@@ -16,7 +16,7 @@ if ! ls -la /usr/bin/pinentry | grep $pinentry >& /dev/null; then
 fi
 
 PAM_ENVIRONMENT_CONFIG=~/.pam_environment
-ln -s -f $DIR/pam_environment $PAM_ENVIRONMENT_FILE
+ln -s -f $DIR/pam_environment $PAM_ENVIRONMENT_CONFIG
 
 if ! systemctl --user is-enabled gpg-agent.socket >& /dev/null; then
 	systemctl --user enable gpg-agent.socket

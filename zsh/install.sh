@@ -8,4 +8,9 @@ if [ ! -d $ZPLUG_DIR ]; then
 fi
 
 ZSHRC_CONFIG=~/.zshrc
-ln -s -f $DIR/zshrc $ZSHRC_FILE
+ln -s -f $DIR/zshrc $ZSHRC_CONFIG
+
+if [ "$USER" == "root" ]; then
+	mkdir -p ~/.files
+	ln -s -f $DIR ~/.files/zsh
+fi
