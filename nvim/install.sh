@@ -2,6 +2,10 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # TODO How to say NVIM running under root user to take config from my main user?
+if [ "$USER" == "root" ]; then
+	ln -s -f `realpath $DIR/../../.config/nvim` ~/.config/nvim
+	exit
+fi
 
 NVIM_CONFIG_DIR=~/.config/nvim
 mkdir -p $NVIM_CONFIG_DIR
