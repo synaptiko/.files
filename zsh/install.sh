@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+ZPLUG_DIR=~/.zplug
+if [ ! -d $ZPLUG_DIR ]; then
+	git clone https://github.com/zplug/zplug $ZPLUG_DIR
+	touch ~/.zsh-first-run
+fi
+
+ZSHRC_CONFIG=~/.zshrc
+ln -s -f $DIR/zshrc $ZSHRC_FILE

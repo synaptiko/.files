@@ -1,0 +1,128 @@
+# vim:filetype=i3
+set $mod Mod1
+set $left j
+set $up k
+set $down l
+set $right semicolon
+
+exec --no-startup-id ~/.files/i3/startup.sh
+exec_always --no-startup-id ~/.files/i3/polybar.sh
+exec --no-startup-id ~/.files/i3/autolocker.sh
+
+font pango:Fantasque Sans Mono 12
+
+floating_modifier $mod
+new_window pixel 3
+new_float normal
+
+bindsym $mod+Return exec TERMINAL=xfce4-terminal i3-sensible-terminal
+bindsym $mod+Shift+Return exec --no-startup-id gtk-launch chromium
+bindsym $mod+Shift+q kill
+# bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
+bindsym $mod+d exec --no-startup-id xlunch -r
+bindsym Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
+bindsym Mod4+Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 | xclip -selection clipboard -t image/png"
+bindsym Shift+Print exec ~/.files/i3/record-screen.sh byzanz
+bindsym Shift+Ctrl+Print exec ~/.files/i3/record-screen.sh gif
+bindsym Shift+Mod4+Print exec ~/.files/i3/record-screen.sh ogv
+
+bindsym $mod+$up focus up
+bindsym $mod+$down focus down
+bindsym $mod+$left focus left
+bindsym $mod+$right focus right
+
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+a focus parent
+bindsym $mod+Shift+s sticky toggle
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+slash workspace 
+
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+slash move container to workspace 
+
+bindsym $mod+Shift+c exec "~/.files/i3/merge-config.sh && i3-msg reload"
+bindsym $mod+Shift+r exec "~/.files/i3/merge-config.sh && i3-msg restart"
+bindsym $mod+Shift+b exec "~/.files/i3/polybar.sh"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# TODO jprokop: decide what to use; in case of i3lock autogenerate i3lock image somehow
+# bindsym Mod4+l exec --no-startup-id light-locker-command -l
+bindsym Mod4+l exec --no-startup-id ~/.files/i3/lock.sh
+
+workspace_auto_back_and_forth yes
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+	bindsym $up resize grow height 5 px or 5 ppt
+	bindsym $down resize shrink height 5 px or 5 ppt
+	bindsym $left resize shrink width 5 px or 5 ppt
+	bindsym $right resize grow width 5 px or 5 ppt
+
+	bindsym Left resize shrink width 5 px or 5 ppt
+	bindsym Down resize grow height 5 px or 5 ppt
+	bindsym Up resize shrink height 5 px or 5 ppt
+	bindsym Right resize grow width 5 px or 5 ppt
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindcode Shift+86 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindcode Shift+82 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindcode Shift+63 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #285577 #285577 #ffffff #285577   #285577
+client.focused_inactive #5f676a #5f676a #ffffff #5f676a   #5f676a
+client.unfocused        #222222 #222222 #888888 #222222   #222222
+client.urgent           #900000 #900000 #ffffff #900000   #900000
+client.placeholder      #0c0c0c #0c0c0c #ffffff #0c0c0c   #0c0c0c
+client.background       #ffffff
+
+# easier pasting with middle click
+bindsym $mod+Shift+v exec --no-startup-id xdotool click 2
+
+for_window [title="Android Emulator"] floating enable
+for_window [title="Screen Layout Editor"] floating enable # arandr
+for_window [title="Nitrogen"] floating enable
+for_window [title="Firewall"] floating enable
