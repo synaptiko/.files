@@ -12,5 +12,5 @@ ln -s -f $DIR/zshrc $ZSHRC_CONFIG
 
 if [ "$USER" == "root" ]; then
 	mkdir -p ~/.files
-	ln -s -f $DIR ~/.files/zsh
+	ln -s -f $DIR ~/.files
 fi
