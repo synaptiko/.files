@@ -224,6 +224,13 @@ augroup configgroup
 	autocmd! User FzfStatusLine call <SID>fzf_statusline()
 	" Open help vertically
 	autocmd FileType help wincmd L
+
+	" TODO convert to some kind of plugin!!!
+	" Temporary experiment for i3+nvr mapping
+	autocmd FocusGained * :silent exec "!ln -s -f $NVIM_LISTEN_ADDRESS /tmp/nvimsocket"
+	autocmd VimLeave * :silent exec "!test -L /tmp/nvimsocket && ls -l /tmp/nvimsocket | grep $NVIM_LISTEN_ADDRESS >& /dev/null && rm /tmp/nvimsocket"
+	" It currently doesn't work well as pressing Ctrl+Alt+[jkl;] is causing losing of focus
+	" autocmd FocusLost * :silent exec "!test -L /tmp/nvimsocket && ls -l /tmp/nvimsocket | grep $NVIM_LISTEN_ADDRESS >& /dev/null && rm /tmp/nvimsocket"
 augroup END
 
 " Following ensures that fzf will be always set correctly, even when run from nvim-wrapper
@@ -263,6 +270,7 @@ function! SwitchTheme(variant, ...)
 	if a:variant == 'dark'
 		set background=dark
 
+		" TODO remove this and all terminal related this as I'm not using it
 		" Better colors in a terminal inside Neovim (https://github.com/neovim/neovim/issues/4436)
 		let g:terminal_color_0  = '#282828'
 		let g:terminal_color_1  = '#cc241d'
