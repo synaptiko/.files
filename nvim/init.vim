@@ -333,3 +333,9 @@ function! InitTheme()
 	endif
 endfunction
 call InitTheme()
+
+function! GetNvimListenAddress()
+	return $NVIM_LISTEN_ADDRESS
+endfunction
+set title
+let &titlestring = 'Neovim@' . GetNvimListenAddress()
