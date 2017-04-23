@@ -2,7 +2,7 @@
 
 Clone this repo into `~/.files` and run:
 ```
-$ ./install-all-dependencies.sh
+$ ./install-dependencies.sh
 $ ./init.sh
 ```
 
