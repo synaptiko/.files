@@ -48,6 +48,8 @@ modules-left = i3
 modules-center = 
 modules-right = workvpn pacman volume date menu
 
+height = 26
+
 tray-position = right
 tray-padding = 2
 
