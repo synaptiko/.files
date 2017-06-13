@@ -14,6 +14,9 @@ alias agscss='ag -p .ignore --sass -Q'
 alias l='gtk-launch'
 alias recvgpgkey='gpg --recv-keys --keyserver hkp://pool.sks-keyservers.net'
 
+alias plan='~/Documents/todo/plan.sh'
+alias track='~/Documents/todo/track.sh'
+
 up() {
 	if pacman -Qs reflector >& /dev/null; then
 		read -k "UPDATE_MIRRORS?:: Update Pacman mirror list? [Y/n] "
