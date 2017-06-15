@@ -19,7 +19,7 @@ alias track='~/Documents/todo/track.sh'
 
 up() {
 	if pacman -Qs reflector >& /dev/null; then
-		read -k "UPDATE_MIRRORS?:: Update Pacman mirror list? [Y/n] "
+		read -k "UPDATE_MIRRORS?:: Update Pacman mirror list? [y/N] "
 		if [ $UPDATE_MIRRORS != $'\n' ]; then
 			printf "\n"
 		fi
@@ -35,7 +35,7 @@ up() {
 		fi
 
 		if [ $UPDATE_AUR != "n" ]; then
-			read -k "UPDATE_DEVEL?:: Update git/svn… packages? [Y/n] "
+			read -k "UPDATE_DEVEL?:: Update git/svn… packages? [y/N] "
 			if [ $UPDATE_DEVEL != $'\n' ]; then
 				printf "\n"
 			fi
@@ -48,7 +48,7 @@ up() {
 		fi
 
 		if [ $UPDATE_AUR != "n" ]; then
-			read -k "UPDATE_DEVEL?:: Update git/svn… packages? [Y/n] "
+			read -k "UPDATE_DEVEL?:: Update git/svn… packages? [y/N] "
 			if [ $UPDATE_DEVEL != $'\n' ]; then
 				printf "\n"
 			fi
@@ -62,14 +62,14 @@ up() {
 		printf "\n"
 	fi
 
-	if [ $UPDATE_MIRRORS != "n" ]; then
+	if [ $UPDATE_MIRRORS = "y" ]; then
 		echo "sudo systemctl start reflector"
 		sudo systemctl start reflector
 	fi
 
 	if [ $UPDATE_AUR != "n" ]; then
 		if [ $USE_YAOURT = "y" ]; then
-			if [ $UPDATE_DEVEL != "n" ]; then
+			if [ $UPDATE_DEVEL = "y" ]; then
 				echo "yaourt -Syua --devel"
 				yaourt -Syua --devel
 			else
@@ -77,7 +77,7 @@ up() {
 				yaourt -Syua
 			fi
 		else
-			if [ $UPDATE_DEVEL != "n" ]; then
+			if [ $UPDATE_DEVEL = "y" ]; then
 				echo "pacaur -Syu --devel"
 				pacaur -Syu --devel
 			else
