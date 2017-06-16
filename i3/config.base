@@ -79,9 +79,8 @@ bindsym $mod+Shift+slash move container to workspace 
 bindsym $mod+Shift+c exec "~/.files/i3/merge-config.sh && i3-msg reload"
 bindsym $mod+Shift+r exec "~/.files/i3/merge-config.sh && i3-msg restart"
 bindsym $mod+Shift+b exec "~/.files/i3/polybar.sh"
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-# TODO jprokop: decide what to use; in case of i3lock autogenerate i3lock image somehow
-# bindsym Mod4+l exec --no-startup-id light-locker-command -l
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# TODO jprokop: autogenerate i3lock image somehow
 bindsym Mod4+l exec --no-startup-id ~/.files/i3/lock.sh
 
 # TODO experimental

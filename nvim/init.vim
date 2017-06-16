@@ -40,6 +40,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'synaptiko/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'synaptiko/mintabline'
@@ -125,15 +126,12 @@ imap <Tab> <C-t>
 imap <S-Tab> <C-d>
 
 " Better mapping related to the terminal and window movements (derived from i3)
+" TODO remove?
 tnoremap <Esc> <Esc><C-\><C-n>
 tnoremap <leader>wj <C-\><C-n><C-w>h
 tnoremap <leader>wk <C-\><C-n><C-w>j
 tnoremap <leader>wl <C-\><C-n><C-w>k
 tnoremap <leader>w; <C-\><C-n><C-w>l
-nnoremap <leader>wj <C-w>h
-nnoremap <leader>wk <C-w>j
-nnoremap <leader>wl <C-w>k
-nnoremap <leader>w; <C-w>l
 
 " Easier jumping amongst first 9 tabs
 nmap <silent> <leader>1 1gt
