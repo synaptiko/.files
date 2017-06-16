@@ -66,6 +66,7 @@ Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
 Plug 'elzr/vim-json'
 Plug 'tpope/vim-abolish'
+Plug 'joukevandermaas/vim-ember-hbs'
 call plug#end()
 
 " The Silver Searcher

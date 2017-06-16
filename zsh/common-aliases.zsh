@@ -18,43 +18,21 @@ alias plan='~/Documents/todo/plan.sh'
 alias track='~/Documents/todo/track.sh'
 
 up() {
-	if pacman -Qs reflector >& /dev/null; then
-		read -k "UPDATE_MIRRORS?:: Update Pacman mirror list? [y/N] "
-		if [ $UPDATE_MIRRORS != $'\n' ]; then
-			printf "\n"
-		fi
-	else
-		UPDATE_MIRRORS="n"
+	read -k "UPDATE_MIRRORS?:: Update Pacman mirror list? [y/N] "
+	if [ $UPDATE_MIRRORS != $'\n' ]; then
+		printf "\n"
 	fi
 
-	if pacman -Qs yaourt >& /dev/null; then
-		USE_YAOURT="y"
-		read -k "UPDATE_AUR?:: Update AUR packages? [Y/n] "
-		if [ $UPDATE_AUR != $'\n' ]; then
+	read -k "UPDATE_AUR?:: Update AUR packages? [Y/n] "
+	if [ $UPDATE_AUR != $'\n' ]; then
+		printf "\n"
+	fi
+
+	if [ $UPDATE_AUR != "n" ]; then
+		read -k "UPDATE_DEVEL?:: Update git/svn… packages? [y/N] "
+		if [ $UPDATE_DEVEL != $'\n' ]; then
 			printf "\n"
 		fi
-
-		if [ $UPDATE_AUR != "n" ]; then
-			read -k "UPDATE_DEVEL?:: Update git/svn… packages? [y/N] "
-			if [ $UPDATE_DEVEL != $'\n' ]; then
-				printf "\n"
-			fi
-		fi
-	elif pacman -Qs pacaur >& /dev/null; then
-		USE_YAOURT="n"
-		read -k "UPDATE_AUR?:: Update AUR packages? [Y/n] "
-		if [ $UPDATE_AUR != $'\n' ]; then
-			printf "\n"
-		fi
-
-		if [ $UPDATE_AUR != "n" ]; then
-			read -k "UPDATE_DEVEL?:: Update git/svn… packages? [y/N] "
-			if [ $UPDATE_DEVEL != $'\n' ]; then
-				printf "\n"
-			fi
-		fi
-	else
-		UPDATE_AUR="n"
 	fi
 
 	read -k "CLEAN_CACHES?:: Clean-up caches after upgrade? [y/N] "
@@ -68,27 +46,17 @@ up() {
 	fi
 
 	if [ $UPDATE_AUR != "n" ]; then
-		if [ $USE_YAOURT = "y" ]; then
-			if [ $UPDATE_DEVEL = "y" ]; then
-				echo "yaourt -Syua --devel"
-				yaourt -Syua --devel
-			else
-				echo "yaourt -Syua"
-				yaourt -Syua
-			fi
+		if [ $UPDATE_DEVEL = "y" ]; then
+			echo "pacaur -Syu --devel"
+			pacaur -Syu --devel
 		else
-			if [ $UPDATE_DEVEL = "y" ]; then
-				echo "pacaur -Syu --devel"
-				pacaur -Syu --devel
-			else
-				echo "pacaur -Syu"
-				pacaur -Syu
-			fi
+			echo "pacaur -Syu"
+			pacaur -Syu
+		fi
 
-			if [ $CLEAN_CACHES = "y" ]; then
-				echo "pacaur -Scc"
-				pacaur -Scc
-			fi
+		if [ $CLEAN_CACHES = "y" ]; then
+			echo "pacaur -Scc"
+			pacaur -Scc
 		fi
 	else
 		echo "sudo pacman -Syu"

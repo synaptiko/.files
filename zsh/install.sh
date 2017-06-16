@@ -10,6 +10,8 @@ fi
 ZSHRC_CONFIG=~/.zshrc
 ln -s -f $DIR/zshrc $ZSHRC_CONFIG
 
+sudo ln -s -f $DIR/reflector.service /etc/systemd/system/reflector.service
+
 if [ "$USER" == "root" ]; then
 	mkdir -p ~/.files
 	ln -s -f $DIR ~/.files

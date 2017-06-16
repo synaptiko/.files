@@ -42,36 +42,7 @@ font-0 = "Fantasque Sans Mono:size=12;3"
 font-1 = "Material Icons:size=12;4"
 font-2 = "Font Awesome:size=11;3"
 
-[bar/main-jprokop-nuc]
-inherit = bar/base
-modules-left = i3
-modules-center = 
-modules-right = workvpn pacman volume date menu
-
-height = 26
-
-tray-position = right
-tray-padding = 2
-
-[bar/main-jprokop-tp13]
-monitor = ${env:MONITOR}
-inherit = bar/base
-modules-left = i3
-modules-center = 
-modules-right = wifi openvpn workvpn battery pacman volume date menu
-
-tray-position = right
-tray-padding = 2
-
-[bar/left-jprokop-tp13]
-monitor = ${env:MONITOR}
-inherit = bar/base
-modules-left = i3
-modules-center = 
-modules-right = volume date
-
 [bar/main-jprokop]
-monitor = DP1
 inherit = bar/base
 modules-left = i3
 modules-center = 
@@ -82,19 +53,25 @@ height = 26
 tray-position = right
 tray-padding = 2
 
-[bar/left-jprokop]
-monitor = VGA1
-inherit = bar/base
-modules-left = 
-modules-center = 
-modules-right = i3
+[bar/main-jprokop-nuc]
+inherit = bar/main-jprokop
 
-[bar/right-jprokop]
-monitor = HDMI2
+[bar/main-jprokop-tp13]
+monitor = ${env:MONITOR}
 inherit = bar/base
 modules-left = i3
 modules-center = 
-modules-right = 
+modules-right = wifi openvpn battery pacman volume date menu
+
+tray-position = right
+tray-padding = 2
+
+[bar/left-jprokop-tp13]
+monitor = ${env:MONITOR}
+inherit = bar/base
+modules-left = i3
+modules-center = 
+modules-right = volume date
 
 [module/i3]
 type = internal/i3
@@ -153,13 +130,6 @@ type = custom/script
 exec = pgrep openvpn
 interval = 15
 label = OpenVPN
-format-prefix = " "
-
-[module/workvpn]
-type = custom/script
-exec = pgrep kvpncsvc
-interval = 15
-label = WorkVPN
 format-prefix = " "
 
 [module/pacman]

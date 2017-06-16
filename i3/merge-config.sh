@@ -20,12 +20,7 @@ echo "# DON'T EDIT DIRECTLY! EDIT FILES IN $DIR" >> $I3_CONFIG_FILE
 echo "# Source: $CONFIG_BASE" >> $I3_CONFIG_FILE
 tail -n +2 $CONFIG_BASE >> $I3_CONFIG_FILE
 
-if [[ "$HOSTNAME" == "jprokop" ]]; then
-	CONFIG_JPROKOP=$DIR/config.jprokop
-	echo >> $I3_CONFIG_FILE
-	echo "# Source: $CONFIG_JPROKOP" >> $I3_CONFIG_FILE
-	tail -n +2 $CONFIG_JPROKOP >> $I3_CONFIG_FILE
-elif [[ "$HOSTNAME" == "jprokop-tp13" ]]; then
+if [[ "$HOSTNAME" == "jprokop-tp13" ]]; then
 	if xrandr | grep "HDMI1 connected" >& /dev/null; then
 		CONFIG_JPROKOP_TP13=$DIR/config.jprokop-tp13
 		echo >> $I3_CONFIG_FILE

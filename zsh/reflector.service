@@ -1,0 +1,6 @@
+[Unit]
+Description=Pacman mirrorlist update
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/reflector --protocol https --latest 50 --sort rate --fastest 10 --save /etc/pacman.d/mirrorlist
