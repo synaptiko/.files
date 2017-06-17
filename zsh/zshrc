@@ -58,8 +58,8 @@ zplug 'plugins/vi-mode', from:oh-my-zsh
 zplug 'plugins/sudo', from:oh-my-zsh
 zplug '~/.files', from:local, use:'zsh/*.zsh'
 
-if [ -d ~/.files-work/zsh ]; then
-	zplug '~/.files-work/zsh', from:local
+if [ -d ~/.files-work ]; then
+	zplug '~/.files-work', from:local, use:'zsh/*.zsh'
 fi
 
 # zplug 'halfo/lambda-mod', as:theme
