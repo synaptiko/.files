@@ -17,6 +17,12 @@ alias recvgpgkey='gpg --recv-keys --keyserver hkp://pool.sks-keyservers.net'
 alias plan='~/Documents/todo/plan.sh'
 alias track='~/Documents/todo/track.sh'
 
+randpw() {
+	# < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-20}
+	openssl rand -base64 32 | tr -dc _A-Z-a-z-0-9 | head -c${1:-20}
+	echo
+}
+
 up() {
 	read -k "UPDATE_MIRRORS?:: Update Pacman mirror list? [y/N] "
 	if [ $UPDATE_MIRRORS != $'\n' ]; then
