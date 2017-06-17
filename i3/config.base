@@ -7,7 +7,6 @@ set $right semicolon
 
 exec --no-startup-id ~/.files/i3/startup.sh
 exec_always --no-startup-id ~/.files/i3/polybar.sh
-exec --no-startup-id ~/.files/i3/autolocker.sh
 
 font pango:Fantasque Sans Mono 12
 
