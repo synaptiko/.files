@@ -35,6 +35,6 @@ fi
 if [ "$pacaurDeps" != "" ]; then
 	echo -e "\e[1mpacaur -Sa \e[0m$pacaurDeps"
 	if [ "$dryRun" != true ]; then
-		pacaur -Sa $pacaurDeps
+		EDITOR=vi pacaur -Sa $pacaurDeps
 	fi
 fi
