@@ -10,6 +10,8 @@ ln -s -f $DIR/zlogin $ZLOGIN_CONFIG
 XORG_KEYBOARD_CONF_FILE=/etc/X11/xorg.conf.d/00-keyboard.conf
 sudo ln -s -f $DIR/xorg.conf.d-00-keyboard.conf $XORG_KEYBOARD_CONF_FILE
 
+# TODO jprokop: parse it from user-dirs.dirs instead
+mkdir -p ~/{Downloads,Documents,Music,Pictures,Videos,Packages,Projects,work}
 USER_DIRS_CONFIG=~/.config/user-dirs.dirs
 ln -s -f $DIR/user-dirs.dirs $USER_DIRS_CONFIG
 xdg-user-dirs-update

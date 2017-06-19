@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# FIXME jprokop: this seems to be obsolete now!
 QT4_CONFIG=~/.config/Trolltech.conf
 if [ -f $QT4_CONFIG ]; then
 	sed -E -i 's/(^font=).\+$/\1"Cantarell,11,-1,5,50,0,0,0,0,0"/' $QT4_CONFIG
