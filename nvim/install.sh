@@ -2,6 +2,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [ "$USER" == "root" ]; then
+	mkdir -p ~/.config
 	ln -s -f `realpath $DIR/../../.config/nvim` ~/.config/nvim
 	exit
 fi
