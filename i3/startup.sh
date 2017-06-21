@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Disable DPMS and prevent screen from blanking
+xset s off -dpms
 compton -b --config $DIR/compton.config
 nitrogen --restore
 redshift >& /dev/null &
