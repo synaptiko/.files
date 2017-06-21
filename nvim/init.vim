@@ -20,7 +20,7 @@ set splitbelow                      " Split horizontal windows below to the curr
 set noshowmode
 set relativenumber
 set updatetime=750
-set listchars=tab:  ,trail:·,space:·,nbsp:·
+set listchars=tab:  ,trail:·
 set list
 set title
 set clipboard=unnamed
@@ -68,6 +68,7 @@ Plug 'moll/vim-node'
 Plug 'elzr/vim-json'
 Plug 'tpope/vim-abolish'
 Plug 'joukevandermaas/vim-ember-hbs'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 " The Silver Searcher
@@ -102,6 +103,9 @@ let g:auto_save_silent=1
 let g:GPGExecutable='gpg2'
 
 let g:vim_json_syntax_conceal=0
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
 
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
