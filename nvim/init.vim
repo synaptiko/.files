@@ -69,6 +69,7 @@ Plug 'elzr/vim-json'
 Plug 'tpope/vim-abolish'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'w0rp/ale'
 call plug#end()
 
 " The Silver Searcher
@@ -107,6 +108,10 @@ let g:vim_json_syntax_conceal=0
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
 
+let g:ale_fixers = {
+\   'javascript': ['eslint']
+\}
+
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
@@ -117,6 +122,8 @@ nmap <silent> <leader>a <plug>NERDTreeTabsToggle<CR>
 
 nmap <silent> <leader>[ <Plug>GitGutterPrevHunk
 nmap <silent> <leader>] <Plug>GitGutterNextHunk
+
+nmap <leader>d <Plug>(ale_fix)
 
 " Previous solution: nnoremap <C-l> :let @/ = ""<CR><C-l>
 " More solutions here: http://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
