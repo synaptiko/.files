@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 if [ $# -eq 0 ] || [ ! -L /tmp/nvimsocket ]; then
 	xfce4-terminal -x nvim >& /dev/null
-	sleep 0.1
+	while [ ! -L /tmp/nvimsocket ]; do
+		sleep 0.1
+	done
 	newInstance=true
 else
 	newInstance=false
