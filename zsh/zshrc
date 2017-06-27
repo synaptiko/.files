@@ -2,6 +2,7 @@
 export BROWSER=/usr/bin/xdg-open
 export EDITOR=nvim
 export VISUAL=nvim
+export COLORTERM=gnome-terminal # fix for https://github.com/neovim/neovim/issues/6802 (remove when https://github.com/neovim/neovim/pull/6816 is merged)
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ANDROID_HOME=$HOME/Android/SDK
 export JAVA_HOME=/usr/lib/jvm/java-8-jdk
