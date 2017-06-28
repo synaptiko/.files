@@ -10,6 +10,10 @@ fi
 ZSHRC_CONFIG=~/.zshrc
 ln -s -f $DIR/zshrc $ZSHRC_CONFIG
 
+# to support aliases inside of vim (:!gs for example)
+ZSHENV_CONFIG=~/.zshenv
+ln -s -f $DIR/zshenv $ZSHENV_CONFIG
+
 sudo ln -s -f $DIR/reflector.service /etc/systemd/system/reflector.service
 
 if [ "$USER" == "root" ]; then

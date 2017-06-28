@@ -1,0 +1,9 @@
+for file in ~/.files/zsh/*aliases.zsh; do
+	source "$file"
+done
+
+if [ -d ~/.files-work/zsh ]; then
+	for file in ~/.files-work/zsh/*aliases.zsh; do
+		source "$file"
+	done
+fi
