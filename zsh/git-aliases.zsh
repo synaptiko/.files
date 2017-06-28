@@ -14,3 +14,8 @@ alias gfp='git fetch --prune'
 alias gcho='git checkout'
 alias gchrp='git cherry-pick -x'
 alias grbs='git fetch upstream && git rebase upstream/master'
+
+gnbr() {
+	git checkout -b $1
+	git push --set-upstream origin $1
+}
