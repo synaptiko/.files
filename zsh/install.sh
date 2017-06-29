@@ -15,6 +15,8 @@ ZSHENV_CONFIG=~/.zshenv
 ln -s -f $DIR/zshenv $ZSHENV_CONFIG
 
 sudo ln -s -f $DIR/reflector.service /etc/systemd/system/reflector.service
+sudo mkdir -p /etc/pacman.d/hooks
+sudo ln -s -f $DIR/pacman-mirrorlist-upgrade.hook /etc/pacman.d/hooks/pacman-mirrorlist-upgrade.hook
 
 if [ "$USER" == "root" ]; then
 	mkdir -p ~/.files
