@@ -7,8 +7,11 @@ if [ ! -d $GNUPG_CONFIG_DIR ]; then
 	exit 1
 fi
 
-GNUPG_CONFIG=$GNUPG_CONFIG_DIR/gpg-agent.conf
-ln -s -f $DIR/gpg-agent.conf $GNUPG_CONFIG
+GNUPG_CONFIG=$GNUPG_CONFIG_DIR/gpg.conf
+ln -s -f $DIR/gpg.conf $GNUPG_CONFIG
+
+GNUPG_AGENT_CONFIG=$GNUPG_CONFIG_DIR/gpg-agent.conf
+ln -s -f $DIR/gpg-agent.conf $GNUPG_AGENT_CONFIG
 
 pinentry=`grep pinentry-program $DIR/gpg-agent.conf | cut -d' ' -f2`
 if ! ls -la /usr/bin/pinentry | grep $pinentry >& /dev/null; then

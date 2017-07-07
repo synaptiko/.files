@@ -1,1 +1,2 @@
-prefix=/home/jprokop/.npm-packages
+progress=false
+spin=false
