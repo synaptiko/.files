@@ -82,6 +82,8 @@ SPACESHIP_GIT_STASHED='$'
 SPACESHIP_GIT_UNPULLED='↓'
 SPACESHIP_GIT_UNPUSHED='↑'
 SPACESHIP_VI_MODE_SHOW=false
+# maybe later switch to true
+SPACESHIP_NVM_SHOW=false
 
 if [ -e ~/.zsh-first-run ]; then
 	rm ~/.zsh-first-run
