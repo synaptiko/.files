@@ -16,6 +16,7 @@ alias recvgpgkey='gpg --recv-keys --keyserver hkp://pool.sks-keyservers.net'
 
 alias plan='~/Documents/todo/plan.sh'
 alias track='~/Documents/todo/track.sh'
+alias show-time='~/Documents/todo/show-time.js'
 
 randpw() {
 	# < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-20}

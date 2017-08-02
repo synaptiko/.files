@@ -46,7 +46,7 @@ font-2 = "Font Awesome:size=11;3"
 inherit = bar/base
 modules-left = i3
 modules-center = 
-modules-right = pacman volume date menu
+modules-right = pacman volume time-track date menu
 
 height = 26
 
@@ -139,6 +139,14 @@ format = <label>
 label = "%output%"
 format-prefix = ""
 exec =  "~/.files/i3/checkupdates.sh"
+
+[module/time-track]
+type = custom/script
+interval = 60
+format = <label>
+label = "%output%"
+format-prefix = " "
+exec =  "~/Documents/todo/time-track.js"
 
 [module/battery]
 type = internal/battery
