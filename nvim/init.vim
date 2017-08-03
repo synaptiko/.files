@@ -92,7 +92,7 @@ let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#whitespace#enabled=0
 
-let g:gitgutter_sign_column_always=1
+set signcolumn=yes
 let g:gitgutter_realtime=1
 
 let g:fzf_command_prefix='Fzf'
