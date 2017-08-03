@@ -19,11 +19,10 @@ bindsym $mod+Shift+Return exec --no-startup-id gtk-launch chromium
 bindsym $mod+Shift+q kill
 # bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
 bindsym $mod+d exec --no-startup-id xlunch -r
-bindsym Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
-bindsym Mod4+Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 | xclip -selection clipboard -t image/png"
-bindsym Shift+Print exec ~/.files/i3/record-screen.sh byzanz
-bindsym Shift+Ctrl+Print exec ~/.files/i3/record-screen.sh gif
-bindsym Shift+Mod4+Print exec ~/.files/i3/record-screen.sh ogv
+bindsym Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 | xclip -selection clipboard -t image/png"
+bindsym Mod4+Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
+bindsym Shift+Print exec ~/.files/i3/record-screen.sh ogv --convert-to-gif
+bindsym Shift+Ctrl+Print exec ~/.files/i3/record-screen.sh byzanz
 
 bindsym $mod+$up focus up
 bindsym $mod+$down focus down

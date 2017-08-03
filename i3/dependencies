@@ -25,6 +25,7 @@ xdotool
 maim
 byzanz
 fontconfig
+jq
 aur/xlunch-git
 aur/xbanish
 aur/ttf-fantasque-sans
