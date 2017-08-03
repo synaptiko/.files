@@ -18,10 +18,11 @@ if [[ "$IS_RECORDING_PID" == "" ]]; then
 
 			if [[ "$2" == "--convert-to-gif" ]]; then
 				sleep 1
-				$DIR/convert-ogv-to-gif.sh $FILE_NAME
+				$DIR/convert-ogv-to-gif.sh $FILE_NAME | xclip -selection clipboard
 			fi
 			;;
 	esac
 else
+	polybar-msg hook is-recording 1
 	kill $IS_RECORDING_PID
 fi

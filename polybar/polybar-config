@@ -42,11 +42,13 @@ font-0 = "Fantasque Sans Mono:size=12;3"
 font-1 = "Material Icons:size=12;4"
 font-2 = "Font Awesome:size=11;3"
 
+enable-ipc = true
+
 [bar/main-jprokop]
 inherit = bar/base
 modules-left = i3
 modules-center = 
-modules-right = pacman volume time-track date menu
+modules-right = pacman volume time-track date is-recording menu
 
 height = 26
 
@@ -61,7 +63,7 @@ monitor = ${env:MONITOR}
 inherit = bar/base
 modules-left = i3
 modules-center = 
-modules-right = wifi openvpn battery pacman volume date menu
+modules-right = wifi openvpn battery pacman volume time-track date is-recording menu
 
 tray-position = right
 tray-padding = 2
@@ -185,6 +187,13 @@ time = %H:%M
 date-alt = %Y-%m-%d
 time-alt = %H:%M:%S
 label = %date% %time%
+
+[module/is-recording]
+type = custom/ipc
+hook-0 = echo
+hook-1 = echo 
+format-foreground = ${colors.urgent}
+initial = 1
 
 [module/menu]
 type = custom/menu
