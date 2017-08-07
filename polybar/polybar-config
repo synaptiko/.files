@@ -46,9 +46,9 @@ enable-ipc = true
 
 [bar/main-jprokop]
 inherit = bar/base
-modules-left = i3
+modules-left = is-recording i3
 modules-center = 
-modules-right = pacman volume time-track date is-recording menu
+modules-right = pacman volume time-track date
 
 height = 26
 
@@ -61,9 +61,9 @@ inherit = bar/main-jprokop
 [bar/main-jprokop-tp13]
 monitor = ${env:MONITOR}
 inherit = bar/base
-modules-left = i3
+modules-left = is-recording i3
 modules-center = 
-modules-right = wifi openvpn battery pacman volume time-track date is-recording menu
+modules-right = wifi openvpn battery pacman volume time-track date
 
 tray-position = right
 tray-padding = 2
@@ -186,29 +186,11 @@ date = %a %d %b,
 time = %H:%M
 date-alt = %Y-%m-%d
 time-alt = %H:%M:%S
-label = %date% %time%
+label = "%date% %time% "
 
 [module/is-recording]
 type = custom/ipc
 hook-0 = echo
-hook-1 = echo 
+hook-1 = echo " "
 format-foreground = ${colors.urgent}
 initial = 1
-
-[module/menu]
-type = custom/menu
-
-label-open = " "
-label-close = "× "
-
-; Restart
-menu-0-0 = ""
-menu-0-0-exec = sudo reboot
-
-; Power off
-menu-0-1 = "  "
-menu-0-1-exec = sudo poweroff
-
-; Redshift toggle
-menu-0-2 = " "
-menu-0-2-exec = kill -SIGUSR1 `pgrep ^redshift$`

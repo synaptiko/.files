@@ -106,6 +106,17 @@ mode "resize" {
 	bindsym Escape mode "default"
 }
 
+set $mode_system "(r)eboot (p)oweroff (t)oggle redshift"
+bindsym $mod+Escape mode $mode_system
+mode $mode_system {
+	bindsym r exec --no-startup-id sudo reboot, mode "default"
+	bindsym p exec --no-startup-id sudo poweroff, mode "default"
+	bindsym t exec --no-startup-id kill -SIGUSR1 `pgrep ^redshift$`, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
 bindcode Shift+86 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
 bindcode Shift+82 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%

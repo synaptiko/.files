@@ -48,22 +48,18 @@ Plug 'synaptiko/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'artnez/vim-wipeout'
-Plug 'rust-lang/rust.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'MattesGroeger/vim-bookmarks'
-Plug 'sirtaj/vim-openscad'
+" Plug 'sirtaj/vim-openscad'
 Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'scrooloose/nerdtree'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'chrisbra/Recover.vim'
 Plug 'tpope/vim-commentary'
 Plug 'michaeljsmith/vim-indent-object'
 Plug '907th/vim-auto-save'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'othree/yajs.vim'
-Plug 'tpope/vim-projectionist'
-Plug 'mxw/vim-jsx'
+" Plug 'tpope/vim-projectionist'
+" Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
 Plug 'elzr/vim-json'
 Plug 'tpope/vim-abolish'
@@ -118,7 +114,6 @@ xmap gs <plug>(GrepperOperator)
 nmap <silent> <leader>j :FzfFiles<CR>
 nmap <silent> <leader>k :FzfBuffers<CR>
 nmap <silent> <leader>l :FzfBLines<CR>
-nmap <silent> <leader>a <plug>NERDTreeTabsToggle<CR>
 
 nmap <silent> <leader>[ <Plug>GitGutterPrevHunk
 nmap <silent> <leader>] <Plug>GitGutterNextHunk
@@ -166,36 +161,6 @@ nnoremap <silent> N Nzz
 " Better repeating in visual mode
 vnoremap . :norm.<CR>
 
-" Better NERDTree <-> vim-bookmarks integration! (see https://github.com/MattesGroeger/vim-bookmarks#faq)
-let g:bookmark_no_default_key_mappings = 1
-function! BookmarkMapKeys()
-	nmap mm :BookmarkToggle<CR>
-	nmap mi :BookmarkAnnotate<CR>
-	nmap mn :BookmarkNext<CR>
-	nmap mp :BookmarkPrev<CR>
-	nmap ma :BookmarkShowAll<CR>
-	nmap mc :BookmarkClear<CR>
-	nmap mx :BookmarkClearAll<CR>
-	nmap mkk :BookmarkMoveUp
-	nmap mjj :BookmarkMoveDown
-	" Tabs can be easily moved (similar to Ctrl+Shift+PageDown/Up)
-	nmap <silent> mt :tabm +<CR>
-	nmap <silent> mT :tabm -<CR>
-endfunction
-function! BookmarkUnmapKeys()
-	unmap mm
-	unmap mi
-	unmap mn
-	unmap mp
-	unmap ma
-	unmap mc
-	unmap mx
-	unmap mkk
-	unmap mjj
-	unmap mt
-	unmap mT
-endfunction
-
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
@@ -206,7 +171,9 @@ nnoremap ZZ <nop>
 " Useful abbreviations
 ab fixme // FIXME jprokop:
 ab todo // TODO jprokop:
-ab clog console.log();<Left><Left>
+ab clog console.log()<Left>
+ab cerr console.error()<Left>
+ab cdir console.dir()<Left>
 ab dbg debugger
 
 " Default Fzf's status line is not useful for me
@@ -227,9 +194,6 @@ augroup configgroup
 	autocmd BufReadPost quickfix setlocal nolist
 	" Trigger autoread when changing buffers or coming back to vim
 	autocmd FocusGained,BufEnter * :checktime
-	" Related to NERDTree <-> vim-bookmarks integration defined above
-	autocmd BufEnter * :call BookmarkMapKeys()
-	autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 	" Related to Fzf's status line above
 	autocmd! User FzfStatusLine call <SID>fzf_statusline()
 	" Open help vertically
