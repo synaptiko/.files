@@ -1,7 +1,6 @@
 # vim:filetype=dosini
 [colors]
 bg = #1d2021
-tbg = #e51d2021
 fg = #ebdbb2
 focused = #285577
 visible = #5f676a
@@ -22,7 +21,7 @@ bottom = true
 radius = 0.0
 fixed-center = false
 
-background = ${colors.tbg}
+background = ${colors.bg}
 foreground = ${colors.fg}
 
 line-size = 3
@@ -85,7 +84,7 @@ pin-workspaces = true
 
 label-mode-padding = 1
 label-mode-foreground = ${colors.fg}
-label-mode-background = ${colors.tbg}
+label-mode-background = ${colors.bg}
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %name%
