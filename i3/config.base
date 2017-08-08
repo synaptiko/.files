@@ -141,3 +141,5 @@ for_window [title="Android Emulator"] floating enable
 for_window [title="Screen Layout Editor"] floating enable # arandr
 for_window [title="Nitrogen"] floating enable
 for_window [title="Firewall"] floating enable
+for_window [title="Signal" class="Chromium"] floating enable, move scratchpad, scratchpad show
+for_window [title="Authy" class="Chromium"] floating enable
