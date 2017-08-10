@@ -27,6 +27,6 @@ fontconfig
 jq
 aur/xlunch-git
 aur/xbanish
-aur/ttf-fantasque-sans
+aur/ttf-iosevka-term-ss03
 aur/polybar
 aur/neovim-remote

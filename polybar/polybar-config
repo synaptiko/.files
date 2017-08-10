@@ -36,10 +36,10 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
+font-0 = "Iosevka Term Medium:size=11;3"
 ; TODO jprokop: add those new fonts + Noto/Noto Emoji to my .files
-font-0 = "Fantasque Sans Mono:size=12;3"
 font-1 = "Material Icons:size=12;4"
-font-2 = "Font Awesome:size=11;3"
+font-2 = "Font Awesome:size=12;3"
 
 enable-ipc = true
 
@@ -67,12 +67,12 @@ modules-right = wifi openvpn battery pacman volume time-track date
 tray-position = right
 tray-padding = 2
 
-[bar/left-jprokop-tp13]
+[bar/external-jprokop-tp13]
 monitor = ${env:MONITOR}
 inherit = bar/base
-modules-left = i3
+modules-left = is-recording i3
 modules-center = 
-modules-right = volume date
+modules-right = openvpn pacman volume time-track date
 
 [module/i3]
 type = internal/i3

@@ -15,7 +15,15 @@ new_window pixel 3
 new_float normal
 
 bindsym $mod+Return exec TERMINAL=xfce4-terminal i3-sensible-terminal
-bindsym $mod+Shift+Return exec --no-startup-id gtk-launch chromium
+
+# Chromium Profiles Runner section
+set $chrunnerDir ~/Projects/chromium-profiles-runner
+set $chrunnerCacheDir ~/.chrunner
+set $chrunnerTitle Chromium Profiles Runner
+exec_always --no-startup-id $chrunnerDir/generate-folder-for-fzf.js $chrunnerCacheDir
+bindsym $mod+Shift+Return exec xfce4-terminal --title="$chrunnerTitle" --geometry=16x7 --working-directory $chrunnerCacheDir -e $chrunnerDir/tui.sh
+for_window [title="$chrunnerTitle"] floating enable
+
 bindsym $mod+Shift+q kill
 # bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
 bindsym $mod+d exec --no-startup-id xlunch -r
@@ -61,6 +69,7 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 bindsym $mod+slash workspace 
+bindsym $mod+Ctrl+8 workspace *
 
 bindsym $mod+Shift+1 move container to workspace 1, workspace 1
 bindsym $mod+Shift+2 move container to workspace 2, workspace 2
@@ -73,6 +82,7 @@ bindsym $mod+Shift+8 move container to workspace 8, workspace 8
 bindsym $mod+Shift+9 move container to workspace 9, workspace 9
 bindsym $mod+Shift+0 move container to workspace 10, workspace 10
 bindsym $mod+Shift+slash move container to workspace , workspace 
+bindsym $mod+Shift+Ctrl+8 move container to workspace *, workspace *
 
 bindsym $mod+Shift+c exec "~/.files/i3/merge-config.sh && i3-msg reload"
 bindsym $mod+Shift+r exec "~/.files/i3/merge-config.sh && i3-msg restart"
@@ -143,3 +153,5 @@ for_window [title="Nitrogen"] floating enable
 for_window [title="Firewall"] floating enable
 for_window [title="Signal" class="Chromium"] floating enable, move scratchpad, scratchpad show
 for_window [title="Authy" class="Chromium"] floating enable
+for_window [class="keepassxc"] floating enable
+for_window [class="zoom"] floating enable

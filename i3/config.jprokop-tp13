@@ -5,8 +5,9 @@ workspace 3 output HDMI1
 workspace 4 output HDMI1
 workspace 5 output HDMI1
 workspace 6 output HDMI1
-workspace 7 output eDP1
-workspace 8 output eDP1
-workspace 9 output eDP1
-workspace 10 output eDP1
+workspace 7 output HDMI1
+workspace 8 output HDMI1
+workspace 9 output HDMI1
+workspace 10 output HDMI1
 workspace "" output HDMI1
+workspace "*" output eDP1

@@ -6,8 +6,8 @@ HOSTNAME=`hostname`
 
 if [[ "$HOSTNAME" == "jprokop-tp13" ]]; then
 	if xrandr | grep "HDMI1 connected" >& /dev/null; then
-		MONITOR=HDMI1 polybar main-$HOSTNAME >& /dev/null &
-		MONITOR=eDP1 polybar left-$HOSTNAME >& /dev/null &
+		MONITOR=HDMI1 polybar external-$HOSTNAME >& /dev/null &
+		MONITOR=eDP1 polybar main-$HOSTNAME >& /dev/null &
 	else
 		MONITOR=eDP1 polybar main-$HOSTNAME >& /dev/null &
 	fi
