@@ -18,7 +18,7 @@ alias plan='~/Documents/todo/plan.sh'
 alias track='~/Documents/todo/track.sh'
 alias show-time='~/Documents/todo/show-time.js'
 
-alias rch='~/Projects/chromium-profiles-runner/index.js'
+alias rch='chromium-runner'
 
 randpw() {
 	# < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-20}
