@@ -313,3 +313,23 @@ function! GetNvimListenAddress()
 endfunction
 set title
 let &titlestring = 'Neovim@' . GetNvimListenAddress()
+
+function! ConvertThroughLodash(fnName, type)
+	if a:type ==# 'v'
+		let saved_unnamed_register = @@
+
+		normal! `<v`>y
+		execute "normal! gvc" . system("node -e \"process.stdout.write(require('lodash')." . a:fnName . "('" . @@ . "'))\" 2> /dev/null")
+
+		let @@ = saved_unnamed_register
+	else
+		echoerr a:fnName . " can be used only on characterwise selection"
+	endif
+endfunction
+command! -range -nargs=0 Capitalize :call ConvertThroughLodash('capitalize', visualmode())
+command! -range -nargs=0 LowerFirst :call ConvertThroughLodash('lowerFirst', visualmode())
+command! -range -nargs=0 UpperFirst :call ConvertThroughLodash('upperFirst', visualmode())
+command! -range -nargs=0 CamelCase :call ConvertThroughLodash('camelCase', visualmode())
+command! -range -nargs=0 KebabCase :call ConvertThroughLodash('kebabCase', visualmode())
+command! -range -nargs=0 SnakeCase :call ConvertThroughLodash('snakeCase', visualmode())
+command! -range -nargs=0 StartCase :call ConvertThroughLodash('startCase', visualmode())
