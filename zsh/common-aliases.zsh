@@ -20,6 +20,14 @@ alias show-time='~/Documents/todo/show-time.js'
 
 alias rch='chromium-runner'
 
+# Can it be useful later?
+# _() { node -e "process.stdout.write(require('lodash').$1('${2:-$(cat)}'))" }
+# _C() { _ capitalize $1 }
+# _l() { _ lowerFirst $1 }
+# _cC() { _ camelCase $1 }
+# _kC() { _ kebabCase $1 }
+# _sC() { _ snakeCase $1 }
+
 randpw() {
 	# < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-20}
 	openssl rand -base64 32 | tr -dc _A-Z-a-z-0-9 | head -c${1:-20}
