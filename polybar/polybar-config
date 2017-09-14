@@ -57,6 +57,9 @@ tray-padding = 2
 [bar/main-jprokop-nuc]
 inherit = bar/main-jprokop
 
+[bar/main-jprokop-op790]
+inherit = bar/main-jprokop
+
 [bar/main-jprokop-tp13]
 monitor = ${env:MONITOR}
 inherit = bar/base
