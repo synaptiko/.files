@@ -35,6 +35,6 @@ fi
 if [ "$pacaurDeps" != "" ]; then
 	echo -e "\e[1mpacaur -Sa \e[0m$pacaurDeps"
 	if [ "$dryRun" != true ]; then
-		EDITOR=vi pacaur -Sa $pacaurDeps
+		EDITOR=`which nvim &> /dev/null && echo nvim || echo nano` pacaur -Sa $pacaurDeps
 	fi
 fi
