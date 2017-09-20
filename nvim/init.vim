@@ -66,6 +66,9 @@ Plug 'tpope/vim-abolish'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
+" TypeScript support:
+" Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
 call plug#end()
 
 " The Silver Searcher
@@ -105,7 +108,8 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
 
 let g:ale_fixers = {
-\   'javascript': ['eslint']
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint']
 \}
 
 nmap gs <plug>(GrepperOperator)
