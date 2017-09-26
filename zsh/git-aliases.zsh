@@ -24,3 +24,10 @@ gnbr() {
 	git checkout -b $1
 	git push --set-upstream origin $1
 }
+
+gdcm() {
+    echo 'Commits that exist in '$1' but not in '$2':'
+    git log --graph --pretty=format:'%Cred%h%Creset %s' --abbrev-commit $2..$1
+    echo 'Commits that exist in '$2' but not in '$1':'
+    git log --graph --pretty=format:'%Cred%h%Creset %s' --abbrev-commit $1..$2
+}
