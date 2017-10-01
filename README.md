@@ -2,6 +2,7 @@
 
 Clone this repo into `~/.files` and run:
 ```
+$ ./install-pgp-keys.sh
 $ ./install-dependencies.sh
 $ ./init.sh
 ```
