@@ -57,7 +57,6 @@ Plug 'tpope/vim-commentary'
 Plug 'michaeljsmith/vim-indent-object'
 Plug '907th/vim-auto-save'
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'othree/yajs.vim'
 " Plug 'tpope/vim-projectionist'
 " Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
@@ -66,9 +65,12 @@ Plug 'tpope/vim-abolish'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
-" TypeScript support:
-" Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
+" Use either those two for javascript/typescript:
+Plug 'jelera/vim-javascript-syntax'
+Plug 'leafgarland/typescript-vim'
+" or those two:
+" Plug 'othree/yajs.vim'
+" Plug 'HerringtonDarkholme/yats.vim'
 call plug#end()
 
 " The Silver Searcher
