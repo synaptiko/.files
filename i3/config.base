@@ -114,9 +114,10 @@ mode "resize" {
 	bindsym Escape mode "default"
 }
 
-set $mode_system "(r)eboot (p)oweroff (t)oggle redshift"
+set $mode_system "(l)ogout (r)eboot (p)oweroff (t)oggle redshift"
 bindsym $mod+Escape mode $mode_system
 mode $mode_system {
+	bindsym l exec --no-startup-id kill -9 `pgrep -U $UID i3`
 	bindsym r exec --no-startup-id sudo reboot, mode "default"
 	bindsym p exec --no-startup-id sudo poweroff, mode "default"
 	bindsym t exec --no-startup-id kill -SIGUSR1 `pgrep ^redshift$`, mode "default"
