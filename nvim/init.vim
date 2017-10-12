@@ -26,6 +26,8 @@ set title
 set clipboard=unnamed
 set inccommand=nosplit
 set mouse=a
+set nobackup
+set nowritebackup
 
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
