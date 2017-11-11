@@ -72,6 +72,8 @@ modules-right = wifi openvpn battery pacman volume time-track date
 tray-position = right
 tray-padding = 2
 
+height = 22
+
 [bar/external-jprokop-tp13]
 monitor = ${env:MONITOR}
 inherit = bar/base
