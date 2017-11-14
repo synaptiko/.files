@@ -69,7 +69,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
 " Use either those two for javascript/typescript:
 Plug 'jelera/vim-javascript-syntax'
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
 " or those two:
 " Plug 'othree/yajs.vim'
 " Plug 'HerringtonDarkholme/yats.vim'

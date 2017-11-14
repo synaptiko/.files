@@ -8,7 +8,7 @@ set $right semicolon
 exec --no-startup-id ~/.files/i3/startup.sh
 exec_always --no-startup-id ~/.files/i3/polybar.sh
 
-font pango:Fantasque Sans Mono 12
+font pango:Iosevka Term Medium 12
 
 floating_modifier $mod
 new_window pixel 3
@@ -21,7 +21,7 @@ exec_always --no-startup-id chromium-runner --generate-cache
 bindsym $mod+Shift+Return exec xfce4-terminal --title="$chromiumRunnerTitle" --geometry=16x7 -e chromium-runner
 for_window [title="$chromiumRunnerTitle"] floating enable
 
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Iosevka Term Medium'"
 
 bindsym Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 | xclip -selection clipboard -t image/png"
 bindsym Mod4+Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
