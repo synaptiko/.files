@@ -18,7 +18,7 @@ alias plan='~/Documents/todo/plan.sh'
 alias track='~/Documents/todo/track.sh'
 alias show-time='~/Documents/todo/show-time.js'
 
-alias rch='chromium-runner'
+alias v='vim'
 
 # Can it be useful later?
 # _() { node -e "process.stdout.write(require('lodash').$1('${2:-$(cat)}'))" }
@@ -28,7 +28,7 @@ alias rch='chromium-runner'
 # _kC() { _ kebabCase $1 }
 # _sC() { _ snakeCase $1 }
 
-randpw() {
+passwd-rnd() {
 	# < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-20}
 	openssl rand -base64 32 | tr -dc _A-Z-a-z-0-9 | head -c${1:-20}
 	echo
@@ -52,7 +52,7 @@ up() {
 		fi
 	fi
 
-	read -k "CLEAN_CACHES?:: Clean-up caches after upgrade? [y/N] "
+	read -k "CLEAN_CACHES?:: Clean-up caches before upgrade? [y/N] "
 	if [ $CLEAN_CACHES != $'\n' ]; then
 		printf "\n"
 	fi
@@ -63,6 +63,11 @@ up() {
 	fi
 
 	if [ $UPDATE_AUR != "n" ]; then
+		if [ $CLEAN_CACHES = "y" ]; then
+			echo "pacaur -Scc"
+			pacaur -Scc
+		fi
+
 		if [ $UPDATE_DEVEL = "y" ]; then
 			echo "pacaur -Syu --devel"
 			pacaur -Syu --devel
@@ -70,18 +75,13 @@ up() {
 			echo "pacaur -Syu"
 			pacaur -Syu
 		fi
-
-		if [ $CLEAN_CACHES = "y" ]; then
-			echo "pacaur -Scc"
-			pacaur -Scc
-		fi
 	else
-		echo "sudo pacman -Syu"
-		sudo pacman -Syu
-
 		if [ $CLEAN_CACHES = "y" ]; then
 			echo "sudo pacman -Scc"
 			sudo pacman -Scc
 		fi
+
+		echo "sudo pacman -Syu"
+		sudo pacman -Syu
 	fi
 }
