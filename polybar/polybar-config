@@ -54,9 +54,6 @@ height = 25
 tray-position = right
 tray-padding = 2
 
-[bar/main-jprokop-nuc]
-inherit = bar/main-jprokop
-
 [bar/main-jprokop-op790]
 inherit = bar/main-jprokop
 
@@ -80,6 +77,8 @@ inherit = bar/base
 modules-left = is-recording i3
 modules-center = 
 modules-right = openvpn pacman volume time-track date
+
+height = 22
 
 [module/i3]
 type = internal/i3
