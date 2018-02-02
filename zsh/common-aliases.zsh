@@ -19,6 +19,8 @@ alias track='~/Documents/todo/track.sh'
 alias show-time='~/Documents/todo/show-time.js'
 
 alias v='vim'
+alias y='yarn'
+alias ys='yarn start'
 
 # Can it be useful later?
 # _() { node -e "process.stdout.write(require('lodash').$1('${2:-$(cat)}'))" }
