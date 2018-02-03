@@ -215,6 +215,8 @@ augroup configgroup
 	autocmd VimLeave * :silent exec "!test -L /tmp/nvimsocket && ls -l /tmp/nvimsocket | grep $NVIM_LISTEN_ADDRESS >& /dev/null && rm /tmp/nvimsocket"
 	" It currently doesn't work well as pressing Ctrl+Alt+[jkl;] is causing losing of focus
 	" autocmd FocusLost * :silent exec "!test -L /tmp/nvimsocket && ls -l /tmp/nvimsocket | grep $NVIM_LISTEN_ADDRESS >& /dev/null && rm /tmp/nvimsocket"
+
+	autocmd BufRead,BufNewFile *.mjs set filetype=javascript
 augroup END
 
 " Following ensures that fzf will be always set correctly, even when run from nvim-wrapper
