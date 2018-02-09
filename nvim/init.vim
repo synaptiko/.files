@@ -117,6 +117,7 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint']
 \}
+let g:ale_javascript_eslint_suppress_missing_config=1
 
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
