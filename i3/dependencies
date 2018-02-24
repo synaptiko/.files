@@ -35,7 +35,7 @@ byzanz
 fontconfig
 jq
 compton
-aur/j4-dmenu-desktop
+rofi
 aur/xbanish
 aur/fonts-meta-extended-lt
 aur/ttf-iosevka-term-ss03

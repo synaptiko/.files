@@ -15,13 +15,9 @@ new_window pixel 3
 new_float normal
 
 bindsym $mod+Return exec TERMINAL=xfce4-terminal i3-sensible-terminal
-
-set $chromiumRunnerTitle Chromium Runner
+bindsym $mod+d exec --no-startup-id rofi -show drun
 exec_always --no-startup-id chromium-runner --generate-cache
-bindsym $mod+Shift+Return exec xfce4-terminal --title="$chromiumRunnerTitle" --geometry=16x7 -e chromium-runner
-for_window [title="$chromiumRunnerTitle"] floating enable
-
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'Iosevka Term Medium'"
+bindsym $mod+Shift+Return exec --no-startup-id rofi -no-show-icons -location 0 -width 10 -no-fixed-num-lines -show chromium-runner
 
 bindsym Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 | xclip -selection clipboard -t image/png"
 bindsym Mod4+Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
