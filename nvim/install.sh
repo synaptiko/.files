@@ -40,3 +40,6 @@ xdg-desktop-menu install --novendor /tmp/nvim.desktop
 mimeo --add 'glob:text/*' nvim.desktop
 mimeo --prefer 'glob:text/*' nvim.desktop
 rm /tmp/nvim.desktop
+
+# to support ConvertThroughLodash functionality: CamelCase, KebabCase etc.
+yarn global add lodash

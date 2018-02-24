@@ -114,7 +114,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
 
 let g:ale_fixers = {
-\   'javascript': ['eslint'],
+\   'javascript': ['standard', 'eslint'],
 \   'typescript': ['eslint']
 \}
 let g:ale_javascript_eslint_suppress_missing_config=1
@@ -171,9 +171,6 @@ nnoremap <silent> N Nzz
 
 " Better repeating in visual mode
 vnoremap . :norm.<CR>
-
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
 
 " Avoid accidental unexpected behavior of Ctrl+U in insert mode & ZZ
 inoremap <C-u> <nop>
@@ -332,17 +329,20 @@ function! ConvertThroughLodash(fnName, type)
 		let saved_unnamed_register = @@
 
 		normal! `<v`>y
-		execute "normal! gvc" . system("node -e \"process.stdout.write(require('lodash')." . a:fnName . "('" . @@ . "'))\" 2> /dev/null")
+		execute "normal! gvc" . system("YARN_GLOBAL_PATH=`yarn global dir` node -e \"process.stdout.write(require(require('path').join(process.env.YARN_GLOBAL_PATH, 'node_modules', 'lodash'))." . a:fnName . "('" . @@ . "'))\" 2> /dev/null")
 
 		let @@ = saved_unnamed_register
 	else
 		echoerr a:fnName . " can be used only on characterwise selection"
 	endif
 endfunction
-command! -range -nargs=0 Capitalize :call ConvertThroughLodash('capitalize', visualmode())
-command! -range -nargs=0 LowerFirst :call ConvertThroughLodash('lowerFirst', visualmode())
-command! -range -nargs=0 UpperFirst :call ConvertThroughLodash('upperFirst', visualmode())
+" Variants of multiword casing
 command! -range -nargs=0 CamelCase :call ConvertThroughLodash('camelCase', visualmode())
 command! -range -nargs=0 KebabCase :call ConvertThroughLodash('kebabCase', visualmode())
 command! -range -nargs=0 SnakeCase :call ConvertThroughLodash('snakeCase', visualmode())
 command! -range -nargs=0 StartCase :call ConvertThroughLodash('startCase', visualmode())
+" Alias for easier search
+command! -range -nargs=0 CaseCamel :call ConvertThroughLodash('camelCase', visualmode())
+command! -range -nargs=0 CaseKebab :call ConvertThroughLodash('kebabCase', visualmode())
+command! -range -nargs=0 CaseSnake :call ConvertThroughLodash('snakeCase', visualmode())
+command! -range -nargs=0 CaseStart :call ConvertThroughLodash('startCase', visualmode())
