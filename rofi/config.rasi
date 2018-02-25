@@ -1,5 +1,5 @@
 configuration {
-	modi: "drun,window,chromium-runner:chromium-runner-rofi";
+	modi: "drun,window";
 	width: 100;
 	lines: 5;
 /*	columns: 1;*/
@@ -31,7 +31,7 @@ configuration {
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-	combi-modi: "drun,window,chromium-runner";
+	combi-modi: "drun,window";
 	matching: "fuzzy";
 /*	tokenize: true;*/
 /*	m: "-5";*/
