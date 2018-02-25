@@ -45,7 +45,12 @@ zstyle ':completion:*' rehash true
 autoload -Uz compinit
 compinit
 
-# work .files
+# .files
+for file in ~/.files/zsh/*.zsh; do
+	source "$file"
+done
+
+# work .files (optional)
 if [ -d ~/.files-work/zsh ]; then
 	for file in ~/.files-work/zsh/*.zsh; do
 		source "$file"
@@ -59,7 +64,6 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 zplug 'plugins/vi-mode', from:oh-my-zsh
 zplug 'plugins/sudo', from:oh-my-zsh
-zplug '~/.files', from:local, use:'zsh/*.zsh'
 
 # zplug 'halfo/lambda-mod', as:theme
 zplug 'synaptiko/spaceship-zsh-theme', as:theme
@@ -102,7 +106,3 @@ zplug load
 # FZF sourcing
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-
-# NVM sourcing
-export NVM_DIR="$HOME/.nvm"
-[ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
