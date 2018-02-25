@@ -69,7 +69,7 @@ modules-right = wifi openvpn battery pacman volume time-track date
 tray-position = right
 tray-padding = 2
 
-height = 22
+height = 24
 
 [bar/external-jprokop-tp13]
 monitor = ${env:MONITOR}
@@ -78,7 +78,7 @@ modules-left = is-recording i3
 modules-center = 
 modules-right = openvpn pacman volume time-track date
 
-height = 22
+height = 24
 
 [module/i3]
 type = internal/i3

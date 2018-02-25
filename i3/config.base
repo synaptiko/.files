@@ -14,7 +14,7 @@ floating_modifier $mod
 new_window pixel 3
 new_float normal
 
-bindsym $mod+Return exec TERMINAL=xfce4-terminal i3-sensible-terminal
+bindsym $mod+Return exec TERMINAL=alacritty i3-sensible-terminal
 bindsym $mod+d exec --no-startup-id rofi -show drun
 exec_always --no-startup-id chromium-runner --generate-cache
 bindsym $mod+Shift+Return exec --no-startup-id rofi -no-show-icons -location 0 -width 10 -no-fixed-num-lines -show chromium-runner
