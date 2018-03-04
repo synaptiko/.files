@@ -2,23 +2,34 @@
 export BROWSER=/usr/bin/xdg-open
 export EDITOR=nvim
 export VISUAL=nvim
-export COLORTERM=gnome-terminal # fix for https://github.com/neovim/neovim/issues/6802 (remove when https://github.com/neovim/neovim/pull/6816 is merged)
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ANDROID_HOME=$HOME/Android/SDK
 export JAVA_HOME=/usr/lib/jvm/java-8-jdk
 export PATH=./node_modules/.bin:$PATH:$JAVA_HOME/bin:$HOME/.yarn/bin:$HOME/.local/opt/gcc-arm-none-eabi-6/bin
 
-# NVIM_TUI_ENABLE_TRUE_COLOR is problematic in Gnome Terminal: when :term is called inside Neovim colors are incorrect
-# But it can be resolved in init.vim like this: https://github.com/neovim/neovim/issues/4436
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+# Prevent duplicates in PATH variable
+typeset -U path
 
-# Setting ag as the default source for fzf
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_DEFAULT_OPTS='--height=100% --reverse --inline-info'
+# NVIM_TUI_ENABLE_TRUE_COLOR was problematic but gruvbox colorscheme has already proper support for it
+# (more info: https://github.com/morhetz/gruvbox/commit/e5c6c3a359af4b2da8f50ea9323315308f00d191
+#  && https://github.com/neovim/neovim/issues/4436)
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+# Use vi-like keys
+bindkey -v
+
+# My plugins
+local ZSH_PLUG_PATH=$HOME/.zsh_plug
+fpath=( $ZSH_PLUG_PATH $fpath )
+
+source $ZSH_PLUG_PATH/vi-mode.plugin.zsh
+source $ZSH_PLUG_PATH/sudo.plugin.zsh
+
+autoload -U promptinit; promptinit
+prompt pure
 
 # History
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000000
 SAVEHIST=$((HISTSIZE/2))
 setopt append_history
@@ -29,6 +40,7 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 setopt share_history
+setopt auto_cd
 
 # Don't beep
 unsetopt beep
@@ -36,72 +48,30 @@ if [ -n "$DISPLAY" ]; then
 	xset b off
 fi
 
-# Use vi-like keys
-bindkey -v
-
 # Defaults for completion
 zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' rehash true
 autoload -Uz compinit
-compinit
+# disable check for unsafe locations by `-u`
+# (unfortunately .zsh_plug under root is symlink
+#  and it's impossible to set 755 permissions to it)
+compinit -u
 
 # .files
-for file in ~/.files/zsh/*.zsh; do
+for file in $HOME/.files/zsh/*.zsh; do
 	source "$file"
 done
 
 # work .files (optional)
-if [ -d ~/.files-work/zsh ]; then
-	for file in ~/.files-work/zsh/*.zsh; do
+if [ -d $HOME/.files-work/zsh ]; then
+	for file in $HOME/.files-work/zsh/*.zsh; do
 		source "$file"
 	done
 fi
 
-# Use zplug as plugin manager!
-source ~/.zplug/init.zsh
-
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-zplug 'plugins/vi-mode', from:oh-my-zsh
-zplug 'plugins/sudo', from:oh-my-zsh
-
-# zplug 'halfo/lambda-mod', as:theme
-zplug 'synaptiko/spaceship-zsh-theme', as:theme
-
-# Spaceship theme configuration
-SPACESHIP_PROMPT_SYMBOL='λ'
-SPACESHIP_PROMPT_ADD_NEWLINE=true
-SPACESHIP_PROMPT_SEPARATE_LINE=true
-SPACESHIP_PROMPT_TRUNC=0
-SPACESHIP_PREFIX_SHOW=true
-SPACESHIP_PREFIX_HOST='@'
-SPACESHIP_PREFIX_DIR=' in '
-SPACESHIP_PREFIX_GIT='  '
-SPACESHIP_PREFIX_ENV_DEFAULT=' via '
-SPACESHIP_GIT_SHOW=true
-SPACESHIP_GIT_UNCOMMITTED='+'
-SPACESHIP_GIT_UNSTAGED='!'
-SPACESHIP_GIT_UNTRACKED='?'
-SPACESHIP_GIT_STASHED='$'
-SPACESHIP_GIT_UNPULLED='↓'
-SPACESHIP_GIT_UNPUSHED='↑'
-SPACESHIP_VI_MODE_SHOW=false
-# maybe later switch to true
-SPACESHIP_NVM_SHOW=false
-
-if [ -e ~/.zsh-first-run ]; then
-	rm ~/.zsh-first-run
-	zplug install
-fi
-
-# if ! zplug check --verbose; then
-# 	printf "Install? [y/N]: "
-# 	if read -q; then
-# 		echo; zplug install
-# 	fi
-# fi
-
-zplug load
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_OPTS='--height=100% --reverse --inline-info'
 
 # FZF sourcing
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh

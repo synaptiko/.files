@@ -1,11 +1,12 @@
 # vim:filetype=dosini
 [colors]
-bg = #1d2021
+bg = #f71d2021
+; bg = #1d2021
 fg = #ebdbb2
-focused = #285577
+focused = #458588
 visible = #5f676a
-urgent = #900000
-alert = #fabd2f
+urgent = #cc241d
+alert = #d79921
 
 [global/wm]
 margin-top = 0

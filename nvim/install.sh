@@ -16,7 +16,7 @@ if [ ! -d $NVIM_CONFIG_DIR/plugged ]; then
 	mkdir -p $NVIM_CONFIG_DIR/{autoload,plugged}
 	curl -sfLo $NVIM_CONFIG_DIR/autoload/plug.vim \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	pip install --user neovim
+	pip install -U --user neovim
 
 	cat << EOF > $DIR/post-install.sh
 #!/usr/bin/env bash
@@ -43,3 +43,6 @@ rm /tmp/nvim.desktop
 
 # to support ConvertThroughLodash functionality: CamelCase, KebabCase etc.
 yarn global add lodash
+
+# to support Node.js plugins (yarn cannot be simply used)
+sudo npm install -g neovim

@@ -21,6 +21,7 @@ alias show-time='~/Documents/todo/show-time.js'
 alias v='vim'
 alias y='yarn'
 alias ys='yarn start'
+alias yb='yarn build'
 alias yt='yarn test'
 
 # Can it be useful later?

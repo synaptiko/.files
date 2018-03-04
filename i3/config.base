@@ -14,7 +14,7 @@ floating_modifier $mod
 new_window pixel 3
 new_float normal
 
-bindsym $mod+Return exec TERMINAL=alacritty i3-sensible-terminal
+bindsym $mod+Return exec TERMINAL=alacritty i3-sensible-terminal -t Terminal
 bindsym $mod+d exec --no-startup-id rofi -show drun
 exec_always --no-startup-id chromium-runner --generate-cache
 bindsym $mod+Shift+Return exec --no-startup-id "rofi -modi chromium-runner:chromium-runner-rofi,track:~/Documents/todo/track-rofi.sh -no-show-icons -location 0 -width 10 -no-fixed-num-lines -show chromium-runner"
@@ -116,7 +116,7 @@ mode $mode_system {
 	bindsym l exec --no-startup-id kill -9 `pgrep -U $UID i3`
 	bindsym r exec --no-startup-id sudo reboot, mode "default"
 	bindsym p exec --no-startup-id sudo poweroff, mode "default"
-	bindsym t exec --no-startup-id kill -SIGUSR1 `pgrep ^redshift$`, mode "default"
+	bindsym t exec --no-startup-id kill -USR1 `pgrep ^redshift$`, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -132,12 +132,12 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #285577 #285577 #ffffff #285577   #285577
-client.focused_inactive #5f676a #5f676a #ffffff #5f676a   #5f676a
-client.unfocused        #222222 #222222 #888888 #222222   #222222
-client.urgent           #900000 #900000 #ffffff #900000   #900000
-client.placeholder      #0c0c0c #0c0c0c #ffffff #0c0c0c   #0c0c0c
-client.background       #ffffff
+client.focused          #458588 #458588 #ebdbb2 #458588   #458588
+client.focused_inactive #504945 #504945 #bdae93 #504945   #504945
+client.unfocused        #1d2021 #1d2021 #bdae93 #1d2021   #1d2021
+client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
+client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
+client.background       #ebdbb2
 
 # easier pasting with middle click
 bindsym $mod+Shift+v exec --no-startup-id xdotool click 2

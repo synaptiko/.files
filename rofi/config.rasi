@@ -159,5 +159,5 @@ element selected {
 window {
 	border: 3px;
 	padding: 6px;
-	border-color: #285577;
+	border-color: #458588;
 }

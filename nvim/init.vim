@@ -55,7 +55,8 @@ Plug 'moll/vim-node'
 Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'sirtaj/vim-openscad'
 Plug 'synaptiko/fzf'
-Plug 'synaptiko/gruvbox'
+Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my custom colors for tabline
+" Plug 'morhetz/gruvbox'
 Plug 'synaptiko/mintabline'
 Plug 'synaptiko/vim-auto-save'
 Plug 'tpope/vim-abolish'
@@ -86,10 +87,10 @@ endif
 
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
-let g:gruvbox_termcolors=256
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='hard'
 let g:gruvbox_invert_selection=0
+let g:gruvbox_invert_tabline=0
 let g:gitgutter_override_sign_column_highlight=1
 colorscheme gruvbox
 
@@ -253,45 +254,8 @@ function! SwitchTheme(variant, ...)
 
 	if a:variant == 'dark'
 		set background=dark
-
-		" TODO remove this and all terminal related this as I'm not using it
-		" Better colors in a terminal inside Neovim (https://github.com/neovim/neovim/issues/4436)
-		let g:terminal_color_0  = '#282828'
-		let g:terminal_color_1  = '#cc241d'
-		let g:terminal_color_2  = '#98971a'
-		let g:terminal_color_3  = '#d79921'
-		let g:terminal_color_4  = '#458588'
-		let g:terminal_color_5  = '#b16286'
-		let g:terminal_color_6  = '#689d6a'
-		let g:terminal_color_7  = '#a89984'
-		let g:terminal_color_8  = '#928374'
-		let g:terminal_color_9  = '#fb4934'
-		let g:terminal_color_10 = '#b8bb26'
-		let g:terminal_color_11 = '#fabd2f'
-		let g:terminal_color_12 = '#83a598'
-		let g:terminal_color_13 = '#d3869b'
-		let g:terminal_color_14 = '#8ec07c'
-		let g:terminal_color_15 = '#ebdbb2'
 	else
 		set background=light
-
-		" Better colors in a terminal inside Neovim (https://github.com/neovim/neovim/issues/4436)
-		let g:terminal_color_0  = '#fbf1c7'
-		let g:terminal_color_1  = '#cc241d'
-		let g:terminal_color_2  = '#98971a'
-		let g:terminal_color_3  = '#d79921'
-		let g:terminal_color_4  = '#458588'
-		let g:terminal_color_5  = '#b16286'
-		let g:terminal_color_6  = '#689d6a'
-		let g:terminal_color_7  = '#7c6f64'
-		let g:terminal_color_8  = '#928374'
-		let g:terminal_color_9  = '#9d0006'
-		let g:terminal_color_10 = '#79740e'
-		let g:terminal_color_11 = '#b57614'
-		let g:terminal_color_12 = '#076678'
-		let g:terminal_color_13 = '#8f3f71'
-		let g:terminal_color_14 = '#427b58'
-		let g:terminal_color_15 = '#3c3836'
 	endif
 
 	" To be more cooler => transparent background
