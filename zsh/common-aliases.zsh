@@ -24,6 +24,9 @@ alias ys='yarn start'
 alias yb='yarn build'
 alias yt='yarn test'
 
+# One shouldn't add itself to docker group as mentioned here: https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
+alias docker='sudo docker'
+
 # Can it be useful later?
 # _() { node -e "process.stdout.write(require('lodash').$1('${2:-$(cat)}'))" }
 # _C() { _ capitalize $1 }
