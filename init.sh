@@ -22,7 +22,7 @@ function checkDependency {
 
 mkdir -p $DIR/.logs
 
-for moduleDir in `find $DIR/*/ -maxdepth 1 -type d`; do
+for moduleDir in `find $DIR/*/ -maxdepth 1 -type d | sort`; do
 	module=`basename $moduleDir`
 	failedDependenciesCount=0
 	

@@ -6,6 +6,7 @@ export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ANDROID_HOME=$HOME/Android/SDK
 export JAVA_HOME=/usr/lib/jvm/java-8-jdk
 export PATH=./node_modules/.bin:$PATH:$JAVA_HOME/bin:$HOME/.yarn/bin:$HOME/.local/opt/gcc-arm-none-eabi-6/bin
+export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
 
 # Prevent duplicates in PATH variable
 typeset -U path

@@ -36,6 +36,7 @@ fontconfig
 jq
 compton
 rofi
+lxqt-openssh-askpass
 perl-anyevent-i3
 aur/xbanish
 aur/fonts-meta-extended-lt
