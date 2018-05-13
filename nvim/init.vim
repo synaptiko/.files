@@ -28,6 +28,7 @@ set inccommand=nosplit
 set mouse=a
 set nobackup
 set nowritebackup
+set foldlevel=99                    " Open all folds by default, useful when checking commits in GV plugin
 
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
@@ -63,6 +64,7 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 " Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rhubarb'
 Plug 'vim-airline/vim-airline'
@@ -101,6 +103,11 @@ let g:airline#extensions#whitespace#enabled=0
 
 set signcolumn=yes
 let g:gitgutter_realtime=1
+let g:gitgutter_sign_added='┃'
+let g:gitgutter_sign_modified='┃'
+let g:gitgutter_sign_removed='◢'
+let g:gitgutter_sign_removed_first_line='◥'
+let g:gitgutter_sign_modified_removed='◢'
 
 let g:fzf_command_prefix='Fzf'
 let g:fzf_layout={ 'window': 'topleft 14new' }
@@ -226,7 +233,7 @@ let $FZF_DEFAULT_OPTS='--reverse --inline-info'
 
 " Useful for highlight introspection and overrides:
 " http://yanpritzker.com/2012/04/17/how-to-change-vim-syntax-colors-that-are-annoying-you/
-" nmap ,hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+" nmap <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
 " Update appearance of TabLine (according to gruvbox theme)
 highlight TabLineSel guifg=#1d2021 guibg=#a89984
