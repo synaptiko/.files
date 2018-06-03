@@ -192,6 +192,7 @@ ab clog console.log()<Left>
 ab cerr console.error()<Left>
 ab cdir console.dir()<Left>
 ab dbg debugger
+ab wtd ¯\_(ツ)_/¯
 
 " Default Fzf's status line is not useful for me
 function! s:fzf_statusline()
@@ -224,6 +225,9 @@ augroup configgroup
 	" autocmd FocusLost * :silent exec "!test -L /tmp/nvimsocket && ls -l /tmp/nvimsocket | grep $NVIM_LISTEN_ADDRESS >& /dev/null && rm /tmp/nvimsocket"
 
 	autocmd BufRead,BufNewFile *.mjs set filetype=javascript
+
+	" Open files in quickfix window in new tab when Ctrl+T is pressed
+	autocmd FileType qf nnoremap <buffer> <C-T> <C-W><Enter><C-W>T
 augroup END
 
 " Following ensures that fzf will be always set correctly, even when run from nvim-wrapper
@@ -296,6 +300,7 @@ endfunction
 set title
 let &titlestring = 'Neovim@' . GetNvimListenAddress()
 
+" TODO jprokop: replace by some simple C program :-) no need to have yarn, node etc. to convert letters and spaces!
 function! ConvertThroughLodash(fnName, type)
 	if a:type ==# 'v'
 		let saved_unnamed_register = @@
@@ -318,3 +323,11 @@ command! -range -nargs=0 CaseCamel :call ConvertThroughLodash('camelCase', visua
 command! -range -nargs=0 CaseKebab :call ConvertThroughLodash('kebabCase', visualmode())
 command! -range -nargs=0 CaseSnake :call ConvertThroughLodash('snakeCase', visualmode())
 command! -range -nargs=0 CaseStart :call ConvertThroughLodash('startCase', visualmode())
+
+" Helper function to generate and paste random uuid
+" It can be used in insert mode by pressing Ctrl+O<leader>uuid
+function! Uuid()
+    let @u = system('uuid | tr -d "\n"')
+		normal! "up
+endfunction
+nmap <silent> <leader>uuid :call Uuid()<CR>
