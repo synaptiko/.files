@@ -3,6 +3,7 @@ git
 the_silver_searcher
 fzf
 npm
+xclip
 reflector
 aur/pacaur
 aur/nvm
