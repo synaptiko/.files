@@ -10,4 +10,15 @@ workspace 8 output HDMI1
 workspace 9 output HDMI1
 workspace 10 output HDMI1
 workspace "" output HDMI1
-workspace "*" output eDP1
+
+workspace "1'" output eDP1
+workspace "2'" output eDP1
+workspace "3'" output eDP1
+workspace "4'" output eDP1
+workspace "5'" output eDP1
+workspace "6'" output eDP1
+workspace "7'" output eDP1
+workspace "8'" output eDP1
+workspace "9'" output eDP1
+workspace "10'" output eDP1
+workspace "'" output eDP1

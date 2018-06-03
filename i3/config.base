@@ -63,7 +63,6 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 bindsym $mod+slash workspace 
-bindsym $mod+Ctrl+8 workspace *
 
 bindsym $mod+Shift+1 move container to workspace 1, workspace 1
 bindsym $mod+Shift+2 move container to workspace 2, workspace 2
@@ -76,7 +75,37 @@ bindsym $mod+Shift+8 move container to workspace 8, workspace 8
 bindsym $mod+Shift+9 move container to workspace 9, workspace 9
 bindsym $mod+Shift+0 move container to workspace 10, workspace 10
 bindsym $mod+Shift+slash move container to workspace , workspace 
-bindsym $mod+Shift+Ctrl+8 move container to workspace *, workspace *
+
+bindsym $mod+apostrophe mode "ws'"
+mode "ws'" {
+	bindsym $mod+1 workspace 1'
+	bindsym $mod+2 workspace 2'
+	bindsym $mod+3 workspace 3'
+	bindsym $mod+4 workspace 4'
+	bindsym $mod+5 workspace 5'
+	bindsym $mod+6 workspace 6'
+	bindsym $mod+7 workspace 7'
+	bindsym $mod+8 workspace 8'
+	bindsym $mod+9 workspace 9'
+	bindsym $mod+0 workspace 10'
+	bindsym $mod+slash workspace '
+
+	bindsym $mod+Shift+1 move container to workspace 1', workspace 1'
+	bindsym $mod+Shift+2 move container to workspace 2', workspace 2'
+	bindsym $mod+Shift+3 move container to workspace 3', workspace 3'
+	bindsym $mod+Shift+4 move container to workspace 4', workspace 4'
+	bindsym $mod+Shift+5 move container to workspace 5', workspace 5'
+	bindsym $mod+Shift+6 move container to workspace 6', workspace 6'
+	bindsym $mod+Shift+7 move container to workspace 7', workspace 7'
+	bindsym $mod+Shift+8 move container to workspace 8', workspace 8'
+	bindsym $mod+Shift+9 move container to workspace 9', workspace 9'
+	bindsym $mod+Shift+0 move container to workspace 10', workspace 10'
+	bindsym $mod+Shift+slash move container to workspace ', workspace '
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+apostrophe mode "default"
+}
 
 bindsym $mod+Shift+c exec "~/.files/i3/merge-config.sh && i3-msg reload"
 bindsym $mod+Shift+r exec "~/.files/i3/merge-config.sh && i3-msg restart"
@@ -128,8 +157,17 @@ bindcode Shift+82 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindcode Shift+63 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+# mapped from F13 from QMK
+bindsym XF86Launch5 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 70%
+# mapped from F14 from QMK
+bindsym XF86Tools exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 25%
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+
+# copy selection to main clipboard
+# mapped from F15 from QMK
+bindsym XF86Launch6 exec --no-startup-id xclip -selection primary -o | xclip -selection clipboard -i && xdotool key ctrl+v
+bindsym Shift+XF86Launch6 exec --no-startup-id xclip -selection primary -o | xclip -selection clipboard -i && xdotool key ctrl+shift+v
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #458588 #458588 #ebdbb2 #458588   #458588
@@ -138,9 +176,6 @@ client.unfocused        #1d2021 #1d2021 #bdae93 #1d2021   #1d2021
 client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
 client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
 client.background       #ebdbb2
-
-# easier pasting with middle click
-bindsym $mod+Shift+v exec --no-startup-id xdotool click 2
 
 for_window [title="Android Emulator"] floating enable
 for_window [title="Screen Layout Editor"] floating enable # arandr
@@ -151,3 +186,8 @@ for_window [title="Authy" class="Chromium"] floating enable
 for_window [class="keepassxc"] floating enable
 for_window [class="zoom"] floating enable
 for_window [class="lxqt-openssh-askpass"] floating enable
+
+# show keyboard cheatsheet
+# mapped from F16 from QMK
+bindsym XF86Launch7 exec --no-startup-id alacritty -t "Synaptiko Keyboard Cheatsheet" -e node --experimental-modules ~/Projects/keyboard-cheatsheet-tui/index.mjs
+for_window [title="Synaptiko Keyboard Cheatsheet"] floating enable, resize set 900px 470px, move position center
