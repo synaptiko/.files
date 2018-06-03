@@ -8,10 +8,6 @@ alias grep='grep --color=tty -d skip'
 
 alias df='df -h'
 
-alias agjs='ag -p .ignore --js -Q'
-alias agscss='ag -p .ignore --sass -Q'
-
-alias l='gtk-launch'
 alias recvgpgkey='gpg --recv-keys --keyserver hkp://pool.sks-keyservers.net'
 
 alias plan='~/Documents/todo/plan.sh'
@@ -22,7 +18,12 @@ alias v='vim'
 alias y='yarn'
 alias ys='yarn start'
 alias yb='yarn build'
+alias ydb='yarn devbuild'
 alias yt='yarn test'
+
+alias xcp='xclip-copyfile'
+alias xcu='xclip-cutfile'
+alias xpa='xclip-pastefile'
 
 # One shouldn't add itself to docker group as mentioned here: https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
 alias docker='sudo docker'
@@ -39,6 +40,10 @@ passwd-rnd() {
 	# < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-20}
 	openssl rand -base64 32 | tr -dc _A-Z-a-z-0-9 | head -c${1:-20}
 	echo
+}
+
+uuid() {
+	cat /proc/sys/kernel/random/uuid
 }
 
 up() {
