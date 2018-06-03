@@ -52,16 +52,9 @@ up() {
 		printf "\n"
 	fi
 
-	read -k "UPDATE_AUR?:: Update AUR packages? [Y/n] "
-	if [ $UPDATE_AUR != $'\n' ]; then
+	read -k "UPDATE_PACKAGES?:: Update packages? [Y/n] "
+	if [ $UPDATE_PACKAGES != $'\n' ]; then
 		printf "\n"
-	fi
-
-	if [ $UPDATE_AUR != "n" ]; then
-		read -k "UPDATE_DEVEL?:: Update git/svn… packages? [y/N] "
-		if [ $UPDATE_DEVEL != $'\n' ]; then
-			printf "\n"
-		fi
 	fi
 
 	read -k "CLEAN_CACHES?:: Clean-up caches before upgrade? [y/N] "
@@ -74,26 +67,19 @@ up() {
 		sudo systemctl start reflector
 	fi
 
-	if [ $UPDATE_AUR != "n" ]; then
-		if [ $CLEAN_CACHES = "y" ]; then
-			echo "pacaur -Scc"
-			pacaur -Scc
-		fi
+	if [ $CLEAN_CACHES = "y" ]; then
+		echo "yay -Scc"
+		yay -Scc
+	fi
 
-		if [ $UPDATE_DEVEL = "y" ]; then
-			echo "pacaur -Syu --devel"
-			pacaur -Syu --devel
-		else
-			echo "pacaur -Syu"
-			pacaur -Syu
-		fi
-	else
-		if [ $CLEAN_CACHES = "y" ]; then
-			echo "sudo pacman -Scc"
-			sudo pacman -Scc
-		fi
+	if [ $UPDATE_PACKAGES != "n" ]; then
+		echo "yay --news"
+		yay --news
 
-		echo "sudo pacman -Syu"
-		sudo pacman -Syu
+		echo "yay -Syu"
+		yay -Syu
+
+		echo "yay -P --stats"
+		yay -P --stats
 	fi
 }

@@ -146,7 +146,7 @@ interval = 1200
 format = <label>
 label = "%output%"
 format-prefix = ""
-exec =  "~/.files/i3/checkupdates.sh"
+exec =  "~/.files/polybar/check-updates.sh"
 
 [module/time-track]
 type = custom/script
