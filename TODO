@@ -6,3 +6,4 @@
 - check all fixmes/todos in the files!
 - add support for updating plugins (zsh + tmux; or to check if there are new updates)
 - add support for installation from my own repositories
+- consider forking: http://archibold.io/
