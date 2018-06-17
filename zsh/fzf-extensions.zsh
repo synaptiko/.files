@@ -1,29 +1,29 @@
 if ! type fzf &> /dev/null; then
-    return;
+	return;
 fi
 
 # TODO jprokop: clean it up a little and move extra file?
 # TODO jprokop: rename and provide proper description (that it overrides "built-in" fzf-zsh function)!
 # ALT-C - cd into the selected directory
 fzf-cd-widget() {
-  setopt localoptions pipefail 2> /dev/null
-    local dir="$(eval "command ~/Projects/recent-folders/list-recent-folders ~/.recent-folders" | fzf | ~/Projects/recent-folders/normalize-path)"
+	setopt localoptions pipefail 2> /dev/null
+	local dir="$(eval "command ~/Projects/recent-folders/list-recent-folders ~/.recent-folders" | fzf | ~/Projects/recent-folders/normalize-path)"
 
-  if [[ -z "$dir" ]]; then
-    zle redisplay
-    return 0
-  fi
+	if [[ -z "$dir" ]]; then
+		zle redisplay
+		return 0
+	fi
 
-    if [[ -d "$dir" ]]; then
-        cd "$dir"
-        local ret=$?
-        zle fzf-redraw-prompt
-        typeset -f zle-line-init >/dev/null && zle zle-line-init
-        return $ret
-    else
-        echo -e "\033[0;31m$origDir was not found\033[0;00m"
-        return 1
-    fi
+	if [[ -d "$dir" ]]; then
+		cd "$dir"
+		local ret=$?
+		zle fzf-redraw-prompt
+		typeset -f zle-line-init >/dev/null && zle zle-line-init
+		return $ret
+	else
+		echo -e "\033[0;31m$origDir was not found\033[0;00m"
+		return 1
+	fi
 }
 
 zle     -N    fzf-cd-widget
@@ -31,10 +31,10 @@ bindkey '\ec' fzf-cd-widget
 
 # TODO jprokop: finish/adapt to new approach!
 # ignore-current-dir() {
-#     # grep -v "$PWD" ~/.recent-folders > ~/.recent-folders.tmp
-#     # grep -v "${PWD:s/$HOME/~}" ~/.recent-folders > ~/.recent-folders.tmp
-#     grep -v "${PWD:s/\/home\/jprokop/~}" ~/.recent-folders > ~/.recent-folders.tmp
-#     mv ~/.recent-folders.tmp ~/.recent-folders
+#		 # grep -v "$PWD" ~/.recent-folders > ~/.recent-folders.tmp
+#		 # grep -v "${PWD:s/$HOME/~}" ~/.recent-folders > ~/.recent-folders.tmp
+#		 grep -v "${PWD:s/\/home\/jprokop/~}" ~/.recent-folders > ~/.recent-folders.tmp
+#		 mv ~/.recent-folders.tmp ~/.recent-folders
 # }
 
 is_in_git_repo() {

@@ -7,3 +7,6 @@
 - add support for updating plugins (zsh + tmux; or to check if there are new updates)
 - add support for installation from my own repositories
 - consider forking: http://archibold.io/
+- remove xfce4-terminal config & dependencies
+- adapt switching color theme to alacritty (should be easy)
+- report feature request/issue with yay -Sy && yay -Pn (mention partial upgrades, need for sudo and post my previous version of checkversion.sh script for context)
