@@ -1,3 +1,8 @@
+# TODO jprokop: reimplement: https://github.com/synaptiko/spaceship-zsh-theme/blob/master/spaceship.zsh#L190-L222
+# TODO jprokop: put colors into variable for the ligth/dark switching for later (?)
+# TODO jprokop: implement better stash (show number of stashed items)
+# TODO jprokop: fix weird problem with "dirty state" which sometimes happen after cd
+
 # Pure
 # by Sindre Sorhus
 # https://github.com/sindresorhus/pure
@@ -71,16 +76,6 @@ prompt_pure_set_title() {
 }
 
 prompt_pure_preexec() {
-	if [[ -n $prompt_pure_git_fetch_pattern ]]; then
-		# detect when git is performing pull/fetch (including git aliases).
-		local -H MATCH MBEGIN MEND match mbegin mend
-		if [[ $2 =~ (git|hub)\ (.*\ )?($prompt_pure_git_fetch_pattern)(\ .*)?$ ]]; then
-			# we must flush the async jobs to cancel our git fetch in order
-			# to avoid conflicts with the user issued pull / fetch.
-			async_flush_jobs 'prompt_pure'
-		fi
-	fi
-
 	typeset -g prompt_pure_cmd_timestamp=$EPOCHSECONDS
 
 	# shows the current dir and executed command in the title while a process is active
@@ -100,21 +95,20 @@ prompt_pure_string_length_to_var() {
 prompt_pure_preprompt_render() {
 	setopt localoptions noshwordsplit
 
-	# Set color for git branch/dirty status, change color if dirty checking has
-	# been delayed.
-	local git_color=242
-	[[ -n ${prompt_pure_git_last_dirty_check_timestamp+x} ]] && git_color=red
-
 	# Initialize the preprompt array.
 	local -a preprompt_parts
 
 	# Set the path.
 	preprompt_parts+=('%B%F{blue}%~%f%b')
 
-	# Add git branch and dirty status info.
+	# Add git branch.
 	typeset -gA prompt_pure_vcs_info
 	if [[ -n $prompt_pure_vcs_info[branch] ]]; then
-		preprompt_parts+=("%F{$git_color}"'${prompt_pure_vcs_info[branch]}${prompt_pure_git_dirty}%f')
+		preprompt_parts+=('%F{242}${prompt_pure_vcs_info[branch]}%f')
+	fi
+	# Git dirty status info.
+	if [[ -n $prompt_pure_git_dirty ]]; then
+		preprompt_parts+=('%F{242}${prompt_pure_git_dirty}%f')
 	fi
 	# Git pull/push arrows.
 	if [[ -n $prompt_pure_git_arrows ]]; then
@@ -168,39 +162,11 @@ prompt_pure_precmd() {
 	# shows the full path in the title
 	prompt_pure_set_title 'expand-prompt' '%~'
 
-	# preform async git dirty check and fetch
+	# preform async git dirty check
 	prompt_pure_async_tasks
-
-	# store name of virtualenv in psvar if activated
-	psvar[12]=
-	[[ -n $VIRTUAL_ENV ]] && psvar[12]="${VIRTUAL_ENV:t}"
 
 	# print the preprompt
 	prompt_pure_preprompt_render "precmd"
-}
-
-prompt_pure_async_git_aliases() {
-	setopt localoptions noshwordsplit
-	local dir=$1
-	local -a gitalias pullalias
-
-	# we enter repo to get local aliases as well.
-	builtin cd -q $dir
-
-	# list all aliases and split on newline.
-	gitalias=(${(@f)"$(command git config --get-regexp "^alias\.")"})
-	for line in $gitalias; do
-		parts=(${(@)=line})           # split line on spaces
-		aliasname=${parts[1]#alias.}  # grab the name (alias.[name])
-		shift parts                   # remove aliasname
-
-		# check alias for pull or fetch (must be exact match).
-		if [[ $parts =~ ^(.*\ )?(pull|fetch)(\ .*)?$ ]]; then
-			pullalias+=($aliasname)
-		fi
-	done
-
-	print -- ${(j:|:)pullalias}  # join on pipe (for use in regex).
 }
 
 prompt_pure_async_vcs_info() {
@@ -226,37 +192,32 @@ prompt_pure_async_vcs_info() {
 	print -r - ${(@kvq)info}
 }
 
-# fastest possible way to check if repo is dirty
 prompt_pure_async_git_dirty() {
 	setopt localoptions noshwordsplit
-	local untracked_dirty=$1 dir=$2
+	local dir=$1
 
 	# use cd -q to avoid side effects of changing directory, e.g. chpwd hooks
 	builtin cd -q $dir
 
-	if [[ $untracked_dirty = 0 ]]; then
-		command git diff --no-ext-diff --quiet --exit-code
-	else
-		test -z "$(command git status --porcelain --ignore-submodules -unormal)"
+	# uncommitted changes
+	if ! $(git diff --quiet --ignore-submodules --cached); then
+		echo -n ${PURE_GIT_UNCOMMITTED:-+}
 	fi
 
-	return $?
-}
+	# unstaged changes
+	if ! $(git diff-files --quiet --ignore-submodules --); then
+		echo -n ${PURE_GIT_UNSTAGED:-!}
+	fi
 
-prompt_pure_async_git_fetch() {
-	setopt localoptions noshwordsplit
-	# use cd -q to avoid side effects of changing directory, e.g. chpwd hooks
-	builtin cd -q $1
+	# untracked files
+	if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+		echo -n ${PURE_GIT_UNTRACKED:-?}
+	fi
 
-	# set GIT_TERMINAL_PROMPT=0 to disable auth prompting for git fetch (git 2.3+)
-	export GIT_TERMINAL_PROMPT=0
-	# set ssh BachMode to disable all interactive ssh password prompting
-	export GIT_SSH_COMMAND=${GIT_SSH_COMMAND:-"ssh -o BatchMode=yes"}
-
-	command git -c gc.auto=0 fetch &>/dev/null || return 99
-
-	# check arrow status after a successful git fetch
-	prompt_pure_async_git_arrows $1
+	# stashed changes
+	if $(git rev-parse --verify refs/stash &>/dev/null); then
+		echo -n ${PURE_GIT_STASHED:-$}
+	fi
 }
 
 prompt_pure_async_git_arrows() {
@@ -284,9 +245,7 @@ prompt_pure_async_tasks() {
 
 		# reset git preprompt variables, switching working tree
 		unset prompt_pure_git_dirty
-		unset prompt_pure_git_last_dirty_check_timestamp
 		unset prompt_pure_git_arrows
-		unset prompt_pure_git_fetch_pattern
 		prompt_pure_vcs_info[branch]=
 		prompt_pure_vcs_info[top]=
 	fi
@@ -303,28 +262,8 @@ prompt_pure_async_tasks() {
 prompt_pure_async_refresh() {
 	setopt localoptions noshwordsplit
 
-	if [[ -z $prompt_pure_git_fetch_pattern ]]; then
-		# we set the pattern here to avoid redoing the pattern check until the
-		# working three has changed. pull and fetch are always valid patterns.
-		typeset -g prompt_pure_git_fetch_pattern="pull|fetch"
-		async_job "prompt_pure" prompt_pure_async_git_aliases $working_tree
-	fi
-
 	async_job "prompt_pure" prompt_pure_async_git_arrows $PWD
-
-	# do not preform git fetch if it is disabled or working_tree == HOME
-	if (( ${PURE_GIT_PULL:-1} )) && [[ $working_tree != $HOME ]]; then
-		# tell worker to do a git fetch
-		async_job "prompt_pure" prompt_pure_async_git_fetch $PWD
-	fi
-
-	# if dirty checking is sufficiently fast, tell worker to check it again, or wait for timeout
-	integer time_since_last_dirty_check=$(( EPOCHSECONDS - ${prompt_pure_git_last_dirty_check_timestamp:-0} ))
-	if (( time_since_last_dirty_check > ${PURE_GIT_DELAY_DIRTY_CHECK:-1800} )); then
-		unset prompt_pure_git_last_dirty_check_timestamp
-		# check check if there is anything to pull
-		async_job "prompt_pure" prompt_pure_async_git_dirty ${PURE_GIT_UNTRACKED_DIRTY:-1} $PWD
-	fi
+	async_job "prompt_pure" prompt_pure_async_git_dirty $PWD
 }
 
 prompt_pure_check_git_arrows() {
@@ -374,30 +313,13 @@ prompt_pure_async_callback() {
 
 			do_render=1
 			;;
-		prompt_pure_async_git_aliases)
-			if [[ -n $output ]]; then
-				# append custom git aliases to the predefined ones.
-				prompt_pure_git_fetch_pattern+="|$output"
-			fi
-			;;
 		prompt_pure_async_git_dirty)
-			local prev_dirty=$prompt_pure_git_dirty
-			if (( code == 0 )); then
-				unset prompt_pure_git_dirty
-			else
-				typeset -g prompt_pure_git_dirty="*"
+			if [[ $prompt_pure_git_dirty != $output ]]; then
+				typeset -g prompt_pure_git_dirty=$output
+				do_render=1
 			fi
-
-			[[ $prev_dirty != $prompt_pure_git_dirty ]] && do_render=1
-
-			# When prompt_pure_git_last_dirty_check_timestamp is set, the git info is displayed in a different color.
-			# To distinguish between a "fresh" and a "cached" result, the preprompt is rendered before setting this
-			# variable. Thus, only upon next rendering of the preprompt will the result appear in a different color.
-			(( $exec_time > 5 )) && prompt_pure_git_last_dirty_check_timestamp=$EPOCHSECONDS
 			;;
-		prompt_pure_async_git_fetch|prompt_pure_async_git_arrows)
-			# prompt_pure_async_git_fetch executes prompt_pure_async_git_arrows
-			# after a successful fetch.
+		prompt_pure_async_git_arrows)
 			if (( code == 0 )); then
 				local REPLY
 				prompt_pure_check_git_arrows ${(ps:\t:)output}
@@ -430,9 +352,6 @@ prompt_pure_setup() {
 	# Prevent percentage showing up if output doesn't end with a newline.
 	export PROMPT_EOL_MARK=''
 
-	# disallow python virtualenvs from updating the prompt
-	export VIRTUAL_ENV_DISABLE_PROMPT=1
-
 	prompt_opts=(subst percent)
 
 	# borrowed from promptinit, sets the prompt options in case pure was not
@@ -461,11 +380,8 @@ prompt_pure_setup() {
 	# show username@host if root, with username in red
 	[[ $UID -eq 0 ]] && prompt_pure_username='%F{red}%n%f%F{242}@%m%f'
 
-	# if a virtualenv is activated, display it in grey
-	PROMPT='%(12V.%F{242}%12v%f .)'
-
 	# prompt turns red if the previous command didn't exit with 0
-	PROMPT+='%B%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f%b '
+	PROMPT='%B%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f%b '
 }
 
 prompt_pure_setup "$@"
