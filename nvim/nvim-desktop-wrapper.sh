@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# FIXME jprokop: this currently doesn't work well and has to be adapted to alacritty
 if [ $# -eq 0 ] || [ ! -L /tmp/nvimsocket ]; then
 	xfce4-terminal -x nvim >& /dev/null
 	while [ ! -L /tmp/nvimsocket ]; do

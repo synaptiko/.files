@@ -217,13 +217,6 @@ augroup configgroup
 	" Open help vertically
 	autocmd FileType help wincmd L
 
-	" TODO convert to some kind of plugin!!!
-	" Temporary experiment for i3+nvr mapping
-	autocmd FocusGained * :silent exec "!ln -s -f $NVIM_LISTEN_ADDRESS /tmp/nvimsocket"
-	autocmd VimLeave * :silent exec "!test -L /tmp/nvimsocket && ls -l /tmp/nvimsocket | grep $NVIM_LISTEN_ADDRESS >& /dev/null && rm /tmp/nvimsocket"
-	" It currently doesn't work well as pressing Ctrl+Alt+[jkl;] is causing losing of focus
-	" autocmd FocusLost * :silent exec "!test -L /tmp/nvimsocket && ls -l /tmp/nvimsocket | grep $NVIM_LISTEN_ADDRESS >& /dev/null && rm /tmp/nvimsocket"
-
 	autocmd BufRead,BufNewFile *.mjs set filetype=javascript
 
 	" Open files in quickfix window in new tab when Ctrl+T is pressed
@@ -293,12 +286,6 @@ function! InitTheme()
 	endif
 endfunction
 call InitTheme()
-
-function! GetNvimListenAddress()
-	return $NVIM_LISTEN_ADDRESS
-endfunction
-set title
-let &titlestring = 'Neovim@' . GetNvimListenAddress()
 
 " TODO jprokop: replace by some simple C program :-) no need to have yarn, node etc. to convert letters and spaces!
 function! ConvertThroughLodash(fnName, type)
