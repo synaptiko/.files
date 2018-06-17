@@ -1,1 +1,4 @@
 .logs
+0-theme/configs/*
+!0-theme/configs/.gitkeep
+0-theme/node_modules/*
