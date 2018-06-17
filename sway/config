@@ -33,6 +33,13 @@ bindsym $mod+d exec $menu
 exec_always chromium-runner --generate-cache
 bindsym $mod+Shift+Return exec rofi -modi "chromium-runner:chromium-runner-rofi,track:~/Documents/todo/track-rofi.sh" -no-show-icons -location 0 -width 10 -no-fixed-num-lines -show chromium-runner
 
+# FIXME jprokop: use grim & slurp instead: https://github.com/emersion/grim; https://github.com/emersion/slurp (slurp has to be added to aur first)
+# bindsym Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 | xclip -selection clipboard -t image/png"
+# bindsym Mod4+Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
+# FIXME jprokop: figure out if we can use KMS & ffmpeg for now
+# bindsym Shift+Print exec ~/.files/i3/record-screen.sh ogv --convert-to-gif
+# bindsym Shift+Ctrl+Print exec ~/.files/i3/record-screen.sh byzanz
+
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
