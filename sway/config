@@ -1,0 +1,191 @@
+# vim:filetype=i3
+# Read `man 5 sway` for a complete reference.
+set $mod Mod1
+set $left h
+set $down j
+set $up k
+set $right l
+
+# TODO jprokop: replace by ~/.files/sway/startup.sh script later
+exec redshift -m wayland &> /dev/null &
+
+# fallback to x11 for now, wayland support is not mature yet
+set $term WINIT_UNIX_BACKEND=x11 alacritty
+set $menu rofi -show drun
+
+font pango:Iosevka Term Medium 12
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+# FIXME !!! doesn't work currently! generates an error in log
+# floating_modifier $mod normal
+default_border pixel 3
+# FIXME !!! doesn't work currently! generates an error in log
+# default_floating_border normal
+
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec $menu
+
+exec_always chromium-runner --generate-cache
+bindsym $mod+Shift+Return exec rofi -modi "chromium-runner:chromium-runner-rofi,track:~/Documents/todo/track-rofi.sh" -no-show-icons -location 0 -width 10 -no-fixed-num-lines -show chromium-runner
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+f fullscreen toggle
+
+# FIXME !!! doesn't work currently!
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+p focus parent
+bindsym $mod+Shift+s sticky toggle
+
+# FIXME !!! doesn't work currently!
+bindsym $mod+Shift+minus move scratchpad
+# FIXME !!! doesn't work currently!
+bindsym $mod+minus scratchpad show
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+slash workspace 
+
+bindsym $mod+Shift+1 move container to workspace 1, workspace 1
+bindsym $mod+Shift+2 move container to workspace 2, workspace 2
+bindsym $mod+Shift+3 move container to workspace 3, workspace 3
+bindsym $mod+Shift+4 move container to workspace 4, workspace 4
+bindsym $mod+Shift+5 move container to workspace 5, workspace 5
+bindsym $mod+Shift+6 move container to workspace 6, workspace 6
+bindsym $mod+Shift+7 move container to workspace 7, workspace 7
+bindsym $mod+Shift+8 move container to workspace 8, workspace 8
+bindsym $mod+Shift+9 move container to workspace 9, workspace 9
+bindsym $mod+Shift+0 move container to workspace 10, workspace 10
+bindsym $mod+Shift+slash move container to workspace , workspace 
+
+bindsym $mod+Shift+c reload
+# FIXME jprokop: not supported?
+# bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exit
+
+bindsym Mod4+l exec swaylock
+
+workspace_auto_back_and_forth yes
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+	bindsym $left resize grow width 5
+	bindsym $down resize grow height 5
+	bindsym $up resize shrink height 5
+	bindsym $right resize shrink width 5
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+set $mode_system "(l)ogout (r)eboot (p)oweroff (t)oggle redshift"
+bindsym $mod+Escape mode $mode_system
+mode $mode_system {
+	bindsym l exit
+	bindsym r exec sudo reboot, mode "default"
+	bindsym p exec sudo poweroff, mode "default"
+	bindsym t exec kill -USR1 `pgrep ^redshift$`, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindcode Shift+86 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindcode Shift+82 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindcode Shift+63 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+# mapped from F13 from QMK
+bindsym XF86Launch5 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 70%
+# mapped from F14 from QMK
+bindsym XF86Tools exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 25%
+# FIXME jprokop: there is different command for brightness under wayland, update later!
+# -> https://github.com/swaywm/sway/wiki#xbacklight
+# bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+# bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #458588 #458588 #ebdbb2 #458588   #458588
+client.focused_inactive #504945 #504945 #bdae93 #504945   #504945
+client.unfocused        #1d2021 #1d2021 #bdae93 #1d2021   #1d2021
+client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
+client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
+client.background       #ebdbb2
+
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+	status_command while :; do date +'%a %d %b %H:%M'; sleep 30; done
+	position bottom
+	height 25
+	colors {
+		statusline #ebdbb2
+		background #1d2021
+		focused_workspace #458588 #458588 #1d2021
+		inactive_workspace #1d2021 #1d2021 #ebdbb2
+		# FIXME jprokop: finish following colors
+		# active_workspace
+		# urgent_workspace
+	}
+}
+
+include /etc/sway/config.d/*
+
+# FIXME jprokop: improve later! (per host and user?)
+output * bg ~/Pictures/wallpapers/002.jpg fill
+
+### Idle configuration
+#
+# Example configuration:
+#
+#exec swayidle \
+#    timeout 300 'swaylock -c 000000' \
+#    timeout 600 'swaymsg "output * dpms off"' \
+#       resume 'swaymsg "output * dpms on"' \
+#    before-sleep 'swaylock -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 600 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
