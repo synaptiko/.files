@@ -57,7 +57,6 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " Plug 'sirtaj/vim-openscad'
 Plug 'synaptiko/fzf'
 Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my custom colors for tabline
-" Plug 'morhetz/gruvbox'
 Plug 'synaptiko/mintabline'
 Plug 'synaptiko/vim-auto-save'
 Plug 'tpope/vim-abolish'
