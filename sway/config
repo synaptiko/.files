@@ -150,7 +150,7 @@ client.background       #ebdbb2
 
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-	status_command while :; do date +'%a %d %b %H:%M'; sleep 30; done
+	status_command while :; do date +'%a %d %b, %H:%M'; sleep 30; done
 	position bottom
 	height 25
 	colors {
