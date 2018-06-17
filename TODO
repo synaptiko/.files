@@ -1,0 +1,8 @@
+- add support for "git --global config.set" (initialization of git)
+- add association for URL/links to open Chromium/Firefox? (over mimeo?)
+- add multiuser support/setup
+- add "modular" installation; prepare 4 profiles: desktop-i3, desktop-sway, "sudo root" user, VPS
+- cleanup xfce4-desktop
+- check all fixmes/todos in the files!
+- add support for updating plugins (zsh + tmux; or to check if there are new updates)
+- add support for installation from my own repositories
