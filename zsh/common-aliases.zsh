@@ -27,6 +27,7 @@ alias xpa='xclip-pastefile'
 
 # One shouldn't add itself to docker group as mentioned here: https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
 alias docker='sudo docker'
+# alias docker-compose='sudo docker-compose'
 
 # Can it be useful later?
 # _() { node -e "process.stdout.write(require('lodash').$1('${2:-$(cat)}'))" }

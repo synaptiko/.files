@@ -58,6 +58,14 @@ autoload -Uz compinit
 #  and it's impossible to set 755 permissions to it)
 compinit -u
 
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_OPTS='--height=100% --reverse --inline-info'
+
+# FZF sourcing
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
 # .files
 for file in $HOME/.files/zsh/*.zsh; do
 	source "$file"
@@ -69,11 +77,3 @@ if [ -d $HOME/.files-work/zsh ]; then
 		source "$file"
 	done
 fi
-
-# Setting ag as the default source for fzf
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_DEFAULT_OPTS='--height=100% --reverse --inline-info'
-
-# FZF sourcing
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
