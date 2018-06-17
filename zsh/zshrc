@@ -62,7 +62,7 @@ compinit -u
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_OPTS='--height=100% --reverse --inline-info'
 
-# FZF sourcing
+# FZF sourcing (load before my own zsh scripts to be able to override some keybindings)
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
