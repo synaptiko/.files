@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const colorSchemeFile = path.join(__dirname, 'gruvbox/colors.yml')
 const alacrittySchemeFile = path.join(__dirname, 'gruvbox/alacritty.yml')
-const sourceConfigFile = path.join(__dirname, '../alacritty/alacritty.yml')
+const sourceConfigFile = path.join(__dirname, 'configs/source-alacritty.yml')
 const destinationConfigFile = path.join(__dirname, 'configs/alacritty.yml')
 const theme = process.argv[2] || 'dark'
 
@@ -38,9 +38,3 @@ const newAlacrittyConfig = yaml.safeDump(alacrittyConfig, {
 })
 
 fs.writeFileSync(destinationConfigFile, newAlacrittyConfig, { encoding: 'utf8' })
-
-// TODO jprokop: what has to be done?
-// - integrate to "installation" process of alacritty
-// - add comment to the beginning of generated files so I do not forgot to edit them directly
-// - contact zsh (somehow) and switch pure prompt colors (branch name etc)
-// - contact i3/sway and change colors there (+ in bar; but first get rid of polybar)

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-count=$(yay -Pn | tee ~/.last-check-updates-output)
+count=$(yay -Pn)
 
 if [[ "$count" != "0" ]]; then
 	echo $count

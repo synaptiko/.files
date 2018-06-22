@@ -3,6 +3,8 @@ dark:
     primary:
       background: 'dark0_hard'
       foreground: 'light1'
+      bright_foreground: 'light0'
+      dim_foreground: 'light2'
     normal:
       black:      'dark0'
       red:        'neutral_red'
@@ -36,6 +38,8 @@ light:
     primary:
       background: 'light0_hard'
       foreground: 'dark1'
+      bright_foreground: 'dark0'
+      dim_foreground: 'dark2'
     normal:
       black:      'light0'
       red:        'neutral_red'
