@@ -1,0 +1,34 @@
+[Trigger]
+Operation = Install
+Type = Package
+Target = sway
+
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = sway
+
+[Trigger]
+Operation = Install
+Type = Package
+Target = sway-git
+
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = sway-git
+
+[Trigger]
+Operation = Install
+Type = Package
+Target = sway-wlroots-git
+
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = sway-wlroots-git
+
+[Action]
+Description = Setting capabilities for sway binary...
+When = PostTransaction
+Exec = /bin/sh -c 'setcap "cap_sys_ptrace,cap_sys_tty_config=eip" /usr/bin/sway'

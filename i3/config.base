@@ -1,4 +1,5 @@
 # vim:filetype=i3
+# Read `man i3` for a complete reference.
 set $mod Mod1
 set $left h
 set $down j
