@@ -11,7 +11,7 @@ set $menu rofi -show drun
 exec --no-startup-id ~/.files/i3/startup.sh
 exec_always --no-startup-id ~/.files/i3/polybar.sh
 
-font pango:Iosevka Term Medium 12
+font pango:Iosevka Term SS03 Medium 12
 
 floating_modifier $mod
 new_window pixel 3

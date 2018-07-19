@@ -13,7 +13,7 @@ exec redshift -m wayland &> /dev/null &
 set $term WINIT_UNIX_BACKEND=x11 alacritty
 set $menu rofi -show drun
 
-font pango:Iosevka Term Medium 12
+font pango:Iosevka Term SS03 Medium 12
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.

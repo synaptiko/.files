@@ -37,7 +37,7 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = "Iosevka Term Medium:size=11;3"
+font-0 = "Iosevka Term SS03 Medium:size=11;3"
 ; TODO jprokop: add those new fonts + Noto/Noto Emoji to my .files
 font-1 = "Material Icons:size=12;4"
 font-2 = "Font Awesome:size=12;3"
