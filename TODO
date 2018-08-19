@@ -1,6 +1,6 @@
 - 0-theme:
-	- add toggle functionality (to be called from i3/sway); it has to persist state somewhere
   - add comment to the beginning of generated files so I do not forgot to edit them directly
+	- change theme in rofi
   - contact zsh (somehow) and switch pure prompt colors (branch name etc)
   - contact i3/sway and change colors there (+ in bar; but first get rid of polybar)
 
