@@ -138,11 +138,6 @@ configuration {
 	me-accept-custom: "Control+MouseDPrimary";
 }
 
-* {
-	background-color: #1d2021;
-	color: #ebdbb2;
-}
-
 inputbar {
     children:   [ entry ];
 }
@@ -151,13 +146,22 @@ element {
 	padding: 3px;
 }
 
+window {
+	border: 3px;
+	padding: 6px;
+}
+
+/* -- THEME MARKER -- */
+* {
+	background-color: #1d2021;
+	color: #ebdbb2;
+}
+
 element selected {
 	background-color: #ebdbb2;
 	color: #1d2021;
 }
 
 window {
-	border: 3px;
-	padding: 6px;
 	border-color: #458588;
 }

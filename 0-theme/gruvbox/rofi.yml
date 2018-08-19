@@ -1,0 +1,19 @@
+dark:
+  '*':
+    background-color: 'dark0_hard'
+    color: 'light1'
+  element selected:
+    background-color: 'light1'
+    color: 'dark0_hard'
+  window:
+    border-color:       'neutral_blue'
+
+light:
+  '*':
+    background-color: 'light0_hard'
+    color: 'dark1'
+  element selected:
+    background-color: 'dark1'
+    color: 'light0_hard'
+  window:
+    border-color:       'neutral_blue'
