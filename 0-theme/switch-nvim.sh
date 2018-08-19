@@ -6,7 +6,9 @@ COMMAND="call SwitchTheme('${THEME:-dark}')"
 
 # switch theme in all locally running nvim instances
 for filename in /tmp/nvim*/0; do
-	nvr --nostart --servername "$filename" -c "$COMMAND" &
+	if [ -e $filename ]; then
+		nvr --nostart --servername "$filename" -c "$COMMAND" &
+	fi
 done
 
 # persist theme for future nvim instances

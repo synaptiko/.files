@@ -31,7 +31,8 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: false
+  # FIXME jprokop: we have to use `true` on XOrg but `false` on Wayland; figure out how to handle it (but maybe one day it won't be needed on Wayland with Alacritty's proper support)
+  decorations: true
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
