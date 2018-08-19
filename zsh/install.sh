@@ -14,6 +14,7 @@ ZSHRC_CONFIG=~/.zshrc
 ln -s -f $DIR/zshrc $ZSHRC_CONFIG
 
 ZSH_PLUG_DIR=~/.zsh_plug
+rm -f $ZSH_PLUG_DIR # this prevent to create symlink to `plugins` dir inside .zsh_plug in case it already exists
 ln -s -f $DIR/plugins $ZSH_PLUG_DIR
 
 # to support aliases inside of vim (:!gs for example)
