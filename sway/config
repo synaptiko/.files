@@ -6,16 +6,17 @@ set $down j
 set $up k
 set $right l
 
-set $term alacritty
+# set $term alacritty # FIXME jprokop: switch back to alacritty once it works reliably under xwayland (focus issue) or once wayland support is complete (no decorations, proper geometry and key repeat)
+set $term xfce4-terminal
 set $menu rofi -show drun
 
 exec ~/.files/sway/startup.sh
 
 font pango:Iosevka Term SS03 Medium 12
 
-# floating_modifier $mod normal # FIXME !!! doesn't work currently! generates an error in log
+floating_modifier $mod normal
 default_border pixel 3
-# default_floating_border normal # FIXME !!! doesn't work currently! generates an error in log
+default_floating_border normal
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
@@ -44,15 +45,13 @@ bindsym $mod+b splith
 bindsym $mod+v splitv
 bindsym $mod+f fullscreen toggle
 
-# FIXME !!! doesn't work currently!
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+p focus parent
+# FIXME sticky mode works but it's unusable because of weird bugs
 bindsym $mod+Shift+s sticky toggle
 
-# FIXME !!! doesn't work currently!
 bindsym $mod+Shift+minus move scratchpad
-# FIXME !!! doesn't work currently!
 bindsym $mod+minus scratchpad show
 
 bindsym $mod+s layout stacking
@@ -84,10 +83,9 @@ bindsym $mod+Shift+0 move container to workspace 10, workspace 10
 bindsym $mod+Shift+slash move container to workspace , workspace 
 
 bindsym $mod+Shift+c reload
-# FIXME jprokop: not supported?
-# bindsym $mod+Shift+r restart
+# bindsym $mod+Shift+r restart # FIXME jprokop: restart is not yet supported
 bindsym $mod+Shift+e exit
-
+# TODO jprokop: autogenerate swaylock image somehow
 bindsym Mod4+l exec swaylock
 
 workspace_auto_back_and_forth yes
@@ -115,28 +113,52 @@ mode $mode_system {
 	bindsym Escape mode "default"
 }
 
-bindcode Shift+86 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
-bindcode Shift+82 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
-bindcode Shift+63 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindcode Shift+86 exec pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
+bindcode Shift+82 exec pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%
+bindcode Shift+63 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 # mapped from F13 from QMK
-bindsym XF86Launch5 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 70%
+bindsym XF86Launch5 exec pactl set-sink-volume @DEFAULT_SINK@ 70%
 # mapped from F14 from QMK
-bindsym XF86Tools exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 25%
+bindsym XF86Tools exec pactl set-sink-volume @DEFAULT_SINK@ 25%
 # FIXME jprokop: there is different command for brightness under wayland, update later!
 # -> https://github.com/swaywm/sway/wiki#xbacklight
-# bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-# bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+# bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+# bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+
+# FIXME jprokop: adapt to wayland somehow, if it'll be even possible
+# copy selection to main clipboard
+# mapped from F15 from QMK
+# bindsym XF86Launch6 exec xclip -selection primary -o | xclip -selection clipboard -i && xdotool key ctrl+v
+# bindsym Shift+XF86Launch6 exec xclip -selection primary -o | xclip -selection clipboard -i && xdotool key ctrl+shift+v
+
+# FIXME jprokop: adapt to wayland somehow, if it'll be even possible
+# show keyboard cheatsheet
+# mapped from F16 from QMK
+# bindsym XF86Launch7 exec alacritty -t "Synaptiko Keyboard Cheatsheet" -e node --experimental-modules ~/Projects/keyboard-cheatsheet-tui/index.mjs
+# for_window [title="Synaptiko Keyboard Cheatsheet"] floating enable, resize set 900px 470px, move position center
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #458588 #458588 #ebdbb2 #458588   #458588
 client.focused_inactive #504945 #504945 #bdae93 #504945   #504945
 client.unfocused        #1d2021 #1d2021 #bdae93 #1d2021   #1d2021
 client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
-client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
-client.background       #ebdbb2
+# FIXME jprokop: following color definitions are not supported by sway yet
+# client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
+# client.background       #ebdbb2
+
+# FIXME jprokop: overtaken from i3, has to be adapted to wayland (IIRC `class` doesn't exist in wayland)
+# for_window [title="Android Emulator"] floating enable
+# for_window [title="Screen Layout Editor"] floating enable # arandr
+# for_window [title="Nitrogen"] floating enable
+# for_window [title="Firewall"] floating enable
+# for_window [title="Signal" class="Signal"] floating enable, move scratchpad, scratchpad show
+# for_window [title="Authy" class="Chromium"] floating enable
+# for_window [class="keepassxc"] floating enable
+# for_window [class="zoom"] floating enable
+# for_window [class="lxqt-openssh-askpass"] floating enable
 
 # Read `man 5 sway-bar` for more information about this section.
 bar {
@@ -154,11 +176,12 @@ bar {
 	}
 }
 
-include /etc/sway/config.d/*
+include ~/.config/sway/config.d/*
 
 # FIXME jprokop: improve later! (per host and user?)
 output * bg ~/Pictures/wallpapers/002.jpg fill
 
+# FIXME jprokop: configure following later
 ### Idle configuration
 #
 # Example configuration:
