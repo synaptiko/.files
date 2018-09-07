@@ -225,7 +225,7 @@ augroup END
 " Following ensures that fzf will be always set correctly, even when run from nvim-wrapper
 " (see https://github.com/fmoralesc/neovim-gnome-terminal-wrapper/pull/9#issuecomment-160473798)
 let $FZF_DEFAULT_COMMAND='ag -g ""'
-let $FZF_DEFAULT_OPTS='--reverse --inline-info'
+let $FZF_DEFAULT_OPTS='--reverse --inline-info --color=16'
 
 " Useful for highlight introspection and overrides:
 " http://yanpritzker.com/2012/04/17/how-to-change-vim-syntax-colors-that-are-annoying-you/
@@ -242,49 +242,6 @@ function! ClearTabsAndBuffers()
 	Wipeout
 endfunction
 nmap <leader>Q :call ClearTabsAndBuffers()<CR>
-
-function! SwitchTheme(variant, ...)
-	if a:0 == 0
-		silent !clear
-
-		if a:variant == 'dark'
-			silent !~/.files/xfce4-terminal/switch-theme.sh dark
-		else
-			silent !~/.files/xfce4-terminal/switch-theme.sh light
-		endif
-
-		redraw!
-	endif
-
-	if a:variant == 'dark'
-		set background=dark
-	else
-		set background=light
-	endif
-
-	" To be more cooler => transparent background
-	hi! Normal ctermbg=none guibg=none
-endfunction
-
-function! ToggleTheme()
-	if &background == 'dark'
-		call SwitchTheme('light')
-	else
-		call SwitchTheme('dark')
-	endif
-endfunction
-nmap <silent> <leader>T :call ToggleTheme()<CR>
-
-function! InitTheme()
-	let actualTheme = system("ls -la ~/.config/xfce4/terminal/terminalrc")
-
-	if actualTheme =~# '-light'
-		call SwitchTheme('light', 0)
-	else
-		call SwitchTheme('dark', 0)
-	endif
-endfunction
-call InitTheme()
 
 " TODO jprokop: replace by some simple C program :-) no need to have yarn, node etc. to convert letters and spaces!
 function! ConvertThroughLodash(fnName, type)
@@ -317,3 +274,19 @@ function! Uuid()
 		normal! "up
 endfunction
 nmap <silent> <leader>uuid :call Uuid()<CR>
+
+function! SwitchTheme(variant)
+	if a:variant == 'dark'
+		set background=dark
+	else
+		set background=light
+	endif
+
+	" To be more cooler => transparent background
+	hi! Normal ctermbg=none guibg=none
+endfunction
+if !empty(glob('~/.files/0-theme/configs/nvim.vim'))
+	source ~/.files/0-theme/configs/nvim.vim
+else
+	call SwitchTheme('dark')
+endif

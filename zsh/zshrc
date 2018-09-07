@@ -60,7 +60,7 @@ compinit -u
 
 # Setting ag as the default source for fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_DEFAULT_OPTS='--height=100% --reverse --inline-info'
+export FZF_DEFAULT_OPTS='--height=100% --reverse --inline-info --color=16'
 
 # FZF sourcing (load before my own zsh scripts to be able to override some keybindings)
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh

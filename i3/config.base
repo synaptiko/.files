@@ -111,6 +111,8 @@ mode $mode_system {
 	bindsym Escape mode "default"
 }
 
+bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
+
 bindcode Shift+86 exec pactl set-sink-volume @DEFAULT_SINK@ +2%
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
 bindcode Shift+82 exec pactl set-sink-volume @DEFAULT_SINK@ -2%
