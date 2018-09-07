@@ -5,6 +5,7 @@ fzf
 npm
 xclip
 reflector
+zsh-completions
 aur/yay-bin
 aur/nvm
 aur/nodejs-tldr
