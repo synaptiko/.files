@@ -38,9 +38,6 @@ module-margin-left = 1
 module-margin-right = 1
 
 font-0 = "Iosevka Term SS03 Medium:size=11;3"
-; TODO jprokop: add those new fonts + Noto/Noto Emoji to my .files
-font-1 = "Material Icons:size=12;4"
-font-2 = "Font Awesome:size=12;3"
 
 enable-ipc = true
 
@@ -100,19 +97,22 @@ label-unfocused-padding = 1
 ; focused = Active workspace on focused monitor
 label-focused = %name%
 label-focused-padding = 1
-label-focused-foreground = ${colors.fg}
+label-focused-foreground = ${colors.bg}
+label-focused-background = ${colors.focused}
 label-focused-underline = ${colors.focused}
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %name%
 label-visible-padding = 1
-label-visible-foreground = ${colors.fg}
+label-visible-foreground = ${colors.bg}
+label-visible-background = ${colors.visible}
 label-visible-underline = ${colors.visible}
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %name%
 label-urgent-padding = 1
-label-urgent-foreground = ${colors.fg}
+label-urgent-foreground = ${colors.bg}
+label-urgent-background = ${colors.urgent}
 label-urgent-underline = ${colors.urgent}
 
 [module/wifi]
@@ -121,7 +121,7 @@ interface = wlp3s0
 interval = 15
 format-connected = <label-connected> <ramp-signal>
 format-disconnected = <label-disconnected>
-label-connected = %downspeed% %upspeed% [%essid%]
+label-connected = Dw%downspeed% Up%upspeed% [%essid%]
 label-connected-foreground = #666
 ramp-signal-foreground= #666
 ramp-signal-0 = 0%
@@ -130,7 +130,7 @@ ramp-signal-2 = ~40%
 ramp-signal-3 = ~60%
 ramp-signal-4 = ~80%
 ramp-signal-5 = ~100%
-label-disconnected = 
+label-disconnected = No Wifi
 label-diconnected-foreground = #666
 
 [module/openvpn]
@@ -138,23 +138,23 @@ type = custom/script
 exec = pgrep openvpn
 interval = 15
 label = OpenVPN
-format-prefix = " "
+format-prefix = VPN
 
 [module/pacman]
 type = custom/script
 interval = 1200
 format = <label>
 label = "%output%"
-format-prefix = ""
-exec =  "~/.files/polybar/check-updates.sh"
+format-prefix = "U "
+exec = "~/.files/polybar/check-updates.sh"
 
 [module/time-track]
 type = custom/script
 interval = 60
 format = <label>
 label = "%output%"
-format-prefix = " "
-exec =  "~/Documents/todo/time-track.js"
+format-prefix = "T "
+exec = "~/Documents/todo/time-track.js"
 
 [module/battery]
 type = internal/battery
@@ -163,26 +163,20 @@ battery = BAT1
 adapter = ADP1
 poll-interval = 30
 time-format = %H:%M
-format-charging = <ramp-capacity> <label-charging>
-format-discharging = <ramp-capacity> <label-discharging>
+format-charging = Battery++ <label-charging>
+format-discharging = Battery-- <label-discharging>
 label-charging = %percentage%% (%time%)
 label-discharging = %percentage%% (%time%)
-label-full =  
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
 
 [module/volume]
 type = internal/volume
 
 format-volume = <label-volume>
-label-volume = "%percentage%%"
+label-volume = "V %percentage%%"
 label-volume-foreground = ${root.foreground}
 
 format-muted = <label-muted>
-label-muted = "%percentage%%"
+label-muted = "M %percentage%%"
 format-muted-foreground = ${colors.alert}
 
 [module/date]
@@ -197,6 +191,6 @@ label = "%date% %time% "
 [module/is-recording]
 type = custom/ipc
 hook-0 = echo
-hook-1 = echo " "
+hook-1 = echo " R"
 format-foreground = ${colors.urgent}
 initial = 1

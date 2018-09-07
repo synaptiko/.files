@@ -15,8 +15,8 @@ exec ~/.files/sway/startup.sh
 font pango:Iosevka Term SS03 Medium 12
 
 floating_modifier $mod normal
-default_border pixel 3
-default_floating_border normal
+new_window pixel 3
+new_float normal
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
@@ -68,7 +68,7 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
-bindsym $mod+slash workspace 
+bindsym $mod+slash workspace /
 
 bindsym $mod+Shift+1 move container to workspace 1, workspace 1
 bindsym $mod+Shift+2 move container to workspace 2, workspace 2
@@ -80,7 +80,7 @@ bindsym $mod+Shift+7 move container to workspace 7, workspace 7
 bindsym $mod+Shift+8 move container to workspace 8, workspace 8
 bindsym $mod+Shift+9 move container to workspace 9, workspace 9
 bindsym $mod+Shift+0 move container to workspace 10, workspace 10
-bindsym $mod+Shift+slash move container to workspace , workspace 
+bindsym $mod+Shift+slash move container to workspace /, workspace /
 
 bindsym $mod+Shift+c reload
 # bindsym $mod+Shift+r restart # FIXME jprokop: restart is not yet supported

@@ -66,7 +66,7 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
-bindsym $mod+slash workspace 
+bindsym $mod+slash workspace /
 
 bindsym $mod+Shift+1 move container to workspace 1, workspace 1
 bindsym $mod+Shift+2 move container to workspace 2, workspace 2
@@ -78,7 +78,7 @@ bindsym $mod+Shift+7 move container to workspace 7, workspace 7
 bindsym $mod+Shift+8 move container to workspace 8, workspace 8
 bindsym $mod+Shift+9 move container to workspace 9, workspace 9
 bindsym $mod+Shift+0 move container to workspace 10, workspace 10
-bindsym $mod+Shift+slash move container to workspace , workspace 
+bindsym $mod+Shift+slash move container to workspace /, workspace /
 
 bindsym $mod+Shift+c exec "~/.files/i3/merge-config.sh && i3-msg reload"
 bindsym $mod+Shift+r exec "~/.files/i3/merge-config.sh && i3-msg restart"
