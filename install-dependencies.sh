@@ -1,23 +1,7 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if ! which yay >& /dev/null; then
-	echo "Yay is required; it will be cloned under ~/Packages and installed"
-	echo
-
-	mkdir -p ~/Packages
-	cd ~/Packages
-	git clone https://aur.archlinux.org/yay-bin.git
-	cd yay-bin
-	makepkg -sircC
-	cd
-
-	$DIR/yay/install.sh
-
-	echo
-	echo "Yay! Move on with real installation now! :-)"
-	echo
-fi
+$DIR/yay/install.sh
 
 for arg in $@; do
 	case "$arg" in
@@ -48,6 +32,6 @@ fi
 if [ "$aurDeps" != "" ]; then
 	echo -e "\e[1myay -S \e[0m$aurDeps"
 	if [ "$dryRun" != true ]; then
-		EDITOR=`which nvim &> /dev/null && echo nvim || echo nano` yay -S $aurDeps
+		EDITOR=`which nvim >& /dev/null && echo nvim || echo nano` sudo -u yay yay -S $aurDeps
 	fi
 fi

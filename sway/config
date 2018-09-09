@@ -164,7 +164,8 @@ client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
 
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-	status_command while :; do date +'%a %d %b, %H:%M'; sleep 30; done
+	# status_command while :; do date +'%a %d %b, %H:%M'; sleep 30; done
+	status_command /opt/synaptiko-desktop-status/bar.sh
 	position bottom
 	height 25
 	colors {

@@ -25,6 +25,8 @@ alias xcp='xclip-copyfile'
 alias xcu='xclip-cutfile'
 alias xpa='xclip-pastefile'
 
+alias yay='sudo -u yay yay'
+
 # One shouldn't add itself to docker group as mentioned here: https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user
 alias docker='sudo docker'
 # alias docker-compose='sudo docker-compose'

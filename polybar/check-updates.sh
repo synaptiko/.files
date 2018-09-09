@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-count=$(yay -Pn)
+count=$(yay -Qu | wc -l)
 
 if [[ "$count" != "0" ]]; then
 	echo $count

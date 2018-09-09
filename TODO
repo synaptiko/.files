@@ -1,3 +1,11 @@
+- consider adding users' configuration (multiuser support)
+	- prepare synaptiko, eggze, jprokop users (for desktop env) and only jprokop (for vps env)
+	- plus proper sudoers config
+		https://apple.stackexchange.com/questions/82438/allow-sudo-to-another-user-without-password#82527
+	- synaptiko will contain yay cache, config and shared `.files` and other multiuser things
+		- refactor yay's installation then
+		- I could also run `synaptiko-desktop` under it (if nobody:nobody won't be suitable)
+
 - 0-theme:
   - contact zsh (somehow) and switch pure prompt colors (branch name etc)
   - contact i3/sway and change colors there (+ in bar; but first get rid of polybar)
