@@ -21,13 +21,46 @@ fzf-cd-widget() {
 		typeset -f zle-line-init >/dev/null && zle zle-line-init
 		return $ret
 	else
-		echo -e "\033[0;31m$origDir was not found\033[0;00m"
+		echo -e "\033[0;31m$dir was not found\033[0;00m"
 		return 1
 	fi
 }
 
 zle     -N    fzf-cd-widget
 bindkey '\ec' fzf-cd-widget
+
+# ALT-X - list current directory and cd into the selected one
+fzf-browse-widget() {
+	setopt localoptions pipefail 2> /dev/null
+
+	local origDir=$PWD
+
+	while :; do
+		local listing=$(ls -p --group-directories-first)
+		local selected="$(echo .\\n..\\n$listing | fzf)"
+
+		if [[ -z "$selected" ]]; then
+			cd "$origDir"
+			zle redisplay
+			return 0
+		elif [[ "$selected" == "." ]]; then
+			zle fzf-redraw-prompt
+			typeset -f zle-line-init >/dev/null && zle zle-line-init
+			return 0
+		elif [[ -d "$selected" ]]; then
+			cd "$selected"
+			sleep 0
+		else
+			RBUFFER=${selected}${RBUFFER}
+			zle fzf-redraw-prompt
+			typeset -f zle-line-init >/dev/null && zle zle-line-init
+			return 0
+		fi
+	done
+}
+
+zle     -N    fzf-browse-widget
+bindkey '\ex' fzf-browse-widget
 
 # TODO jprokop: finish/adapt to new approach!
 # ignore-current-dir() {
