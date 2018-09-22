@@ -29,6 +29,7 @@ fzf-cd-widget() {
 zle     -N    fzf-cd-widget
 bindkey '\ec' fzf-cd-widget
 
+# TODO jprokop: maybe it could "compile" the path instead of cd; also blinking could be reduced by using additional script
 # ALT-X - list current directory and cd into the selected one
 fzf-browse-widget() {
 	setopt localoptions pipefail 2> /dev/null
