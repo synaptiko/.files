@@ -123,8 +123,8 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86Launch5 exec pactl set-sink-volume @DEFAULT_SINK@ 70%
 # mapped from F14 from QMK
 bindsym XF86Tools exec pactl set-sink-volume @DEFAULT_SINK@ 25%
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
 # copy selection to main clipboard
 # mapped from F15 from QMK

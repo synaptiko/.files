@@ -17,7 +17,6 @@ xorg-server
 xorg-xinit
 xorg-xprop
 xorg-xwininfo
-xorg-xbacklight
 xorg-xrandr
 xorg-xset
 xf86-video-intel
@@ -43,3 +42,4 @@ aur/ttf-iosevka-term-ss03
 aur/polybar
 aur/neovim-remote
 aur/chromium-runner
+aur/brightnessctl

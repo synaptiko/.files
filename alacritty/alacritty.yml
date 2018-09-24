@@ -37,7 +37,7 @@ window:
   #     - full: Borders and title bar
   #     - none: Neither borders nor title bar
   # FIXME jprokop: we have to use `full` on XOrg but `none` on Wayland; figure out how to handle it (but maybe one day it won't be needed on Wayland with Alacritty's proper support)
-  decorations: full
+  decorations: none
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -223,7 +223,7 @@ visual_bell:
   duration: 0
 
 # Background opacity
-background_opacity: 0.98 # 0.97
+background_opacity: 0.94 # 0.97
 
 # Mouse bindings
 #

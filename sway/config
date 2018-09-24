@@ -6,8 +6,9 @@ set $down j
 set $up k
 set $right l
 
-# set $term alacritty # FIXME jprokop: switch back to alacritty once it works reliably under xwayland (focus issue) or once wayland support is complete (no decorations, proper geometry and key repeat)
-set $term xfce4-terminal
+# FIXME jprokop: switch completely to alacritty once wayland support is complete (no decorations, proper geometry and key repeat)
+# set $term xfce4-terminal
+set $term alacritty
 set $menu rofi -show drun
 
 exec ~/.files/sway/startup.sh
@@ -125,10 +126,8 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86Launch5 exec pactl set-sink-volume @DEFAULT_SINK@ 70%
 # mapped from F14 from QMK
 bindsym XF86Tools exec pactl set-sink-volume @DEFAULT_SINK@ 25%
-# FIXME jprokop: there is different command for brightness under wayland, update later!
-# -> https://github.com/swaywm/sway/wiki#xbacklight
-# bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-# bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
 # FIXME jprokop: adapt to wayland somehow, if it'll be even possible
 # copy selection to main clipboard
