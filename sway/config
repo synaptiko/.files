@@ -49,7 +49,6 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+p focus parent
-# FIXME sticky mode works but it's unusable because of weird bugs
 bindsym $mod+Shift+s sticky toggle
 
 bindsym $mod+Shift+minus move scratchpad
@@ -84,7 +83,6 @@ bindsym $mod+Shift+0 move container to workspace 10, workspace 10
 bindsym $mod+Shift+slash move container to workspace /, workspace /
 
 bindsym $mod+Shift+c reload
-# bindsym $mod+Shift+r restart # FIXME jprokop: restart is not yet supported
 bindsym $mod+Shift+e exit
 # TODO jprokop: autogenerate swaylock image somehow
 bindsym Mod4+l exec swaylock
@@ -150,16 +148,13 @@ client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
 # client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
 # client.background       #ebdbb2
 
-# FIXME jprokop: overtaken from i3, has to be adapted to wayland (IIRC `class` doesn't exist in wayland)
-# for_window [title="Android Emulator"] floating enable
-# for_window [title="Screen Layout Editor"] floating enable # arandr
-# for_window [title="Nitrogen"] floating enable
-# for_window [title="Firewall"] floating enable
-# for_window [title="Signal" class="Signal"] floating enable, move scratchpad, scratchpad show
-# for_window [title="Authy" class="Chromium"] floating enable
-# for_window [class="keepassxc"] floating enable
-# for_window [class="zoom"] floating enable
-# for_window [class="lxqt-openssh-askpass"] floating enable
+for_window [title="Android Emulator"] floating enable
+for_window [title="Firewall"] floating enable
+for_window [title="Signal" class="Signal"] floating enable, move scratchpad, scratchpad show
+for_window [title="Authy" class="Chromium"] floating enable
+for_window [class="keepassxc"] floating enable
+for_window [class="zoom"] floating enable
+for_window [class="lxqt-openssh-askpass"] floating enable
 
 # Read `man 5 sway-bar` for more information about this section.
 bar {
@@ -211,3 +206,11 @@ output * bg ~/Pictures/wallpapers/026.jpg fill
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
+
+# TODO jprokop: add to host-specific file
+input "2:14:ETPS/2_Elantech_Touchpad" {
+	dwt enabled
+	tap enabled
+	natural_scroll enabled
+	middle_emulation enabled
+}
