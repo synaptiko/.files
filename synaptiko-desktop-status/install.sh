@@ -10,7 +10,7 @@ if [ "$(pacman -T synaptiko-desktop-status | wc -l)" != "0" ]; then
 
 	cd synaptiko-packages/synaptiko-desktop-status
 	git pull
-	makepkg -sircC
+	makepkg --noconfirm -sircC
 
 	cd $DIR
 
