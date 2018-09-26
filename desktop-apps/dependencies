@@ -3,7 +3,7 @@ firefox-developer-edition
 keepassxc
 evince
 vlc
-eog
+aur/qview
 nautilus
 android-udev
 gvfs-mtp
