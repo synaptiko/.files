@@ -41,6 +41,6 @@ fi
 # TODO jprokop: improve later (once proper multiuser support is in place)
 YAY_CONFIG=/home/yay/.config/yay/config.json
 sudo -u yay mkdir -p $(dirname $YAY_CONFIG)
-# TODO jprokop: ln -s -f cannot be used here which would ideal… figure out later
+# TODO jprokop: ln -s -f cannot be used here which would be ideal… figure out later
 sudo cp $DIR/config.json $YAY_CONFIG
 sudo chown -h yay:yay $YAY_CONFIG
