@@ -17,3 +17,8 @@ SWAY_CONFIG_DIR=~/.config/sway
 mkdir -p $SWAY_CONFIG_DIR
 SWAY_CONFIG=$SWAY_CONFIG_DIR/config
 ln -s -f $DIR/config $SWAY_CONFIG
+
+SWAYLOCK_CONFIG_DIR=~/.config/swaylock
+mkdir -p $SWAYLOCK_CONFIG_DIR
+SWAYLOCK_CONFIG=$SWAYLOCK_CONFIG_DIR/config
+ln -s -f $DIR/swaylock/config $SWAYLOCK_CONFIG

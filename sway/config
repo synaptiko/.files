@@ -114,6 +114,8 @@ mode $mode_system {
 
 bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
 
+# TODO jprokop: integrate later to synaptiko-desktop (to support also youtube etc.)
+bindsym $mod+Shift+p exec pgrep mocp && mocp --toggle-pause
 bindcode Shift+86 exec pactl set-sink-volume @DEFAULT_SINK@ +2%
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
 bindcode Shift+82 exec pactl set-sink-volume @DEFAULT_SINK@ -2%
