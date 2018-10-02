@@ -71,6 +71,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'w0rp/ale'
 Plug 'kylef/apiblueprint.vim'
+Plug 'rlue/vim-getting-things-down'
 
 " Use either those two for javascript/typescript:
 Plug 'jelera/vim-javascript-syntax'
