@@ -10,6 +10,11 @@ set $right l
 # set $term xfce4-terminal
 set $term alacritty
 set $menu rofi -show drun
+set $swayidle swayidle \
+		timeout 300 'swaylock' \
+		timeout 360 'swaymsg "output * dpms off"' \
+		resume 'swaymsg "output * dpms on"' \
+		before-sleep 'swaylock'
 
 exec ~/.files/sway/startup.sh
 
@@ -85,6 +90,7 @@ bindsym $mod+Shift+slash move container to workspace /, workspace /
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exit
 # TODO jprokop: autogenerate swaylock image somehow
+# FIXME jprokop: consider removing Mod4 bindings completely
 bindsym Mod4+l exec swaylock
 
 workspace_auto_back_and_forth yes
@@ -100,13 +106,16 @@ mode "resize" {
 	bindsym Escape mode "default"
 }
 
-set $mode_system "(l)ogout (r)eboot (p)oweroff (t)oggle redshift"
+set $mode_system "(l)ock l(o)gout (r)eboot (p)oweroff toggle (r)edshift (s)wayidle"
 bindsym $mod+Escape mode $mode_system
 mode $mode_system {
-	bindsym l exit
+	# TODO jprokop: autogenerate swaylock image somehow
+	bindsym l exec swaylock, mode "default"
+	bindsym o exit
 	bindsym r exec sudo reboot, mode "default"
 	bindsym p exec sudo poweroff, mode "default"
 	bindsym t exec pkill -USR1 -u $UID ^redshift$, mode "default"
+	bindsym s exec pgrep swayidle && pkill swayidle || $swayidle, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -194,11 +203,7 @@ output * bg ~/Pictures/wallpapers/026.jpg fill
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 600 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
-exec swayidle \
-		timeout 300 'swaylock -c 000000' \
-		timeout 360 'swaymsg "output * dpms off"' \
-		resume 'swaymsg "output * dpms on"' \
-		before-sleep 'swaylock -c 000000'
+exec $swayidle
 
 ### Input configuration
 #
