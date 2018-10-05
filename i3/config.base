@@ -103,8 +103,8 @@ mode "resize" {
 set $mode_system "(l)ock l(o)gout (r)eboot (p)oweroff toggle r(e)dshift"
 bindsym $mod+Escape mode $mode_system
 mode $mode_system {
-	# TODO jprokop: autogenerate swaylock image somehow
-	bindsym l exec swaylock, mode "default"
+	# TODO jprokop: autogenerate i3lock image somehow
+	bindsym l exec ~/.files/i3/lock.sh, mode "default"
 	bindsym o exit
 	bindsym r exec sudo reboot, mode "default"
 	bindsym p exec sudo poweroff, mode "default"
