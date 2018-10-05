@@ -106,7 +106,7 @@ mode "resize" {
 	bindsym Escape mode "default"
 }
 
-set $mode_system "(l)ock l(o)gout (r)eboot (p)oweroff toggle (r)edshift (s)wayidle"
+set $mode_system "(l)ock l(o)gout (r)eboot (p)oweroff toggle r(e)dshift (s)wayidle"
 bindsym $mod+Escape mode $mode_system
 mode $mode_system {
 	# TODO jprokop: autogenerate swaylock image somehow
@@ -114,7 +114,7 @@ mode $mode_system {
 	bindsym o exit
 	bindsym r exec sudo reboot, mode "default"
 	bindsym p exec sudo poweroff, mode "default"
-	bindsym t exec pkill -USR1 -u $UID ^redshift$, mode "default"
+	bindsym e exec pkill -USR1 -u $UID ^redshift$, mode "default"
 	bindsym s exec pgrep swayidle && pkill swayidle || $swayidle, mode "default"
 
 	bindsym Return mode "default"
