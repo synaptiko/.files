@@ -50,20 +50,18 @@ uuid() {
 }
 
 up() {
-	read -k "UPDATE_MIRRORS?:: Update Pacman mirror list? [y/N] "
-	if [ $UPDATE_MIRRORS != $'\n' ]; then
-		printf "\n"
-	fi
+	UPDATE_MIRRORS="n"
+	CLEAN_CACHES="n"
+	UPDATE_PACKAGES="y"
 
-	read -k "UPDATE_PACKAGES?:: Update packages? [Y/n] "
-	if [ $UPDATE_PACKAGES != $'\n' ]; then
-		printf "\n"
-	fi
-
-	read -k "CLEAN_CACHES?:: Clean-up caches before upgrade? [y/N] "
-	if [ $CLEAN_CACHES != $'\n' ]; then
-		printf "\n"
-	fi
+	while [ "$#" -gt 0 ]; do
+		case "$1" in
+			--update-mirrors) UPDATE_MIRRORS="y"; shift 1;;
+			--only-update-mirrors) UPDATE_MIRRORS="y"; UPDATE_PACKAGES="n"; shift 1;;
+			--clean-caches) CLEAN_CACHES="y"; shift 1;;
+			--only-clean-caches) CLEAN_CACHES="y"; UPDATE_PACKAGES="n"; shift 1;;
+		esac
+	done
 
 	if [ $UPDATE_MIRRORS = "y" ]; then
 		echo "sudo systemctl start reflector"
@@ -84,5 +82,9 @@ up() {
 
 		echo "yay -P --stats"
 		yay -P --stats
+
+		if [ -S /run/synaptiko-desktop-status-bus.socket ]; then
+			echo '{"systemUpdated":true}' | socat unix-connect:/run/synaptiko-desktop-status-bus.socket stdio
+		fi
 	fi
 }
