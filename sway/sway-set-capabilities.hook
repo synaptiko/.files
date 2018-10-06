@@ -18,16 +18,6 @@ Operation = Upgrade
 Type = Package
 Target = sway-git
 
-[Trigger]
-Operation = Install
-Type = Package
-Target = sway-wlroots-git
-
-[Trigger]
-Operation = Upgrade
-Type = Package
-Target = sway-wlroots-git
-
 [Action]
 Description = Setting capabilities for sway binary...
 When = PostTransaction
