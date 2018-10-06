@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+mkdir -p $DIR/../.packages
+
 if [ "$(pacman -T synaptiko-desktop-status | wc -l)" != "0" ]; then
 	cd $DIR/../.packages
 
