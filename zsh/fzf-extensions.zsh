@@ -7,7 +7,7 @@ fi
 # ALT-C - cd into the selected directory
 fzf-cd-widget() {
 	setopt localoptions pipefail 2> /dev/null
-	local dir="$(eval "command ~/Projects/recent-folders/list-recent-folders ~/.recent-folders" | fzf | ~/Projects/recent-folders/normalize-path)"
+	local dir="$(eval "command recent-dirs list ~/.recent-dirs" | fzf | recent-dirs normalize)"
 
 	if [[ -z "$dir" ]]; then
 		zle redisplay
@@ -96,7 +96,7 @@ autoload -Uz add-zsh-hook
 
 visit_folder() {
 	if [ "$PWD" != "$HOME" ]; then
-		~/Projects/recent-folders/visit-folder ~/.recent-folders "$PWD"
+		recent-dirs visit ~/.recent-dirs "$PWD"
 	fi
 }
 
