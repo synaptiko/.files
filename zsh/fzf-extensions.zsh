@@ -2,12 +2,10 @@ if ! type fzf &> /dev/null; then
 	return;
 fi
 
-# TODO jprokop: clean it up a little and move extra file?
-# TODO jprokop: rename and provide proper description (that it overrides "built-in" fzf-zsh function)!
-# ALT-C - cd into the selected directory
-fzf-cd-widget() {
+# ALT-C - cd into the selected directory from recently visited dirs
+fzf-recent-dirs-widget() {
 	setopt localoptions pipefail 2> /dev/null
-	local dir="$(eval "command recent-dirs list ~/.recent-dirs" | fzf | recent-dirs normalize)"
+	local dir="$(eval "command recent-dirs list ~/.recent-dirs" | fzf '--bind=ctrl-i:execute-silent(recent-dirs ignore ~/.recent-dirs {}),ctrl-d:execute-silent(recent-dirs delete ~/.recent-dirs)' | recent-dirs normalize)"
 
 	if [[ -z "$dir" ]]; then
 		zle redisplay
@@ -26,8 +24,8 @@ fzf-cd-widget() {
 	fi
 }
 
-zle     -N    fzf-cd-widget
-bindkey '\ec' fzf-cd-widget
+zle     -N    fzf-recent-dirs-widget
+bindkey '\ec' fzf-recent-dirs-widget
 
 # TODO jprokop: maybe it could "compile" the path instead of cd; also blinking could be reduced by using additional script
 # ALT-X - list current directory and cd into the selected one
@@ -63,13 +61,9 @@ fzf-browse-widget() {
 zle     -N    fzf-browse-widget
 bindkey '\ex' fzf-browse-widget
 
-# TODO jprokop: finish/adapt to new approach!
-# ignore-current-dir() {
-#		 # grep -v "$PWD" ~/.recent-folders > ~/.recent-folders.tmp
-#		 # grep -v "${PWD:s/$HOME/~}" ~/.recent-folders > ~/.recent-folders.tmp
-#		 grep -v "${PWD:s/\/home\/jprokop/~}" ~/.recent-folders > ~/.recent-folders.tmp
-#		 mv ~/.recent-folders.tmp ~/.recent-folders
-# }
+ignore-current-dir() {
+	recent-dirs ignore ~/.recent-dirs "$PWD"
+}
 
 is_in_git_repo() {
 	git rev-parse HEAD > /dev/null 2>&1
