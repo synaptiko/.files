@@ -1,9 +1,17 @@
 const os = require('os')
-let blockConfigs, blocks
+const blockConfigs = {
+	// FIXME jprokop: temporary solution
+	'time-track': {
+		extend: 'command',
+		prefix: 'T ',
+		command: 'sudo -u jprokop node /home/jprokop/Documents/todo/time-track.js'
+	}
+}
+let blocks
 
 switch (os.hostname()) {
 	case 'jprokop':
-		blockConfigs = {
+		Object.assign(blockConfigs, {
 			volume0: {
 				extend: 'volume',
 				sinkIndex: 0,
@@ -15,26 +23,28 @@ switch (os.hostname()) {
 				volumeIndexFormat: 'sinkIndex',
 				hideWhenNotRunning: true
 			}
-		}
+		})
 		blocks = [
 			'system-update',
 			'volume0',
 			'volume1',
+			'time-track',
 			'date-time'
 		]
 		break;
 	case 'jprokop-tp13':
 	default:
-		blockConfigs = {
+		Object.assign(blockConfigs, {
 			volume0: {
 				extend: 'volume',
 				sinkIndex: 0,
 				volumeIndexFormat: 'activePort'
 			}
-		}
+		})
 		blocks = [
 			'system-update',
 			'volume0',
+			'time-track',
 			'date-time'
 		]
 		break;
