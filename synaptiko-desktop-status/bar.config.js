@@ -1,6 +1,7 @@
+const os = require('os')
 let blockConfigs, blocks
 
-switch (process.env.HOST) {
+switch (os.hostname()) {
 	case 'jprokop':
 		blockConfigs = {
 			volume0: {
