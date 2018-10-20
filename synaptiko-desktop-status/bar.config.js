@@ -4,7 +4,11 @@ const blockConfigs = {
 	'time-track': {
 		extend: 'command',
 		prefix: 'T ',
-		command: 'sudo -u jprokop node /home/jprokop/Documents/todo/time-track.js'
+		command: 'sudo -u jprokop node /home/jprokop/Documents/todo/time-track.js',
+		interval: {
+			amount: 1,
+			unit: 'minute'
+		}
 	}
 }
 let blocks
@@ -12,12 +16,12 @@ let blocks
 switch (os.hostname()) {
 	case 'jprokop':
 		Object.assign(blockConfigs, {
-			volume0: {
+			'volume0': {
 				extend: 'volume',
 				sinkIndex: 0,
 				volumeIndexFormat: 'sinkIndex'
 			},
-			volume1: {
+			'volume1': {
 				extend: 'volume',
 				sinkIndex: 1,
 				volumeIndexFormat: 'sinkIndex',
@@ -35,14 +39,51 @@ switch (os.hostname()) {
 	case 'jprokop-tp13':
 	default:
 		Object.assign(blockConfigs, {
-			volume0: {
+			'volume0': {
 				extend: 'volume',
 				sinkIndex: 0,
 				volumeIndexFormat: 'activePort'
+			},
+			// FIXME jprokop: temporary solution
+			'i3status-relay': {
+				config: `general {
+					output_format = "none"
+					interval = 5
+				}
+
+				order += "wireless wlp3s0"
+				wireless wlp3s0 {
+					format_up = "W %essid (%quality)"
+					format_down = "No Wifi"
+				}
+
+				order += "battery all"
+				battery all {
+					format = "%status %percentage (%remaining)"
+					format_down = "No battery"
+					status_chr = "B++"
+					status_bat = "B--"
+					status_unk = "B??"
+					status_full = "B"
+					path = "/sys/class/power_supply/BAT%d/uevent"
+					hide_seconds = true
+					integer_battery_capacity = true
+				}`
+			},
+			'wlan': {
+				extend: 'i3status-relay',
+				relayBlockIndex: 0,
+        color: '#928374'
+			},
+			'battery': {
+				extend: 'i3status-relay',
+				relayBlockIndex: 1
 			}
 		})
 		blocks = [
 			'system-update',
+			'wlan',
+			'battery',
 			'volume0',
 			'time-track',
 			'date-time'
