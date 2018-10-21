@@ -8,7 +8,7 @@
 
 - 0-theme:
   - contact zsh (somehow) and switch pure prompt colors (branch name etc)
-  - contact i3/sway and change colors there (+ in bar; but first get rid of polybar)
+  - contact i3/sway and change colors there (+ in bar)
 
 - add support for "git --global config.set" (initialization of git)
 - add association for URL/links to open Chromium/Firefox? (over mimeo?)

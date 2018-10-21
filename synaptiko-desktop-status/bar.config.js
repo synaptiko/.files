@@ -49,7 +49,7 @@ switch (os.hostname()) {
 			'i3status-relay': {
 				config: `general {
 					output_format = "none"
-					interval = 5
+					interval = 15
 				}
 
 				order += "wireless wlp3s0"

@@ -33,9 +33,6 @@ bindsym $mod+Shift+Return exec rofi -modi "chromium-runner:chromium-runner-rofi,
 
 # bindsym Print exec slurp | grim -g - - | swaymsg send_clipboard -t image/png # FIXME jprokop: doesn't work; figure it out
 bindsym Mod4+Print exec slurp | grim -g - ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png
-# FIXME jprokop: figure out if we can use KMS & ffmpeg for now (or with the new support in sway 0.4alpha)
-# bindsym Shift+Print exec ~/.files/i3/record-screen.sh ogv --convert-to-gif
-# bindsym Shift+Ctrl+Print exec ~/.files/i3/record-screen.sh byzanz
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -169,9 +166,8 @@ for_window [class="lxqt-openssh-askpass"] floating enable
 
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-	# status_command while :; do date +'%a %d %b, %H:%M'; sleep 30; done
 	status_command /opt/synaptiko-desktop-status/bar.sh
-	position bottom
+	position top
 	height 25
 	colors {
 		statusline #ebdbb2

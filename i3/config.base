@@ -10,7 +10,6 @@ set $term alacritty
 set $menu rofi -show drun
 
 exec ~/.files/i3/startup.sh
-exec_always ~/.files/i3/polybar.sh
 
 font pango:Iosevka Term SS03 Medium 12
 
@@ -27,8 +26,6 @@ bindsym $mod+Shift+Return exec "rofi -modi chromium-runner:chromium-runner-rofi,
 
 bindsym Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 | xclip -selection clipboard -t image/png"
 bindsym Mod4+Print exec "maim -u -s -n -l -c 0.157,0.333,0.466,0.4 ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png"
-bindsym Shift+Print exec ~/.files/i3/record-screen.sh ogv --convert-to-gif
-bindsym Shift+Ctrl+Print exec ~/.files/i3/record-screen.sh byzanz
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -82,7 +79,6 @@ bindsym $mod+Shift+slash move container to workspace /, workspace /
 
 bindsym $mod+Shift+c exec "~/.files/i3/merge-config.sh && i3-msg reload"
 bindsym $mod+Shift+r exec "~/.files/i3/merge-config.sh && i3-msg restart"
-bindsym $mod+Shift+b exec "~/.files/i3/polybar.sh"
 # TODO jprokop: autogenerate i3lock image somehow
 # FIXME jprokop: consider removing Mod4 bindings completely
 bindsym Mod4+l exec ~/.files/i3/lock.sh
@@ -158,3 +154,18 @@ for_window [title="Authy" class="Chromium"] floating enable
 for_window [class="keepassxc"] floating enable
 for_window [class="zoom"] floating enable
 for_window [class="lxqt-openssh-askpass"] floating enable
+
+bar {
+	status_command /opt/synaptiko-desktop-status/bar.sh
+	position top
+	height 25
+	colors {
+		statusline #ebdbb2
+		background #1d2021
+		focused_workspace #458588 #458588 #1d2021
+		inactive_workspace #1d2021 #1d2021 #ebdbb2
+		# FIXME jprokop: finish following colors
+		# active_workspace
+		# urgent_workspace
+	}
+}
