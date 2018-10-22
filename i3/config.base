@@ -158,7 +158,6 @@ for_window [class="lxqt-openssh-askpass"] floating enable
 bar {
 	status_command /opt/synaptiko-desktop-status/bar.sh
 	position top
-	height 25
 	colors {
 		statusline #ebdbb2
 		background #1d2021
