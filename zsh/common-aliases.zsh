@@ -74,6 +74,8 @@ up() {
 	fi
 
 	if [ $UPDATE_PACKAGES != "n" ]; then
+		echo '{"getPackageListToUpdate":true}' | socat unix-connect:/run/synaptiko-desktop-status-bus.socket stdio
+
 		echo "yay --news"
 		yay --news
 
