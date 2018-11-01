@@ -1,3 +1,0 @@
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -le 2 ]; then
-	exec startx >& /dev/null
-fi

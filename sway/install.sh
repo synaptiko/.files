@@ -4,9 +4,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 sudo mkdir -p /etc/pacman.d/hooks
 sudo ln -s -f $DIR/sway-set-capabilities.hook /etc/pacman.d/hooks/sway-set-capabilities.hook
 
-ZLOGIN_CONFIG=~/.zlogin
-ln -s -f $DIR/zlogin $ZLOGIN_CONFIG
-
 # TODO jprokop: parse it from user-dirs.dirs instead
 mkdir -p ~/{Downloads,Documents,Music,Pictures,Videos,Packages,Projects,work}
 USER_DIRS_CONFIG=~/.config/user-dirs.dirs

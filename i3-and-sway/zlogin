@@ -1,0 +1,28 @@
+if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ]; then
+	sway() {
+		unfunction sway
+		unfunction i3
+		exec dbus-launch --sh-syntax --exit-with-session \
+			sway -V -d &> ~/.sway.log
+	}
+
+	i3() {
+		unfunction sway
+		unfunction i3
+		exec startx >& /dev/null
+	}
+
+	if [ $XDG_VTNR -eq 1 ]; then
+		use_sway=0
+
+		if [[ "$USER" == "eggze" ]]; then
+			use_sway=1
+		fi
+
+		if [ $use_sway -eq 1 ]; then
+			sway
+		else
+			i3
+		fi
+	fi
+fi

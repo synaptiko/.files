@@ -10,6 +10,7 @@ set $right l
 # set $term xfce4-terminal
 set $term alacritty
 set $menu rofi -show drun
+# TODO jprokop: autogenerate swaylock image somehow
 set $swayidle swayidle \
 		timeout 300 'swaylock' \
 		timeout 360 'swaymsg "output * dpms off"' \
@@ -85,18 +86,14 @@ bindsym $mod+Shift+0 move container to workspace 10, workspace 10
 bindsym $mod+Shift+slash move container to workspace /, workspace /
 
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exit
-# TODO jprokop: autogenerate swaylock image somehow
-# FIXME jprokop: consider removing Mod4 bindings completely
-bindsym Mod4+l exec swaylock
 
 workspace_auto_back_and_forth yes
 
 bindsym $mod+r mode "resize"
 mode "resize" {
 	bindsym $left resize grow width 5
-	bindsym $down resize grow height 5
-	bindsym $up resize shrink height 5
+	bindsym $down resize shrink height 5
+	bindsym $up resize grow height 5
 	bindsym $right resize shrink width 5
 
 	bindsym Return mode "default"
@@ -106,8 +103,7 @@ mode "resize" {
 set $mode_system "(l)ock l(o)gout (r)eboot (p)oweroff toggle r(e)dshift (s)wayidle"
 bindsym $mod+Escape mode $mode_system
 mode $mode_system {
-	# TODO jprokop: autogenerate swaylock image somehow
-	bindsym l exec swaylock, mode "default"
+	bindsym l exec pgrep swayidle || $swayidle, exec pkill -USR1 swayidle, mode "default"
 	bindsym o exit
 	bindsym r exec sudo reboot, mode "default"
 	bindsym p exec sudo poweroff, mode "default"
@@ -148,13 +144,13 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 # for_window [title="Synaptiko Keyboard Cheatsheet"] floating enable, resize set 900px 470px, move position center
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #458588 #458588 #ebdbb2 #458588   #458588
+client.focused          #458588 #458588 #1d2021 #458588   #458588
 client.focused_inactive #504945 #504945 #bdae93 #504945   #504945
 client.unfocused        #1d2021 #1d2021 #bdae93 #1d2021   #1d2021
 client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
 # FIXME jprokop: following color definitions are not supported by sway yet
-# client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
-# client.background       #ebdbb2
+client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
+client.background       #ebdbb2
 
 for_window [title="Android Emulator"] floating enable
 for_window [title="Firewall"] floating enable
@@ -174,51 +170,32 @@ bar {
 		background #1d2021
 		focused_workspace #458588 #458588 #1d2021
 		inactive_workspace #1d2021 #1d2021 #ebdbb2
-		# FIXME jprokop: finish following colors
-		# active_workspace
-		# urgent_workspace
+		active_workspace #504945 #504945 #bdae93
+		urgent_workspace #cc241d #cc241d #1d2021
 	}
 }
-
-include ~/.config/sway/config.d/*
 
 # FIXME jprokop: improve later! (per host and user?)
 output * bg ~/Pictures/wallpapers/026.jpg fill
 
-# FIXME jprokop: configure following later
-### Idle configuration
-#
-# Example configuration:
-#
-#exec swayidle \
-#    timeout 300 'swaylock -c 000000' \
-#    timeout 600 'swaymsg "output * dpms off"' \
-#       resume 'swaymsg "output * dpms on"' \
-#    before-sleep 'swaylock -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 600 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 exec $swayidle
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+# TODO jprokop: add to host-specific files
+# include ~/.config/sway/config.d/*
 
-# TODO jprokop: add to host-specific file
 input "2:14:ETPS/2_Elantech_Touchpad" {
 	dwt enabled
 	tap enabled
 	natural_scroll enabled
 	middle_emulation enabled
 }
+
+input * {
+	xkb_layout us
+	xkb_model pc105
+	xkb_options compose:ralt,caps:escape
+}
+
+smart_borders on
+gaps inner 1
+gaps outer 2
