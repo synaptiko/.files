@@ -83,10 +83,17 @@ workspace_auto_back_and_forth yes
 
 bindsym $mod+r mode "resize"
 mode "resize" {
-	bindsym $left resize grow width 5
-	bindsym $down resize shrink height 5
-	bindsym $up resize grow height 5
-	bindsym $right resize shrink width 5
+	# TODO jprokop: improve for floating windows, it make sense to grow/shrink width/height instead
+	# TODO jprokop: implement own command which will read the current state of WS and it will decide what to do with the focused window
+	bindsym $left exec swaymsg resize grow left 5 || swaymsg resize shrink right 5
+	bindsym shift+$left resize shrink left 5
+	bindsym $right exec swaymsg resize grow right 5 || swaymsg resize shrink left 5
+	bindsym shift+$right resize shrink right 5
+
+	bindsym $down exec swaymsg resize grow down 5 || swaymsg resize shrink up 5
+	bindsym shift+$down resize shrink down 5
+	bindsym $up exec swaymsg resize grow up 5 || swaymsg resize shrink down 5
+	bindsym shift+$up resize shrink up 5
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
