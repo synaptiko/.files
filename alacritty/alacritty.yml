@@ -1,18 +1,16 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
-
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-env:
-  # TERM env customization
+#env:
+  # TERM variable
   #
-  # If this property is not set, alacritty will set it to `xterm-256color`.
-  #
-  # Note that some xterm terminfo databases don't declare support for italics.
-  # You can verify this by checking for the presence of `smso` and `sitm` in
-  # `infocmp xterm-256color`.
-  TERM: xterm-256color
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use 'alacritty' if it is
+  # available, otherwise 'xterm-256color' is used.
+  #TERM: xterm-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -20,16 +18,16 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 0
-    lines: 0
+    columns: 80
+    lines: 24
 
   # Window padding (changes require restart)
   #
-  # Blank space added around the window in pixels. This padding is not scaled
+  # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 0
-    y: 0
+    x: 3
+    y: 3
 
   # Window decorations
   #
@@ -90,7 +88,7 @@ font:
   normal:
     family: "Iosevka Term SS03 Medium"
     # The `style` can be specified to pick a specific face.
-    # style: Regular
+    #style: Regular
 
   # Bold font face
   bold:
@@ -105,13 +103,13 @@ font:
     style: Italic
 
   # Point size
-  size: 13.0
+  size: 14.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 0
-    y: -1
+    y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -120,19 +118,8 @@ font:
     x: 0
     y: 0
 
-  # Scale the font size based on the monitor's DPI. This will lead to bigger text on HiDPI
-  # screens and make reading text a little easier.
-  # On X11 it is possible to change the DPI for each instance of alacritty by using
-  # `WINIT_HIDPI_FACTOR=1.0 alacritty` to scale the font.
-  scale_with_dpi: true
-
 # Display the time it takes to redraw each frame.
 render_timer: false
-
-# Use custom cursor colors. If `true`, the `colors.cursor.foreground` and
-# `colors.cursor.background` colors will be used to display the cursor.
-# Otherwise the cell colors are inverted for the cursor.
-custom_cursor_colors: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -149,13 +136,13 @@ colors:
     # The dimmed foreground color is calculated automatically if it is not present.
     # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
     # is `false`, the normal foreground color will be used.
-
     dim_foreground: '0xd5c4a1'
     bright_foreground: '0xfbf1c7'
 
   # Cursor colors
   #
-  # These will only be used when the `custom_cursor_colors` field is set to `true`.
+  # Colors which should be used to draw the terminal cursor. If these are unset,
+  # the cursor color will be the inverse of the cell color.
   cursor:
     text: '0x000000'
     cursor: '0xffffff'
@@ -196,6 +183,13 @@ colors:
     cyan:    '0x427b58'
     white:   '0x3c3836'
 
+  # Indexed Colors
+  #
+  # The indexed colors include all colors from 16 to 256.
+  # When these are not set, they're filled with sensible defaults.
+  #indexed_colors:
+  #  - { index: 16, color: '0x000000' }
+
 # Visual Bell
 #
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
@@ -222,6 +216,9 @@ visual_bell:
   duration: 0
 
 # Background opacity
+#
+# Window opacity as a floating point number from `0.0` to `1.0`.
+# The value `0.0` is completely transparent and `1.0` is opaque.
 background_opacity: 0.94 # 0.97
 
 # Mouse bindings
@@ -251,24 +248,44 @@ mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
 
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  hide_when_typing: false
+
+  url:
+    # URL launcher
+    #
+    # This program is executed when clicking on a text which is recognized as a URL.
+    # The URL is always added to the command as the last parameter.
+    launcher: xdg-open
+
+    # URL modifiers
+    #
+    # These are the modifiers that need to be held down for opening URLs when clicking
+    # on them. The available modifiers are documented in the key binding section.
+    #modifiers: Control|Shift
+
 selection:
   semantic_escape_chars: ",│`|\"' ()[]{}<>"
 
+  # When set to `true`, selected text will be copied to both the primary and
+  # the selection clipboard. Otherwise, it will only be copied to the selection
+  # clipboard.
+  save_to_clipboard: false
+
 dynamic_title: true
 
-hide_cursor_when_typing: false
+cursor:
+  # Cursor style
+  #
+  # Values for 'style':
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
 
-# Cursor style
-#
-# Values for 'cursor_style':
-#   - Block
-#   - Underline
-#   - Beam
-cursor_style: Block
-
-# If this is `true`, the cursor will be rendered as a hollow box when the
-# window is not focused.
-unfocused_hollow_cursor: true
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
 
 # Live config reload (changes require restart)
 live_config_reload: true
@@ -277,7 +294,6 @@ live_config_reload: true
 #
 # You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
 # Entries in `shell.args` are passed unmodified as arguments to the shell.
-#
 #shell:
 #  program: /bin/bash
 #  args:
@@ -311,6 +327,12 @@ shell:
 #   A full list with available key codes can be found here:
 #   https://docs.rs/glutin/*/glutin/enum.VirtualKeyCode.html#variants
 #
+#   Instead of using the name of the keys, the `key` field also supports using
+#   the scancode of the desired key. Scancodes have to be specified as a
+#   decimal number.
+#   This command will allow you to display the hex scancodes for certain keys:
+#     `showkey --scancodes`
+#
 # Values for `mods`:
 #   - Command
 #   - Control
@@ -325,6 +347,9 @@ shell:
 #   it possible to pass escape sequences.
 #   To find escape codes for bindings like `PageUp` ("\x1b[5~"), you can run
 #   the command `showkey -a` outside of tmux.
+#   Note that applications use terminfo to map escape sequences back to
+#   keys. It is therefore required to update the terminfo when
+#   changing an escape sequence.
 #
 # Values for `action`:
 #   - Paste
