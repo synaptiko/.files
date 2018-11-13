@@ -1,0 +1,10 @@
+anchor=top-right
+font=Iosevka Term SS03 Medium 12
+width=400
+height=200
+margin=3
+padding=3,6
+border-size=3
+background-color=#1d2021ed
+text-color=#ebdbb2
+border-color=#458588

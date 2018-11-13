@@ -20,4 +20,9 @@ mkdir -p $SWAYLOCK_CONFIG_DIR
 SWAYLOCK_CONFIG=$SWAYLOCK_CONFIG_DIR/config
 ln -s -f $DIR/swaylock/config $SWAYLOCK_CONFIG
 
+MAKO_CONFIG_DIR=~/.config/mako
+mkdir -p $MAKO_CONFIG_DIR
+MAKO_CONFIG=$MAKO_CONFIG_DIR/config
+ln -s -f $DIR/mako/config $MAKO_CONFIG
+
 # TODO jprokop: setup GUI libraries to work properly under Wayland: https://wiki.archlinux.org/index.php/Wayland#GUI_libraries

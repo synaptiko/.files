@@ -32,8 +32,8 @@ bindsym $mod+d exec $menu
 exec_always chromium-runner --generate-cache
 bindsym $mod+Shift+Return exec rofi -modi "chromium-runner:chromium-runner-rofi,track:~/Documents/todo/track-rofi.sh" -no-show-icons -location 0 -width 10 -no-fixed-num-lines -show chromium-runner
 
-# bindsym Print exec slurp | grim -g - - | swaymsg send_clipboard -t image/png # FIXME jprokop: doesn't work; figure it out
-bindsym Mod4+Print exec slurp | grim -g - ~/Pictures/Screenshot-$(date -Iseconds | cut -d'+' -f1).png
+bindsym Print exec ~/.files/sway/screenshot.sh selection
+bindsym Mod4+Print exec ~/.files/sway/screenshot.sh screen
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
