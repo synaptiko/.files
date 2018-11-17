@@ -2,9 +2,6 @@ python-pip
 aur/neovim-git
 aur/neovim-symlinks
 aur/neovim-remote
-aur/mimeo
-aur/seturgent
-xdotool
 the_silver_searcher
 fzf
 editorconfig-core-c

@@ -2,7 +2,6 @@ i3-wm
 i3lock
 nitrogen
 mate-polkit
-xfce4-terminal
 gtk3
 chromium
 xclip
@@ -41,3 +40,4 @@ aur/ttf-iosevka-term-ss03
 aur/neovim-remote
 aur/chromium-runner
 aur/brightnessctl
+aur/alacritty-git

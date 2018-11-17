@@ -6,8 +6,6 @@ set $down j
 set $up k
 set $right l
 
-# FIXME jprokop: switch completely to alacritty once wayland support is complete (no decorations, proper geometry and key repeat)
-# set $term xfce4-terminal
 set $term alacritty
 set $menu rofi -show drun
 # TODO jprokop: autogenerate swaylock image somehow
