@@ -125,8 +125,8 @@ bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
 
 # TODO jprokop: integrate later to synaptiko-desktop (to support also youtube etc.)
 bindsym $mod+Shift+p exec pgrep mocp && mocp --toggle-pause
-bindcode Shift+86 exec ~/.files/i3-and-sway/volume.sh +2
-bindsym XF86AudioRaiseVolume exec ~/.files/i3-and-sway/volume.sh +2
+bindcode Shift+86 exec ~/.files/i3-and-sway/volume.sh 2
+bindsym XF86AudioRaiseVolume exec ~/.files/i3-and-sway/volume.sh 2
 bindcode Shift+82 exec ~/.files/i3-and-sway/volume.sh -2
 bindsym XF86AudioLowerVolume exec ~/.files/i3-and-sway/volume.sh -2
 bindcode Shift+63 exec ~/.files/i3-and-sway/volume.sh toggle
