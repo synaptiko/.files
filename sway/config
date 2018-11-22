@@ -179,8 +179,8 @@ bar {
 	}
 }
 
-# FIXME jprokop: improve later! (per host and user?)
-output * bg ~/Pictures/wallpapers/026.jpg fill
+exec_always ~/.files/sway/bg.sh
+bindsym $mod+Shift+w exec ~/.files/sway/bg.sh
 
 exec ~/.files/sway/idle.sh
 
