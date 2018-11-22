@@ -5,5 +5,5 @@ revert() {
 
 trap revert HUP INT TERM
 xset dpms force off
-i3lock -n -u -t -i ~/Pictures/i3lock.png
+i3lock -c 000000 -p default -n -u -t
 revert

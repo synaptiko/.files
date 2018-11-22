@@ -1,31 +1,29 @@
-image=$HOME/Pictures/wallpapers/026.jpg
+indicator-radius=16
+indicator-thickness=12
 
-indicator-radius=100
-indicator-thickness=20
+bs-hl-color=cc241d
+key-hl-color=ffffffc4
 
-bs-hl-color=d65d0e
-key-hl-color=a89984
-
-inside-color=282828c0
-line-color=282828
-ring-color=282828
+inside-color=00000000
+line-color=00000000
+ring-color=00000000
 text-color=00000000
 
-separator-color=282828
+separator-color=00000000
 
-inside-ver-color=d79921
-line-ver-color=282828
-ring-ver-color=282828
+inside-ver-color=ffffffc4
+line-ver-color=00000000
+ring-ver-color=00000000
 text-ver-color=00000000
 
 inside-wrong-color=cc241d
-line-wrong-color=282828
-ring-wrong-color=282828
+line-wrong-color=00000000
+ring-wrong-color=00000000
 text-wrong-color=00000000
 
 inside-clear-color=00000000
-line-clear-color=282828
-ring-clear-color=282828
+line-clear-color=00000000
+ring-clear-color=00000000
 text-clear-color=00000000
 
 line-uses-ring

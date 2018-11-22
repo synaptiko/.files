@@ -8,12 +8,6 @@ set $right l
 
 set $term alacritty
 set $menu rofi -show drun
-# TODO jprokop: autogenerate swaylock image somehow
-set $swayidle swayidle \
-		timeout 300 'swaylock' \
-		timeout 360 'swaymsg "output * dpms off"' \
-		resume 'swaymsg "output * dpms on"' \
-		before-sleep 'swaylock'
 
 exec ~/.files/sway/startup.sh
 
@@ -108,15 +102,24 @@ mode "resize" {
 set $mode_system "(l)ock l(o)gout (r)eboot (p)oweroff toggle r(e)dshift (s)wayidle"
 bindsym $mod+Escape mode $mode_system
 mode $mode_system {
-	bindsym l exec pgrep swayidle || $swayidle, exec pkill -USR1 swayidle, mode "default"
+	bindsym l exec ~/.files/sway/lock.sh
 	bindsym o exit
 	bindsym r exec sudo reboot, mode "default"
 	bindsym p exec sudo poweroff, mode "default"
 	bindsym e exec pkill -USR1 -u $UID ^redshift$, mode "default"
-	bindsym s exec pgrep swayidle && pkill swayidle || $swayidle, mode "default"
+	bindsym s exec ~/.files/sway/idle.sh toggle, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
+}
+
+mode "locked" {
+	bindsym --locked Escape exec ~/.files/sway/idle.sh timeout-now
+	bindsym --locked $mod+Shift+p exec pgrep mocp && mocp --toggle-pause
+	bindcode --locked Shift+63 exec ~/.files/i3-and-sway/volume.sh toggle
+	bindsym --locked XF86AudioMute exec ~/.files/i3-and-sway/volume.sh toggle
+
+	bindsym $mod+Escape mode "default"
 }
 
 bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
@@ -145,7 +148,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 # for_window [title="Synaptiko Keyboard Cheatsheet"] floating enable, resize set 900px 470px, move position center
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #458588 #458588 #1d2021 #458588   #458588
+client.focused          #a89984 #a89984 #1d2021 #a89984   #a89984
 client.focused_inactive #504945 #504945 #bdae93 #504945   #504945
 client.unfocused        #1d2021 #1d2021 #bdae93 #1d2021   #1d2021
 client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
@@ -169,7 +172,7 @@ bar {
 	colors {
 		statusline #ebdbb2
 		background #1d2021
-		focused_workspace #458588 #458588 #1d2021
+		focused_workspace #a89984 #a89984 #1d2021
 		inactive_workspace #1d2021 #1d2021 #ebdbb2
 		active_workspace #504945 #504945 #bdae93
 		urgent_workspace #cc241d #cc241d #1d2021
@@ -179,7 +182,7 @@ bar {
 # FIXME jprokop: improve later! (per host and user?)
 output * bg ~/Pictures/wallpapers/026.jpg fill
 
-exec $swayidle
+exec ~/.files/sway/idle.sh
 
 # TODO jprokop: add to host-specific files
 # include ~/.config/sway/config.d/*
@@ -196,6 +199,3 @@ input * {
 	xkb_model pc105
 	xkb_options compose:ralt,caps:escape
 }
-
-smart_borders on
-gaps inner 3

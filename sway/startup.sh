@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-redshift -m wayland >& /dev/null &
+redshift -m wayland -r >& /dev/null &
 
 mako >& /dev/null &
 

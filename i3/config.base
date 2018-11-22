@@ -137,7 +137,7 @@ bindsym XF86Launch7 exec alacritty -t "Synaptiko Keyboard Cheatsheet" -e node --
 for_window [title="Synaptiko Keyboard Cheatsheet"] floating enable, resize set 900px 470px, move position center
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #458588 #458588 #1d2021 #458588   #458588
+client.focused          #a89984 #a89984 #1d2021 #a89984   #a89984
 client.focused_inactive #504945 #504945 #bdae93 #504945   #504945
 client.unfocused        #1d2021 #1d2021 #bdae93 #1d2021   #1d2021
 client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
@@ -160,7 +160,7 @@ bar {
 	colors {
 		statusline #ebdbb2
 		background #1d2021
-		focused_workspace #458588 #458588 #1d2021
+		focused_workspace #a89984 #a89984 #1d2021
 		inactive_workspace #1d2021 #1d2021 #ebdbb2
 		active_workspace #504945 #504945 #bdae93
 		urgent_workspace #cc241d #cc241d #1d2021
