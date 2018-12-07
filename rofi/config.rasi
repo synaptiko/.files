@@ -163,5 +163,5 @@ element selected {
 }
 
 window {
-	border-color: #458588;
+	border-color: #a89984;
 }

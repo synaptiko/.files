@@ -1,5 +1,6 @@
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ]; then
 	sway() {
+		export GDK_BACKEND=wayland
 		unfunction sway
 		unfunction i3
 		exec dbus-launch --sh-syntax --exit-with-session \

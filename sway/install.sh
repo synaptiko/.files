@@ -25,4 +25,6 @@ mkdir -p $MAKO_CONFIG_DIR
 MAKO_CONFIG=$MAKO_CONFIG_DIR/config
 ln -s -f $DIR/mako/config $MAKO_CONFIG
 
+$DIR/../0-theme/switch-sway.js dark
+
 # TODO jprokop: setup GUI libraries to work properly under Wayland: https://wiki.archlinux.org/index.php/Wayland#GUI_libraries

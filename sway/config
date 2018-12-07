@@ -40,6 +40,8 @@ bindsym $mod+Shift+$right move right
 bindsym $mod+b splith
 bindsym $mod+v splitv
 bindsym $mod+f fullscreen toggle
+# "distraction/focus" mode
+bindsym $mod+Shift+f bar hidden_state toggle 0, bar mode toggle 0
 
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
@@ -147,14 +149,16 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 # bindsym XF86Launch7 exec alacritty -t "Synaptiko Keyboard Cheatsheet" -e node --experimental-modules ~/Projects/keyboard-cheatsheet-tui/index.mjs
 # for_window [title="Synaptiko Keyboard Cheatsheet"] floating enable, resize set 900px 470px, move position center
 
-# class                 border  backgr. text    indicator child_border
-client.focused          #a89984 #a89984 #1d2021 #a89984   #a89984
-client.focused_inactive #504945 #504945 #bdae93 #504945   #504945
-client.unfocused        #1d2021 #1d2021 #bdae93 #1d2021   #1d2021
-client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
-# FIXME jprokop: following color definitions are not supported by sway yet
-client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
-client.background       #ebdbb2
+titlebar_padding 8 4
+
+# following file contains both colors and bar configuration
+include ~/.files/0-theme/configs/sway.config
+
+exec_always ~/.files/sway/bg.sh
+# generate new background picture
+bindsym $mod+Shift+w exec ~/.files/sway/bg.sh
+
+exec ~/.files/sway/idle.sh
 
 for_window [title="Android Emulator"] floating enable
 for_window [title="Firewall"] floating enable
@@ -163,26 +167,6 @@ for_window [title="Authy" class="Chromium"] floating enable
 for_window [class="keepassxc"] floating enable
 for_window [class="zoom"] floating enable
 for_window [class="lxqt-openssh-askpass"] floating enable
-
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-	status_command /opt/synaptiko-desktop-status/bar.sh
-	position top
-	height 25
-	colors {
-		statusline #ebdbb2
-		background #1d2021
-		focused_workspace #a89984 #a89984 #1d2021
-		inactive_workspace #1d2021 #1d2021 #ebdbb2
-		active_workspace #504945 #504945 #bdae93
-		urgent_workspace #cc241d #cc241d #1d2021
-	}
-}
-
-exec_always ~/.files/sway/bg.sh
-bindsym $mod+Shift+w exec ~/.files/sway/bg.sh
-
-exec ~/.files/sway/idle.sh
 
 # TODO jprokop: add to host-specific files
 # include ~/.config/sway/config.d/*

@@ -1,0 +1,17 @@
+dark:
+  bg: 'dark0_hard'
+  fg: 'light1'
+  fc: 'light4'
+  in: 'dark2'
+  it: 'light3'
+  ur: 'neutral_red'
+  pl: 'dark1'
+
+light:
+  bg: 'light0_hard'
+  fg: 'dark1'
+  fc: 'dark4'
+  in: 'light2'
+  it: 'dark3'
+  ur: 'neutral_red'
+  pl: 'light1'
