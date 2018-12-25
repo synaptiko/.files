@@ -14,17 +14,7 @@ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ]; then
 		exec startx >& /dev/null
 	}
 
-	if [ $XDG_VTNR -eq 1 ]; then
-		use_sway=0
-
-		if [[ "$USER" == "eggze" ]]; then
-			use_sway=1
-		fi
-
-		if [ $use_sway -eq 1 ]; then
-			sway
-		else
-			i3
-		fi
+	if [ $XDG_VTNR -le 2 ]; then
+		sway
 	fi
 fi
