@@ -1,7 +1,7 @@
 python-pip
 aur/neovim-git
 aur/neovim-symlinks
-aur/neovim-remote-git
+aur/neovim-remote
 the_silver_searcher
 fzf
 editorconfig-core-c
