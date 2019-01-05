@@ -16,7 +16,7 @@ font pango:Iosevka Term SS03 Medium 12
 floating_modifier $mod normal
 default_border pixel 3
 default_floating_border normal
-hide_cursor 10000
+seat * hide_cursor 10000
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill

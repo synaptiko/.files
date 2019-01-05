@@ -1,8 +1,8 @@
 aur/sway-git
-aur/grim-git
-aur/slurp-git
-aur/mako-git
 aur/notify-desktop-git
 aur/brightnessctl
-aur/alacritty-git
+alacritty
+mako
+grim
+slurp
 polkit-gnome
