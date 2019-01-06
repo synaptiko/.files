@@ -155,7 +155,7 @@ titlebar_padding 8 4
 # following file contains both colors and bar configuration
 include ~/.files/0-theme/configs/sway.config
 
-exec_always ~/.files/sway/bg.sh
+exec ~/.files/sway/bg.sh
 # generate new background picture
 bindsym $mod+Shift+w exec ~/.files/sway/bg.sh
 
