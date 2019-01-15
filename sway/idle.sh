@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 function turn_on_swayidle {
-	swayidle \
+	swayidle -w \
 			timeout 300 '~/.files/sway/lock.sh' \
 			timeout 360 'swaymsg "output * dpms off"' \
 			resume 'swaymsg "output * dpms on"' \
