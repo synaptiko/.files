@@ -49,9 +49,6 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+p focus parent
 bindsym $mod+Shift+s sticky toggle
 
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
-
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
@@ -90,6 +87,7 @@ bindsym $mod+Shift+Ctrl+7 mark "sp7", move scratchpad
 bindsym $mod+Shift+Ctrl+8 mark "sp8", move scratchpad
 bindsym $mod+Shift+Ctrl+9 mark "sp9", move scratchpad
 bindsym $mod+Shift+Ctrl+0 mark "sp0", move scratchpad
+bindsym $mod+Shift+minus mark "sp-", move scratchpad
 
 bindsym $mod+Ctrl+1 [con_mark="sp1"] scratchpad show
 bindsym $mod+Ctrl+2 [con_mark="sp2"] scratchpad show
@@ -101,6 +99,7 @@ bindsym $mod+Ctrl+7 [con_mark="sp7"] scratchpad show
 bindsym $mod+Ctrl+8 [con_mark="sp8"] scratchpad show
 bindsym $mod+Ctrl+9 [con_mark="sp9"] scratchpad show
 bindsym $mod+Ctrl+0 [con_mark="sp0"] scratchpad show
+bindsym $mod+minus [con_mark="sp-"] scratchpad show
 
 bindsym $mod+Shift+c reload
 
