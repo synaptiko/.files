@@ -1,6 +1,8 @@
 indicator-radius=16
 indicator-thickness=12
 
+color=00000000
+
 bs-hl-color=cc241d
 key-hl-color=ffffffc4
 
