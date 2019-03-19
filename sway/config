@@ -177,6 +177,7 @@ titlebar_padding 8 4
 include ~/.files/0-theme/configs/sway.config
 
 exec ~/.files/sway/bg.sh
+exec_always ~/.files/sway/bg.sh keep
 # generate new background picture
 bindsym $mod+Shift+w exec ~/.files/sway/bg.sh
 
