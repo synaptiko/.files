@@ -46,9 +46,6 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+p focus parent
 bindsym $mod+Shift+s sticky toggle
 
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
-
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
@@ -76,6 +73,30 @@ bindsym $mod+Shift+8 move container to workspace 8, workspace 8
 bindsym $mod+Shift+9 move container to workspace 9, workspace 9
 bindsym $mod+Shift+0 move container to workspace 10, workspace 10
 bindsym $mod+Shift+slash move container to workspace /, workspace /
+
+bindsym $mod+Shift+Ctrl+1 mark "sp1", move scratchpad
+bindsym $mod+Shift+Ctrl+2 mark "sp2", move scratchpad
+bindsym $mod+Shift+Ctrl+3 mark "sp3", move scratchpad
+bindsym $mod+Shift+Ctrl+4 mark "sp4", move scratchpad
+bindsym $mod+Shift+Ctrl+5 mark "sp5", move scratchpad
+bindsym $mod+Shift+Ctrl+6 mark "sp6", move scratchpad
+bindsym $mod+Shift+Ctrl+7 mark "sp7", move scratchpad
+bindsym $mod+Shift+Ctrl+8 mark "sp8", move scratchpad
+bindsym $mod+Shift+Ctrl+9 mark "sp9", move scratchpad
+bindsym $mod+Shift+Ctrl+0 mark "sp0", move scratchpad
+bindsym $mod+Shift+minus mark "sp-", move scratchpad
+
+bindsym $mod+Ctrl+1 [con_mark="sp1"] scratchpad show
+bindsym $mod+Ctrl+2 [con_mark="sp2"] scratchpad show
+bindsym $mod+Ctrl+3 [con_mark="sp3"] scratchpad show
+bindsym $mod+Ctrl+4 [con_mark="sp4"] scratchpad show
+bindsym $mod+Ctrl+5 [con_mark="sp5"] scratchpad show
+bindsym $mod+Ctrl+6 [con_mark="sp6"] scratchpad show
+bindsym $mod+Ctrl+7 [con_mark="sp7"] scratchpad show
+bindsym $mod+Ctrl+8 [con_mark="sp8"] scratchpad show
+bindsym $mod+Ctrl+9 [con_mark="sp9"] scratchpad show
+bindsym $mod+Ctrl+0 [con_mark="sp0"] scratchpad show
+bindsym $mod+minus [con_mark="sp-"] scratchpad show
 
 bindsym $mod+Shift+c exec "~/.files/i3/merge-config.sh && i3-msg reload"
 
@@ -144,15 +165,15 @@ client.urgent           #cc241d #cc241d #1d2021 #cc241d   #cc241d
 client.placeholder      #3c3836 #3c3836 #bdae93 #3c3836   #3c3836
 client.background       #ebdbb2
 
-for_window [title="Android Emulator"] floating enable
-for_window [title="Screen Layout Editor"] floating enable # arandr
-for_window [title="Nitrogen"] floating enable
-for_window [title="Firewall"] floating enable
-for_window [title="Signal" class="Signal"] floating enable, move scratchpad, scratchpad show
-for_window [title="Authy" class="Chromium"] floating enable
-for_window [class="keepassxc"] floating enable
-for_window [class="zoom"] floating enable
-for_window [class="lxqt-openssh-askpass"] floating enable
+for_window [title="^Screen Layout Editor$"] floating enable # arandr
+for_window [title="^Nitrogen$"] floating enable
+for_window [title="^Firewall$"] floating enable
+for_window [title="^Signal$" class="^Signal$"] floating enable
+for_window [title="^Authy$" class="^Chromium$"] floating enable
+for_window [class="^keepassxc$"] floating enable
+for_window [class="^zoom$"] floating enable
+for_window [class="^lxqt-openssh-askpass$"] floating enable
+for_window [class="^Alacritty$" title="^daily-reports$"] mark "sp-", move scratchpad
 
 bar {
 	status_command /opt/synaptiko-desktop-status/bar.sh

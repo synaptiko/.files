@@ -183,13 +183,13 @@ bindsym $mod+Shift+w exec ~/.files/sway/bg.sh
 
 exec ~/.files/sway/idle.sh
 
-for_window [title="Android Emulator"] floating enable
-for_window [title="Firewall"] floating enable
-for_window [title="Signal" class="Signal"] floating enable, move scratchpad, scratchpad show
-for_window [title="Authy" class="Chromium"] floating enable
-for_window [class="keepassxc"] floating enable
-for_window [class="zoom"] floating enable
-for_window [class="lxqt-openssh-askpass"] floating enable
+for_window [title="^Firewall$"] floating enable
+for_window [title="^Signal$" class="^Signal$"] floating enable, move scratchpad, scratchpad show
+for_window [title="^Authy$" class="^Chromium$"] floating enable
+for_window [class="^keepassxc$"] floating enable
+for_window [class="^zoom$"] floating enable
+for_window [class="^lxqt-openssh-askpass$"] floating enable
+for_window [app_id="^Alacritty$" title="^daily-reports$"] mark "sp-", move scratchpad
 
 # TODO jprokop: add to host-specific files
 # include ~/.config/sway/config.d/*

@@ -19,6 +19,7 @@ numlockx &
 xbanish &
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export WINIT_UNIX_BACKEND=x11
 
 # to avoid huge delay when opening Nautilus or other gnome-based apps:
 # https://github.com/flatpak/xdg-desktop-portal-gtk/issues/72
