@@ -140,8 +140,10 @@ bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
 bindsym $mod+Shift+p exec pgrep mocp && mocp --toggle-pause
 bindcode Shift+86 exec ~/.files/i3-and-sway/volume.sh 2
 bindsym XF86AudioRaiseVolume exec ~/.files/i3-and-sway/volume.sh 2
+bindsym Ctrl+F3 exec ~/.files/i3-and-sway/volume.sh set 80
 bindcode Shift+82 exec ~/.files/i3-and-sway/volume.sh -2
 bindsym XF86AudioLowerVolume exec ~/.files/i3-and-sway/volume.sh -2
+bindsym Ctrl+F2 exec ~/.files/i3-and-sway/volume.sh set 15
 bindcode Shift+63 exec ~/.files/i3-and-sway/volume.sh toggle
 bindsym XF86AudioMute exec ~/.files/i3-and-sway/volume.sh toggle
 bindsym XF86MonBrightnessUp exec brightnessctl s +10%
