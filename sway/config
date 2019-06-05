@@ -41,8 +41,6 @@ bindsym $mod+Shift+$right move right
 bindsym $mod+b splith
 bindsym $mod+v splitv
 bindsym $mod+f fullscreen toggle
-# "distraction/focus" mode
-bindsym $mod+Shift+f bar hidden_state toggle 0, bar mode toggle 0
 
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
@@ -100,6 +98,23 @@ bindsym $mod+Ctrl+8 [con_mark="sp8"] scratchpad show
 bindsym $mod+Ctrl+9 [con_mark="sp9"] scratchpad show
 bindsym $mod+Ctrl+0 [con_mark="sp0"] scratchpad show
 bindsym $mod+minus [con_mark="sp-"] scratchpad show
+
+# TODO jprokop: create improved version later: a script which will also turn off notificiations and inhibit idle (also fix/improve toggle functionality)
+# TODO jprokop: (add timer for monitoring how much time I spent in current focus mode? + key to reset/pause (pomodoro-like))
+# "focus/distraction-free" mode
+bindsym $mod+Ctrl+f \
+	bar hidden_state toggle 0, \
+	bar mode toggle 0, \
+	workspace F
+
+bindsym $mod+Shift+Ctrl+f \
+	bar hidden_state hide 0, \
+	bar mode hide 0, \
+	border none, \
+	move container to workspace F, workspace F
+
+# "distraction-free" mode: only for bar
+bindsym $mod+Shift+f bar hidden_state toggle 0, bar mode toggle 0
 
 bindsym $mod+Shift+c reload
 
