@@ -6,8 +6,8 @@ set $down j
 set $up k
 set $right l
 
-set $term alacritty
-set $menu rofi -sort -sorting-method 'fzf' -show drun
+set $term WINIT_UNIX_BACKEND=x11 alacritty
+set $menu rofi -matching normal -no-sort -show drun
 
 exec ~/.files/i3/startup.sh
 

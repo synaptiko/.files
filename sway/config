@@ -7,7 +7,7 @@ set $up k
 set $right l
 
 set $term alacritty
-set $menu rofi -sort -sorting-method 'fzf' -show drun
+set $menu rofi -matching normal -no-sort -show drun
 
 exec ~/.files/sway/startup.sh
 
@@ -160,6 +160,9 @@ mode "locked" {
 
 	bindsym $mod+Escape mode "default"
 }
+
+bindswitch --locked lid:on output * dpms off
+bindswitch --locked lid:off output * dpms on
 
 bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
 
