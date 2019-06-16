@@ -59,6 +59,7 @@ Plug 'synaptiko/fzf'
 Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my custom colors for tabline
 Plug 'synaptiko/mintabline'
 Plug 'synaptiko/vim-auto-save'
+Plug 'synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -257,6 +258,7 @@ function! ConvertThroughLodash(fnName, type)
 		echoerr a:fnName . " can be used only on characterwise selection"
 	endif
 endfunction
+
 " Variants of multiword casing
 command! -range -nargs=0 CamelCase :call ConvertThroughLodash('camelCase', visualmode())
 command! -range -nargs=0 KebabCase :call ConvertThroughLodash('kebabCase', visualmode())
@@ -286,7 +288,7 @@ function! SwitchTheme(variant)
 	" To be more cooler => transparent background
 	hi! Normal ctermbg=none guibg=none
 endfunction
-if !empty(glob('~/.files/0-theme/configs/nvim.vim'))
+if !empty(expand('~/.files/0-theme/configs/nvim.vim'))
 	source ~/.files/0-theme/configs/nvim.vim
 else
 	call SwitchTheme('dark')

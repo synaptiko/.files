@@ -19,3 +19,9 @@ sudo systemctl start synaptiko-desktop-status.socket
 
 cd $DIR/../.packages/synaptiko-packages/synaptiko-recent-dirs
 makepkg --noconfirm -sircC
+
+cd $DIR/../.packages/synaptiko-packages/synaptiko-ownvim
+makepkg --noconfirm -sircC
+sudo systemctl --user daemon-reload
+sudo systemctl --user enable synaptiko-ownvim.socket
+sudo systemctl --user start synaptiko-ownvim.socket
