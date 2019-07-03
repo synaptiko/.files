@@ -19,14 +19,9 @@ default_floating_border normal
 seat * hide_cursor 10000
 
 bindsym $mod+Return exec $term
-bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
-
 exec_always chromium-runner --generate-cache
 bindsym $mod+Shift+Return exec rofi -sort -sorting-method 'fzf' -modi "chromium-runner:chromium-runner-rofi,track:~/Documents/todo/track-rofi.sh" -no-show-icons -location 0 -width 10 -no-fixed-num-lines -show chromium-runner
-
-bindsym Print exec ~/.files/sway/screenshot.sh selection
-bindsym Mod4+Print exec ~/.files/sway/screenshot.sh screen
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -44,12 +39,8 @@ bindsym $mod+f fullscreen toggle
 
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+p focus parent
-bindsym $mod+Shift+s sticky toggle
 
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+workspace_auto_back_and_forth yes
 
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -103,9 +94,9 @@ bindsym $mod+minus [con_mark="sp-"] scratchpad show
 # TODO jprokop: (add timer for monitoring how much time I spent in current focus mode? + key to reset/pause (pomodoro-like))
 # "focus/distraction-free" mode
 bindsym $mod+Ctrl+f \
+	workspace F, \
 	bar hidden_state toggle 0, \
-	bar mode toggle 0, \
-	workspace F
+	bar mode toggle 0
 
 bindsym $mod+Shift+Ctrl+f \
 	bar hidden_state hide 0, \
@@ -116,11 +107,7 @@ bindsym $mod+Shift+Ctrl+f \
 # "distraction-free" mode: only for bar
 bindsym $mod+Shift+f bar hidden_state toggle 0, bar mode toggle 0
 
-bindsym $mod+Shift+c reload
-
-workspace_auto_back_and_forth yes
-
-bindsym $mod+r mode "resize"
+bindsym $mod+z mode "resize"
 mode "resize" {
 	# TODO jprokop: improve for floating windows, it make sense to grow/shrink width/height instead
 	# TODO jprokop: implement own command which will read the current state of WS and it will decide what to do with the focused window
@@ -138,15 +125,14 @@ mode "resize" {
 	bindsym Escape mode "default"
 }
 
-set $mode_system "(l)ock l(o)gout (r)eboot (p)oweroff toggle r(e)dshift (s)wayidle"
+set $mode_system "(l)ock; l(o)gout; (r)eboot; (p)oweroff; reload (c)onfig"
 bindsym $mod+Escape mode $mode_system
 mode $mode_system {
 	bindsym l exec ~/.files/sway/lock.sh
 	bindsym o exit
 	bindsym r exec sudo reboot, mode "default"
 	bindsym p exec sudo poweroff, mode "default"
-	bindsym e exec pkill -USR1 -u $UID ^redshift$, mode "default"
-	bindsym s exec ~/.files/sway/idle.sh toggle, mode "default"
+	bindsym c reload
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -164,10 +150,53 @@ mode "locked" {
 bindswitch --locked lid:on output * dpms off
 bindswitch --locked lid:off output * dpms on
 
-bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
+set $mode_layout "layout: (s)tacking, (t)abbed, t(o)ggle; focus (p)arent; toggle st(i)cky"
+bindsym $mod+s mode $mode_layout
+mode $mode_layout {
+	bindsym p focus parent, mode "default"
+	bindsym i sticky toggle, mode "default"
 
-# TODO jprokop: integrate later to synaptiko-desktop (to support also youtube etc.)
-bindsym $mod+Shift+p exec pgrep mocp && mocp --toggle-pause
+	bindsym s layout stacking, mode "default"
+	bindsym t layout tabbed, mode "default"
+	bindsym o layout toggle split, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+set $mode_adjust "adjust: volume +(j) -(k) (h)igh (l)ow (m)ute, brightness +(f) -(d)"
+bindsym $mod+a mode $mode_adjust
+mode $mode_adjust {
+	bindsym j exec ~/.files/i3-and-sway/volume.sh 2
+	bindsym k exec ~/.files/i3-and-sway/volume.sh -2
+	bindsym f exec brightnessctl s +10%
+	bindsym d exec brightnessctl s 10%-
+	bindsym h exec ~/.files/i3-and-sway/volume.sh set 80
+	bindsym l exec ~/.files/i3-and-sway/volume.sh set 15
+	bindsym m exec ~/.files/i3-and-sway/volume.sh toggle, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (r)edshift, (s)wayidle; (k)ill"
+bindsym $mod+m mode $mode_misc
+mode $mode_misc {
+	bindsym e exec ~/.files/sway/screenshot.sh selection, mode "default"
+	bindsym c exec ~/.files/sway/screenshot.sh screen, mode "default"
+	bindsym t exec ~/.files/0-theme/switch.sh toggle, mode "default"
+	# TODO jprokop: integrate later to synaptiko-desktop (to support also youtube etc.)
+	bindsym p exec pgrep mocp && mocp --toggle-pause, mode "default"
+	# `mode "default"` omitted on purpose on the next line (so I can switch wallpaper multiple times)
+	bindsym w exec ~/.files/sway/bg.sh
+	bindsym r exec pkill -USR1 -u $UID ^redshift$, mode "default"
+	bindsym s exec ~/.files/sway/idle.sh toggle, mode "default"
+	bindsym k kill, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
 bindcode Shift+86 exec ~/.files/i3-and-sway/volume.sh 2
 bindsym XF86AudioRaiseVolume exec ~/.files/i3-and-sway/volume.sh 2
 bindsym Ctrl+F3 exec ~/.files/i3-and-sway/volume.sh set 80
@@ -198,8 +227,6 @@ include ~/.files/0-theme/configs/sway.config
 
 exec ~/.files/sway/bg.sh
 exec_always ~/.files/sway/bg.sh keep
-# generate new background picture
-bindsym $mod+Shift+w exec ~/.files/sway/bg.sh
 
 exec ~/.files/sway/idle.sh
 
