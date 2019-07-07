@@ -76,7 +76,7 @@ bindsym $mod+Shift+Ctrl+7 mark "sp7", move scratchpad
 bindsym $mod+Shift+Ctrl+8 mark "sp8", move scratchpad
 bindsym $mod+Shift+Ctrl+9 mark "sp9", move scratchpad
 bindsym $mod+Shift+Ctrl+0 mark "sp0", move scratchpad
-bindsym $mod+Shift+minus mark "sp-", move scratchpad
+bindsym $mod+Shift+grave mark "sp`", move scratchpad
 
 bindsym $mod+Ctrl+1 [con_mark="sp1"] scratchpad show
 bindsym $mod+Ctrl+2 [con_mark="sp2"] scratchpad show
@@ -88,7 +88,7 @@ bindsym $mod+Ctrl+7 [con_mark="sp7"] scratchpad show
 bindsym $mod+Ctrl+8 [con_mark="sp8"] scratchpad show
 bindsym $mod+Ctrl+9 [con_mark="sp9"] scratchpad show
 bindsym $mod+Ctrl+0 [con_mark="sp0"] scratchpad show
-bindsym $mod+minus [con_mark="sp-"] scratchpad show
+bindsym $mod+grave [con_mark="sp`"] scratchpad show
 
 # TODO jprokop: create improved version later: a script which will also turn off notificiations and inhibit idle (also fix/improve toggle functionality)
 # TODO jprokop: (add timer for monitoring how much time I spent in current focus mode? + key to reset/pause (pomodoro-like))
@@ -179,7 +179,7 @@ mode $mode_adjust {
 	bindsym Escape mode "default"
 }
 
-set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (r)edshift, (s)wayidle; (k)ill"
+set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (r)edshift, (s)wayidle, (l)aptop keyboard; (k)ill"
 bindsym $mod+m mode $mode_misc
 mode $mode_misc {
 	bindsym e exec ~/.files/sway/screenshot.sh selection, mode "default"
@@ -191,6 +191,8 @@ mode $mode_misc {
 	bindsym w exec ~/.files/sway/bg.sh
 	bindsym r exec pkill -USR1 -u $UID ^redshift$, mode "default"
 	bindsym s exec ~/.files/sway/idle.sh toggle, mode "default"
+	bindsym l mode "default"
+	bindsym --release l exec ~/.files/sway/inputs.sh laptop-keyboard toggle
 	bindsym k kill, mode "default"
 
 	bindsym Return mode "default"

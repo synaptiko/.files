@@ -75,7 +75,7 @@ bindsym $mod+Shift+Ctrl+7 mark "sp7", move scratchpad
 bindsym $mod+Shift+Ctrl+8 mark "sp8", move scratchpad
 bindsym $mod+Shift+Ctrl+9 mark "sp9", move scratchpad
 bindsym $mod+Shift+Ctrl+0 mark "sp0", move scratchpad
-bindsym $mod+Shift+minus mark "sp-", move scratchpad
+bindsym $mod+Shift+grave mark "sp`", move scratchpad
 
 bindsym $mod+Ctrl+1 [con_mark="sp1"] scratchpad show
 bindsym $mod+Ctrl+2 [con_mark="sp2"] scratchpad show
@@ -87,7 +87,7 @@ bindsym $mod+Ctrl+7 [con_mark="sp7"] scratchpad show
 bindsym $mod+Ctrl+8 [con_mark="sp8"] scratchpad show
 bindsym $mod+Ctrl+9 [con_mark="sp9"] scratchpad show
 bindsym $mod+Ctrl+0 [con_mark="sp0"] scratchpad show
-bindsym $mod+minus [con_mark="sp-"] scratchpad show
+bindsym $mod+grave [con_mark="sp`"] scratchpad show
 
 bindsym $mod+z mode "resize"
 mode "resize" {
