@@ -26,7 +26,7 @@ else
 		)
 		geometry=$(slurp -b "#45858820" -c "#45858880" -w 3 -d <<< "$windowGeometries") || exit $?
 
-		wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --geometry=$geometry &
+		wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --geometry="$geometry" &
 	fi
 	if ! pgrep ffplay; then
 		ffplay /dev/video2 &
