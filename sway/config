@@ -237,6 +237,19 @@ for_window [class="^zoom$"] floating enable
 for_window [class="^lxqt-openssh-askpass$"] floating enable
 for_window [app_id="^Alacritty$" title="^daily-reports$"] mark "sp-", move scratchpad
 
+# needed for temporary/hacked wayland screen sharing
+for_window [class=ffplay] floating enable, sticky enable
+set $mode_adjust "zoom screen sharing: (s)tart; s(t)op; st(a)tus"
+bindsym $mod+z mode $mode_adjust
+mode $mode_adjust {
+	bindsym s exec ~/.files/wayland-screen-share/share-screen.sh start, mode "default"
+	bindsym t exec ~/.files/wayland-screen-share/share-screen.sh stop, mode "default"
+	bindsym a exec ~/.files/wayland-screen-share/share-screen.sh is-recording, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
 # TODO jprokop: add to host-specific files
 # include ~/.config/sway/config.d/*
 
