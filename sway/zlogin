@@ -1,17 +1,15 @@
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ]; then
 	sway() {
+		# setup GUI libraries to work properly under Wayland: https://wiki.archlinux.org/index.php/Wayland#GUI_libraries
 		# FIXME it's too early for the below; neither Chromium nor Electron app will work with it
 		# export GDK_BACKEND=wayland
+		export MOZ_ENABLE_WAYLAND=1
+		export QT_QPA_PLATFORM=wayland-egl
+		export CLUTTER_BACKEND=wayland
+		export SDL_VIDEODRIVER=wayland
 		unfunction sway
-		unfunction i3
 		exec dbus-launch --sh-syntax --exit-with-session \
 			sway -V -d &> ~/.sway.log
-	}
-
-	i3() {
-		unfunction sway
-		unfunction i3
-		exec startx >& /dev/null
 	}
 
 	if [ $XDG_VTNR -le 2 ]; then

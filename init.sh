@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# FIXME jprokop: add "generic" desktop folder which will contain desktop deps/initialization shared between i3 and sway!
-# FIXME jprokop: install either i3 or sway, add some switch to arguments with default i3
-
 function checkDependency {
 	repository=`echo $1 | cut -d'/' -f1`
 	dependency=`echo $1 | cut -d'/' -f2`

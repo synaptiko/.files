@@ -53,7 +53,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'moll/vim-node'
 " Plug 'mxw/vim-jsx'
-Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'mboughaba/i3config.vim'
 " Plug 'sirtaj/vim-openscad'
 Plug 'synaptiko/fzf'
 Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my custom colors for tabline

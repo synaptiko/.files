@@ -1,4 +1,4 @@
-# vim:filetype=i3
+# vim:filetype=i3config
 # Read `man 5 sway` for a complete reference.
 set $mod Mod1
 set $left h
@@ -149,8 +149,8 @@ mode $mode_system {
 mode "locked" {
 	bindsym --locked Escape exec ~/.files/sway/idle.sh timeout-now
 	bindsym --locked $mod+Shift+p exec pgrep mocp && mocp --toggle-pause
-	bindcode --locked Shift+63 exec ~/.files/i3-and-sway/volume.sh toggle
-	bindsym --locked XF86AudioMute exec ~/.files/i3-and-sway/volume.sh toggle
+	bindcode --locked Shift+63 exec ~/.files/sway/volume.sh toggle
+	bindsym --locked XF86AudioMute exec ~/.files/sway/volume.sh toggle
 
 	bindsym $mod+Escape mode "default"
 }
@@ -161,13 +161,13 @@ bindswitch --locked lid:off output * dpms on
 set $mode_adjust "adjust: volume +(j) -(k) (h)igh (l)ow (m)ute, brightness +(f) -(d)"
 bindsym $mod+a mode $mode_adjust
 mode $mode_adjust {
-	bindsym j exec ~/.files/i3-and-sway/volume.sh 2
-	bindsym k exec ~/.files/i3-and-sway/volume.sh -2
+	bindsym j exec ~/.files/sway/volume.sh 2
+	bindsym k exec ~/.files/sway/volume.sh -2
 	bindsym f exec brightnessctl s +10%
 	bindsym d exec brightnessctl s 10%-
-	bindsym h exec ~/.files/i3-and-sway/volume.sh set 80
-	bindsym l exec ~/.files/i3-and-sway/volume.sh set 15
-	bindsym m exec ~/.files/i3-and-sway/volume.sh toggle, mode "default"
+	bindsym h exec ~/.files/sway/volume.sh set 80
+	bindsym l exec ~/.files/sway/volume.sh set 15
+	bindsym m exec ~/.files/sway/volume.sh toggle, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -196,14 +196,14 @@ bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
 # TODO jprokop: integrate later to synaptiko-desktop (to support also youtube etc.)
 bindsym $mod+Shift+p exec pgrep mocp && mocp --toggle-pause, mode "default"
 
-bindcode Shift+86 exec ~/.files/i3-and-sway/volume.sh 2
-bindsym XF86AudioRaiseVolume exec ~/.files/i3-and-sway/volume.sh 2
-bindsym Ctrl+F3 exec ~/.files/i3-and-sway/volume.sh set 80
-bindcode Shift+82 exec ~/.files/i3-and-sway/volume.sh -2
-bindsym XF86AudioLowerVolume exec ~/.files/i3-and-sway/volume.sh -2
-bindsym Ctrl+F2 exec ~/.files/i3-and-sway/volume.sh set 15
-bindcode Shift+63 exec ~/.files/i3-and-sway/volume.sh toggle
-bindsym XF86AudioMute exec ~/.files/i3-and-sway/volume.sh toggle
+bindcode Shift+86 exec ~/.files/sway/volume.sh 2
+bindsym XF86AudioRaiseVolume exec ~/.files/sway/volume.sh 2
+bindsym Ctrl+F3 exec ~/.files/sway/volume.sh set 80
+bindcode Shift+82 exec ~/.files/sway/volume.sh -2
+bindsym XF86AudioLowerVolume exec ~/.files/sway/volume.sh -2
+bindsym Ctrl+F2 exec ~/.files/sway/volume.sh set 15
+bindcode Shift+63 exec ~/.files/sway/volume.sh toggle
+bindsym XF86AudioMute exec ~/.files/sway/volume.sh toggle
 bindsym XF86MonBrightnessUp exec brightnessctl s +10%
 bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 

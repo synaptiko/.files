@@ -1,3 +1,8 @@
+- check and update adwaita themes, there is some weird conflict and it's compiling qt4 which I don't need
+- refactor synaptiko-packages, they are currently broken
+- check why install-dependencies didn't work properly (it looks like it installs only aur deps)
+
+- add "generic" desktop folder which will contain desktop deps/initialization
 - add support for dmesg -D before getty is started (use disable-dmesg-getty.service as inspiration)
 - consider adding users' configuration (multiuser support)
 	- prepare synaptiko, eggze, jprokop users (for desktop env) and only jprokop (for vps env)
@@ -9,12 +14,12 @@
 
 - 0-theme:
   - contact zsh (somehow) and switch pure prompt colors (branch name etc)
-  - contact i3/sway and change colors there (+ in bar)
+  - contact sway and change colors there (+ in bar)
 
 - add support for "git --global config.set" (initialization of git)
 - add association for URL/links to open Chromium/Firefox? (over mimeo?)
 - add multiuser support/setup
-- add "modular" installation; prepare 4 profiles: desktop-i3, desktop-sway, "sudo root" user, VPS
+- add "modular" installation; prepare 3 profiles: desktop-sway, "sudo root" user, VPS
 - check all fixmes/todos in the files!
 - add support for updating plugins (zsh + tmux; or to check if there are new updates)
 - add support for installation from my own repositories
