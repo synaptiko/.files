@@ -38,7 +38,9 @@ switch (os.hostname()) {
 		]
 		break;
 	case 'jprokop-tp13':
+	case 'jprokop-yoga':
 	default:
+		const wifiName = (os.hostname() === 'jprokop-tp13' ? 'wlp3s0' : 'wlp0s20f3')
 		Object.assign(blockConfigs, {
 			'volume0': {
 				extend: 'volume',
@@ -52,8 +54,8 @@ switch (os.hostname()) {
 					interval = 15
 				}
 
-				order += "wireless wlp3s0"
-				wireless wlp3s0 {
+				order += "wireless ${wifiName}"
+				wireless ${wifiName} {
 					format_up = "W %essid (%quality)"
 					format_down = "No Wifi"
 				}

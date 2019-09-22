@@ -224,7 +224,6 @@ titlebar_padding 8 4
 # following file contains both colors and bar configuration
 include ~/.files/0-theme/configs/sway.config
 
-exec ~/.files/sway/bg.sh
 exec_always ~/.files/sway/bg.sh keep
 
 exec ~/.files/sway/idle.sh
@@ -254,6 +253,13 @@ mode $mode_adjust {
 # include ~/.config/sway/config.d/*
 
 input "2:14:ETPS/2_Elantech_Touchpad" {
+	dwt enabled
+	tap enabled
+	natural_scroll enabled
+	middle_emulation enabled
+}
+
+input "1267:51:Elan_Touchpad" {
 	dwt enabled
 	tap enabled
 	natural_scroll enabled
