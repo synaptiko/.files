@@ -1,3 +1,4 @@
+- add support for dmesg -D before getty is started (use disable-dmesg-getty.service as inspiration)
 - consider adding users' configuration (multiuser support)
 	- prepare synaptiko, eggze, jprokop users (for desktop env) and only jprokop (for vps env)
 	- plus proper sudoers config
