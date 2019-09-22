@@ -4,6 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [ "$(pacman -T yay | wc -l)" != "0" ]; then
 	echo "Yay is required; it will be installed now"
 
+	mkdir -p $DIR/../.packages
 	cd $DIR/../.packages
 	git clone https://aur.archlinux.org/yay-bin.git
 	cd yay-bin
