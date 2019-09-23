@@ -88,7 +88,7 @@ switch (os.hostname()) {
 			'wlan',
 			'battery',
 			'volume0',
-			// 'time-track',
+			'time-track',
 			'date-time'
 		]
 		break;
