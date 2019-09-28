@@ -173,6 +173,7 @@ mode $mode_adjust {
 	bindsym Escape mode "default"
 }
 
+# TODO modes can be now generated dynamically, see: https://github.com/swaywm/sway/pull/4271
 set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (r)edshift, (s)wayidle, (l)aptop keyboard"
 bindsym $mod+m mode $mode_misc
 mode $mode_misc {
@@ -231,6 +232,8 @@ exec ~/.files/sway/idle.sh
 for_window [title="^Firewall$"] floating enable
 for_window [title="^Signal$" class="^Signal$"] floating enable, move scratchpad, scratchpad show
 for_window [title="^Authy$" class="^Chromium$"] floating enable
+# KeepassXC can run both as Wayland or X app, depending on QT_QPA_PLATFORM env var
+for_window [app_id="^keepassxc$"] floating enable
 for_window [class="^keepassxc$"] floating enable
 for_window [class="^zoom$"] floating enable
 for_window [class="^lxqt-openssh-askpass$"] floating enable
