@@ -73,6 +73,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'w0rp/ale'
 Plug 'kylef/apiblueprint.vim'
 Plug 'rlue/vim-getting-things-down'
+Plug 'ziglang/zig.vim'
 
 " Use either those two for javascript/typescript:
 Plug 'jelera/vim-javascript-syntax'
@@ -123,8 +124,17 @@ let g:vim_json_syntax_conceal=0
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
 
+let g:zig_fmt_autosave = 0
+
+let g:ale_linter_aliases = {
+\   'svelte': ['svelte', 'javascript']
+\}
+let g:ale_linters = {
+\   'svelte': ['eslint']
+\}
 let g:ale_fixers = {
 \   'javascript': ['standard', 'eslint'],
+\   'svelte': ['eslint'],
 \   'typescript': ['eslint']
 \}
 let g:ale_javascript_eslint_suppress_missing_config=1
@@ -219,6 +229,7 @@ augroup configgroup
 	autocmd FileType help wincmd L
 
 	autocmd BufRead,BufNewFile *.mjs set filetype=javascript
+	autocmd BufNewFile,BufRead,BufReadPost *.svelte set filetype=html.svelte
 
 	" Open files in quickfix window in new tab when Ctrl+T is pressed
 	autocmd FileType qf nnoremap <buffer> <C-T> <C-W><Enter><C-W>T
