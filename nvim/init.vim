@@ -12,6 +12,7 @@ set hlsearch                        " Highlight search terms
 set scrolljump=3                    " Lines to scroll when cursor leaves screen
 set scrolloff=3                     " Minimum lines to keep above and below cursor
 set nowrap                          " Do not wrap long lines
+set breakindent                     " But use the same indent level when wrapping is selectively enabled
 set shortmess+=filmnrxoOtTI         " Abbrev. of messages (avoids 'hit enter')
 set iskeyword+=-                    " Append hyphens, they are quite often used in SCSS and similar
 set termguicolors                   " https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
