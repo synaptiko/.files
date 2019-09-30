@@ -241,6 +241,7 @@ for_window [app_id="^Alacritty$" title="^daily-reports$"] mark "sp`", move scrat
 
 # needed for temporary/hacked wayland screen sharing
 for_window [class=ffplay] floating enable, sticky enable
+# TODO modes can be now generated dynamically, see: https://github.com/swaywm/sway/pull/4271
 set $mode_adjust "zoom screen sharing: (s)tart; s(t)op; st(a)tus"
 bindsym $mod+z mode $mode_adjust
 mode $mode_adjust {
