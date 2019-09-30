@@ -2,6 +2,8 @@
 - refactor synaptiko-packages, they are currently broken
 - check why install-dependencies didn't work properly (it looks like it installs only aur deps)
 
+- consider usage of `dash-static-musl` instead of bash for some of my scripts
+- add later `wl-clipboard` and `wl-clipboard-x11` (but I have some problems with it currently)
 - add "generic" desktop folder which will contain desktop deps/initialization
 - add support for dmesg -D before getty is started (use disable-dmesg-getty.service as inspiration)
 - consider adding users' configuration (multiuser support)
