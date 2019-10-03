@@ -29,6 +29,7 @@ else
 		wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --geometry="$geometry" &
 	fi
 	if ! pgrep ffplay; then
+		unset SDL_VIDEODRIVER
 		ffplay /dev/video2 &
 		sleep 0.5
 		# a hack so FPS is not dropping
