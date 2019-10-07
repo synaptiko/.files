@@ -33,5 +33,5 @@ slurp
 xdg-user-dirs
 xf86-input-libinput
 xf86-video-intel
-xclip
-xsel
+wl-clipboard
+aur/wl-clipboard-x11
