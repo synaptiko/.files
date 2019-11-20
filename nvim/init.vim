@@ -59,7 +59,7 @@ Plug 'mboughaba/i3config.vim'
 Plug 'synaptiko/fzf'
 Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my custom colors for tabline
 Plug 'synaptiko/mintabline'
-Plug 'synaptiko/vim-auto-save'
+Plug '907th/vim-auto-save'
 Plug 'synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -113,7 +113,8 @@ let g:gitgutter_sign_removed_first_line='◥'
 let g:gitgutter_sign_modified_removed='◢'
 
 let g:fzf_command_prefix='Fzf'
-let g:fzf_layout={ 'window': 'topleft 14new' }
+lua require("navigation")
+let g:fzf_layout = { 'window': 'lua NavigationFloatingWin()' }
 
 let g:auto_save=1
 let g:auto_save_silent=1

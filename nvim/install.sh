@@ -12,6 +12,9 @@ mkdir -p $NVIM_CONFIG_DIR
 NVIM_CONFIG=$NVIM_CONFIG_DIR/init.vim
 ln -s -f $DIR/init.vim $NVIM_CONFIG
 
+mkdir -p $NVIM_CONFIG_DIR/lua/navigation
+ln -s -f $DIR/lua/navigation/init.lua $NVIM_CONFIG_DIR/lua/navigation/init.lua
+
 if [ ! -d $NVIM_CONFIG_DIR/plugged ]; then
 	mkdir -p $NVIM_CONFIG_DIR/{autoload,plugged}
 	curl -sfLo $NVIM_CONFIG_DIR/autoload/plug.vim \
