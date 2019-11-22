@@ -29,6 +29,11 @@ bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
+bindsym $mod+Ctrl+t focus output HDMI-A-2
+bindsym $mod+Ctrl+b focus output eDP-1
+bindsym $mod+Ctrl+Shift+t move output HDMI-A-2
+bindsym $mod+Ctrl+Shift+b move output eDP-1
+
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
