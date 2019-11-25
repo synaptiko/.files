@@ -29,10 +29,37 @@ bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-bindsym $mod+Ctrl+t focus output HDMI-A-2
-bindsym $mod+Ctrl+b focus output eDP-1
+### TODO separate this to a script and run it only in case we have multimonitor setup
+### multimonitor start -->
+workspace 1² output HDMI-A-2
+workspace 2² output HDMI-A-2
+workspace 3² output HDMI-A-2
+workspace 4² output HDMI-A-2
+workspace 5² output HDMI-A-2
+workspace 6² output HDMI-A-2
+workspace 7² output HDMI-A-2
+workspace 8² output HDMI-A-2
+workspace 9² output HDMI-A-2
+workspace 0² output HDMI-A-2
+workspace /² output HDMI-A-2
+
+workspace 1¹ output eDP-1
+workspace 2¹ output eDP-1
+workspace 3¹ output eDP-1
+workspace 4¹ output eDP-1
+workspace 5¹ output eDP-1
+workspace 6¹ output eDP-1
+workspace 7¹ output eDP-1
+workspace 8¹ output eDP-1
+workspace 9¹ output eDP-1
+workspace 0¹ output eDP-1
+workspace /¹ output eDP-1
+
+bindsym $mod+Ctrl+t exec ~/.files/sway/switch-output.sh top
+bindsym $mod+Ctrl+b exec ~/.files/sway/switch-output.sh bottom
 bindsym $mod+Ctrl+Shift+t move output HDMI-A-2
 bindsym $mod+Ctrl+Shift+b move output eDP-1
+### <-- multimonitor end
 
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
