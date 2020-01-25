@@ -6,9 +6,9 @@ aur/fonts-meta-extended-lt
 aur/mimeo
 aur/neovim-remote
 aur/notify-desktop-git
-aur/sway-git
-aur/swayidle-git
-aur/swaylock-git
+sway
+swayidle
+swaylock
 aur/ttf-iosevka-term-ss03
 aur/xdg-utils-mimeo
 aur/wdisplays-git
