@@ -9,6 +9,7 @@ aur/notify-desktop-git
 sway
 swayidle
 swaylock
+xorg-server-xwayland
 aur/ttf-iosevka-term-ss03
 aur/xdg-utils-mimeo
 aur/wdisplays-git
