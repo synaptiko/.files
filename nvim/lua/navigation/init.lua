@@ -1,4 +1,6 @@
 -- TODO: add VimResized autocmd
+-- Inspired by https://gabrielpoca.com/2019-11-13-a-bit-more-lua-in-your-vim/ and https://www.reddit.com/r/neovim/comments/dw0fm8/a_bit_more_lua_in_your_vim/
+-- and https://github.com/huytd/vim-config/blob/master/init.vim#L132-L171 and https://www.reddit.com/r/neovim/comments/di41cm/a_floating_terminal_with_borderpadding/
 function NavigationFloatingWin()
 	local width = vim.api.nvim_get_option("columns")
 	local height = vim.api.nvim_get_option("lines")

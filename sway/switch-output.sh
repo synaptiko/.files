@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 mod=Mod1
 if [[ "$1" == "top" ]]; then
-	swaymsg focus output HDMI-A-2
+	swaymsg focus output DP-1
 	output=²
 else
 	swaymsg focus output eDP-1

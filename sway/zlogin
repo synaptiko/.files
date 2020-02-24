@@ -8,6 +8,7 @@ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ]; then
 		# export QT_QPA_PLATFORM=wayland-egl
 		export CLUTTER_BACKEND=wayland
 		export SDL_VIDEODRIVER=wayland
+		export _JAVA_AWT_WM_NONREPARENTING=1
 		unfunction sway
 		exec dbus-launch --sh-syntax --exit-with-session \
 			sway -V -d &> ~/.sway.log
