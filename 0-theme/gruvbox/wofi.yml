@@ -1,0 +1,7 @@
+dark:
+  background-color: 'light0_hard'
+  color: 'dark1'
+
+light:
+  background-color: 'dark0_hard'
+  color: 'light1'

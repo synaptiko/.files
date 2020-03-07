@@ -1,0 +1,8 @@
+prompt=
+color=.files/0-theme/configs/wofi-colors
+allow_images=true
+insensitive=true
+no_actions=true
+key_up=Control_L-p
+key_down=Control_L-n
+location=center

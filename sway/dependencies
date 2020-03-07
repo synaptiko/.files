@@ -29,7 +29,7 @@ polkit-gnome
 pulseaudio
 pulseaudio-alsa
 qt5-wayland
-rofi
+aur/wofi
 slurp
 xdg-user-dirs
 xf86-input-libinput

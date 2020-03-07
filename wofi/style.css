@@ -1,0 +1,50 @@
+#window {
+	border: 3px solid rgba(--wofi-rgb-color1, 0.94);
+	background-color: rgba(--wofi-rgb-color1, 0.94);
+	font-size: 18px;
+	font-family: "Iosevka Term SS03 Medium";
+}
+
+#outer-box {
+	margin: 3px;
+}
+
+#input {
+	border: 0;
+	border-radius: 0;
+	background-color: transparent;
+	color: --wofi-color0;
+	margin: 3px;
+}
+
+#input image:first-child {
+	margin-left: -100px;
+}
+
+#input image:last-child {
+	margin-right: -100px;
+}
+
+#input:focus {
+	border-radius: 0;
+}
+
+#entry {
+	color: --wofi-color0;
+}
+
+#entry:selected {
+	background-color: rgba(--wofi-rgb-color0, 0.94);
+	color: --wofi-color1;
+}
+
+#img {
+	margin-right: 5px;
+	margin-left: 3px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#text {
+	margin-left: 3px;
+}

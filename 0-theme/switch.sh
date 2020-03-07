@@ -24,5 +24,5 @@ echo -n $theme > $ACTIVE_THEME_FILE
 
 $DIR/switch-alacritty.js $theme &
 $DIR/switch-nvim.sh $theme &
-$DIR/switch-rofi.js $theme &
+$DIR/switch-wofi.js $theme &
 $DIR/switch-sway.js $theme &

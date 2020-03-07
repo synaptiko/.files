@@ -7,7 +7,6 @@ set $up k
 set $right l
 
 set $term alacritty
-set $menu rofi -matching normal -no-sort -show drun
 
 exec ~/.files/sway/startup.sh
 
@@ -20,9 +19,18 @@ seat * hide_cursor 10000
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec $menu
-exec_always chromium-runner --generate-cache
-bindsym $mod+Shift+Return exec rofi -sort -sorting-method 'fzf' -modi "chromium-runner:chromium-runner-rofi,track:~/Documents/todo/track-rofi.sh" -no-show-icons -location 0 -width 10 -no-fixed-num-lines -show chromium-runner
+
+exec_always ~/.files/wofi/menus.sh generate-cache
+set $menuMode "select: (p)rograms (b)rowsers (t)asks"
+bindsym $mod+d mode $menuMode
+mode $menuMode {
+	bindsym p exec ~/.files/wofi/menus.sh programs, mode "default"
+	bindsym b exec ~/.files/wofi/menus.sh browsers, mode "default"
+	bindsym t exec ~/.files/wofi/menus.sh tasks, mode "default"
+
+	bindsym Return mode "default", exec ~/.files/wofi/menus.sh close
+	bindsym Escape mode "default", exec ~/.files/wofi/menus.sh close
+}
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
