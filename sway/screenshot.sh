@@ -10,7 +10,10 @@ case "$1" in
 		geometry=$(slurp -b "#45858820" -c "#45858880" -w 3 -d <<< "$windowGeometries") || exit $?
 		grim -g "$geometry" $FILE
 		;;
-	screen) grim $FILE;;
+	screen)
+		focusedOutput=$(swaymsg -t get_outputs -r | jq -r '.[] | select(.focused) | .name')
+		grim -o $focusedOutput $FILE
+		;;
 esac
 
 notify-desktop -u low -t 3000 "Screenshot has been taken" $(basename "$FILE")

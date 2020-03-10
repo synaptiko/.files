@@ -20,11 +20,7 @@ elif [ $1 == "is-recording" ]; then
 	fi
 else
 	if ! pgrep wf-recorder > /dev/null; then
-		windowGeometries=$(
-			swaymsg -t get_workspaces -r | jq -r '.[] | select(.focused) | .rect | "\(.x),\(.y) \(.width)x\(.height)"'; \
-			swaymsg -t get_outputs -r | jq -r '.[] | select(.active) | .rect | "\(.x),\(.y) \(.width)x\(.height)"'
-		)
-		geometry=$(slurp -b "#45858820" -c "#45858880" -w 3 -d <<< "$windowGeometries") || exit $?
+		geometry=$(~/.files/wayland-screen-share/select-area.sh) || exit $?
 
 		wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --geometry="$geometry" &
 	fi
