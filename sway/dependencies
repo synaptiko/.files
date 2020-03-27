@@ -1,7 +1,6 @@
 alacritty
 alsa-utils
 aur/brightnessctl
-aur/chromium-runner
 aur/fonts-meta-extended-lt
 aur/mimeo
 aur/neovim-remote
@@ -36,3 +35,4 @@ xf86-input-libinput
 xf86-video-intel
 wl-clipboard
 aur/wl-clipboard-x11
+aur/synaptiko-browser-profile-runner-git
