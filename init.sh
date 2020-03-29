@@ -3,10 +3,14 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 function checkDependency {
 	repository=`echo $1 | cut -d'/' -f1`
-	dependency=`echo $1 | cut -d'/' -f2`
+	dependencyName=`echo $1 | cut -d'/' -f2`
+	dependency=$dependencyName
 
 	if [ $repository == "aur" ]; then
 		repository=" (aur)";
+	elif [ $repository == "synaptiko" ]; then
+		repository=" (synaptiko)";
+		dependency="synaptiko-$dependency";
 	else
 		repository="";
 	fi

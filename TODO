@@ -1,5 +1,4 @@
 - check and update adwaita themes, there is some weird conflict and it's compiling qt4 which I don't need
-- refactor synaptiko-packages, they are currently broken
 - check why install-dependencies didn't work properly (it looks like it installs only aur deps)
 
 - consider usage of `dash-static-musl` instead of bash for some of my scripts

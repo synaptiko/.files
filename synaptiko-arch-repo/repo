@@ -1,0 +1,5 @@
+
+[synaptiko]
+SigLevel = Optional TrustAll
+Server = https://arch-repo.synaptiko.cz/$arch
+Server = https://arch-repo.omnia.synaptiko.cz/$arch

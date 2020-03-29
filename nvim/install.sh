@@ -7,6 +7,15 @@ if [ "$USER" == "root" ]; then
 	exit
 fi
 
+systemctl --user daemon-reload
+
+if ! sudo systemctl --global is-enabled synaptiko-ownvim.socket >& /dev/null; then
+	sudo systemctl --global enable synaptiko-ownvim.socket
+fi
+if ! systemctl --user is-active synaptiko-ownvim.socket >& /dev/null; then
+	systemctl --user start synaptiko-ownvim.socket
+fi
+
 NVIM_CONFIG_DIR=~/.config/nvim
 mkdir -p $NVIM_CONFIG_DIR
 NVIM_CONFIG=$NVIM_CONFIG_DIR/init.vim
