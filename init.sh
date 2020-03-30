@@ -16,10 +16,10 @@ function checkDependency {
 	fi
 
 	if pacman -Qs $dependency &> /dev/null; then
-		echo -e "  \e[32m✓\e[0m $dependency$repository"
+		echo -e "  \e[32m✓\e[0m $dependencyName$repository"
 		return 0
 	else
-		echo -e "  \e[31m✖\e[0m $dependency$repository"
+		echo -e "  \e[31m✖\e[0m $dependencyName$repository"
 		return 1
 	fi
 }
