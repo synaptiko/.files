@@ -10,7 +10,7 @@ elif [ "$1" == "browsers" ]; then
 	LINES=`synaptiko-browser-profile-runner-rofi | wc -l`
 	ITEM=`synaptiko-browser-profile-runner-rofi | wofi --cache-file=$HOME/.cache/wofi-browsers --dmenu --width=200 --lines=$LINES`
 	if [ $? == 0 ]; then
-		synaptiko-browser-profile-runner-rofi $ITEM
+		synaptiko-browser-profile-runner-rofi "$ITEM"
 	fi
 elif [ "$1" == "tasks" ]; then
 	rm -f ~/.cache/wofi-tasks
