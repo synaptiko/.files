@@ -25,7 +25,7 @@ const alacrittyConfig = loadYaml(sourceConfigFile)
 Object.keys(newAlacrittyColors).forEach(section => {
 	Object.keys(newAlacrittyColors[section]).forEach(color => {
 		const schemeColorName = newAlacrittyColors[section][color]
-		newAlacrittyColors[section][color] = colorScheme[schemeColorName].replace(/^#/g, '0x')
+		newAlacrittyColors[section][color] = colorScheme[schemeColorName]
 	})
 })
 
