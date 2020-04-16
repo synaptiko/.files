@@ -18,6 +18,7 @@ default_floating_border normal
 seat * hide_cursor 10000
 
 bindsym $mod+Return exec $term
+bindsym $mod+Shift+Return exec $term --title "[floating]"
 bindsym $mod+Shift+q kill
 
 exec_always ~/.files/wofi/menus.sh generate-cache
@@ -282,6 +283,7 @@ for_window [class="^keepassxc$"] floating enable
 for_window [class="^zoom$"] floating enable
 for_window [class="^lxqt-openssh-askpass$"] floating enable
 for_window [app_id="^Alacritty$" title="^daily-reports$"] mark "sp`", move scratchpad
+for_window [app_id="^Alacritty$" title="^\[floating\]$"] floating enable
 
 # needed for temporary/hacked wayland screen sharing
 for_window [class=ffplay] floating enable, sticky enable
