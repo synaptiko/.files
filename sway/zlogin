@@ -8,6 +8,9 @@ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ]; then
 		# export QT_QPA_PLATFORM=wayland-egl
 		export CLUTTER_BACKEND=wayland
 		export SDL_VIDEODRIVER=wayland
+		export XDG_SESSION_TYPE=wayland
+		export XDG_CURRENT_DESKTOP=sway
+		# export GTK_USE_PORTAL=1
 		export _JAVA_AWT_WM_NONREPARENTING=1
 		unfunction sway
 		exec dbus-launch --sh-syntax --exit-with-session \

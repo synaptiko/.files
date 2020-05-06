@@ -22,7 +22,7 @@ else
 	if ! pgrep wf-recorder > /dev/null; then
 		geometry=$(~/.files/wayland-screen-share/select-area.sh) || exit $?
 
-		wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --geometry="$geometry" &
+		wf-recorder --muxer=v4l2 --force-yuv --codec=rawvideo --file=/dev/video2 --geometry="$geometry" &
 	fi
 	if ! pgrep ffplay; then
 		unset SDL_VIDEODRIVER
