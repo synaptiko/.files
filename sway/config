@@ -284,6 +284,8 @@ for_window [class="^zoom$"] floating enable
 for_window [class="^lxqt-openssh-askpass$"] floating enable
 for_window [app_id="^Alacritty$" title="^daily-reports$"] mark "sp`", move scratchpad
 for_window [app_id="^Alacritty$" title="^\[floating\]$"] floating enable
+# Android Studio
+for_window [title="^win0$" class="^java-lang-Thread$"] floating enable
 
 # needed for temporary/hacked wayland screen sharing
 for_window [class=ffplay] floating enable, sticky enable

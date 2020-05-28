@@ -135,8 +135,8 @@ let g:ale_linters = {
 \   'svelte': ['eslint']
 \}
 let g:ale_fixers = {
-\   'javascript': ['standard', 'eslint'],
-\   'svelte': ['eslint'],
+\   'javascript': ['prettier', 'standard', 'eslint'],
+\   'svelte': ['prettier', 'eslint'],
 \   'typescript': ['eslint']
 \}
 let g:ale_javascript_eslint_suppress_missing_config=1
