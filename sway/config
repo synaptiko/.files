@@ -178,6 +178,28 @@ mode "resize" {
 	bindsym Escape mode "default"
 }
 
+set $mode_opacity "opacity: +(j) -(k) 1.0(l) 0.x(0-9)"
+bindsym $mod+o mode $mode_opacity
+mode $mode_opacity {
+	bindsym 0 opacity set 0.0
+	bindsym 1 opacity set 0.1
+	bindsym 2 opacity set 0.2
+	bindsym 3 opacity set 0.3
+	bindsym 4 opacity set 0.4
+	bindsym 5 opacity set 0.5
+	bindsym 6 opacity set 0.6
+	bindsym 7 opacity set 0.7
+	bindsym 8 opacity set 0.8
+	bindsym 9 opacity set 0.9
+
+	bindsym j opacity plus 0.1
+	bindsym k opacity minus 0.1
+	bindsym l opacity set 1.0
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
 set $mode_system "(l)ock; l(o)gout; (r)eboot; (p)oweroff; reload (c)onfig"
 bindsym $mod+Escape mode $mode_system
 mode $mode_system {
@@ -316,6 +338,11 @@ input "1267:51:Elan_Touchpad" {
 	tap enabled
 	natural_scroll enabled
 	middle_emulation enabled
+}
+
+input "1133:16495:Logitech_MX_Ergo" {
+	accel_profile adaptive
+	pointer_accel 1
 }
 
 input * {
