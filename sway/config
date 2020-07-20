@@ -260,6 +260,33 @@ mode $mode_misc {
 	bindsym Escape mode "default"
 }
 
+# TODO jprokop: make it more generic (ideally wrap to a separate program which also renders a grid overlay)
+bindsym $mod+Ctrl+Shift+m mode teleport, seat * hide_cursor 0
+mode teleport {
+	bindsym w seat * cursor set 426 240
+	bindsym e seat * cursor set 1279 240
+	bindsym r seat * cursor set 2132 240
+
+	bindsym s seat * cursor set 426 720
+	bindsym d seat * cursor set 1279 720
+	bindsym f seat * cursor set 2132 720
+
+	bindsym x seat * cursor set 426 1200
+	bindsym c seat * cursor set 1279 1200
+	bindsym v seat * cursor set 2132 1200
+
+	bindsym q seat * cursor set 60 60
+	bindsym a seat * cursor set 60 720
+	bindsym z seat * cursor set 60 1380
+
+	bindsym t seat * cursor set 2500 60
+	bindsym g seat * cursor set 2500 720
+	bindsym b seat * cursor set 2500 1380
+
+	bindsym Return mode "default", seat * hide_cursor 10000
+	bindsym Escape mode "default", seat * hide_cursor 10000
+}
+
 bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
 # TODO jprokop: integrate later to synaptiko-desktop (to support also youtube etc.)
 bindsym $mod+Shift+p exec pgrep mocp && mocp --toggle-pause, mode "default"
