@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 function turn_on_swayidle {
 	swayidle -w \
 			timeout 300 '~/.files/sway/lock.sh' \
@@ -17,7 +17,7 @@ case "$1" in
 		pgrep swayidle && pkill swayidle || turn_on_swayidle
 		;;
 	*)
-		if [ $HOST == "jprokop-tp13" ]; then
+		if [ "$HOST" = "jprokop-tp13" ]; then
 			turn_on_swayidle
 		fi
 		;;
