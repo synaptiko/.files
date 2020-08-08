@@ -241,7 +241,7 @@ mode $mode_adjust {
 }
 
 # TODO modes can be now generated dynamically, see: https://github.com/swaywm/sway/pull/4271
-set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (r)edshift, (s)wayidle, (l)aptop keyboard"
+set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (g)ammastep, (s)wayidle, (l)aptop keyboard"
 bindsym $mod+m mode $mode_misc
 mode $mode_misc {
 	bindsym e exec ~/.files/sway/screenshot.sh selection, mode "default"
@@ -251,7 +251,7 @@ mode $mode_misc {
 	bindsym p exec pgrep mocp && mocp --toggle-pause, mode "default"
 	# `mode "default"` omitted on purpose on the next line (so I can switch wallpaper multiple times)
 	bindsym w exec ~/.files/sway/bg.sh
-	bindsym r exec pkill -USR1 -u $UID ^redshift$, mode "default"
+	bindsym g exec pkill -USR1 -u $UID ^gammastep$, mode "default"
 	bindsym s exec ~/.files/sway/idle.sh toggle, mode "default"
 	bindsym l mode "default"
 	bindsym --release l exec ~/.files/sway/inputs.sh laptop-keyboard toggle
@@ -287,6 +287,7 @@ mode teleport {
 	bindsym Escape mode "default", seat * hide_cursor 10000
 }
 
+# TODO jprokop: this stopped working because of https://github.com/swaywm/sway/pull/5570
 bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
 # TODO jprokop: integrate later to synaptiko-desktop (to support also youtube etc.)
 bindsym $mod+Shift+p exec pgrep mocp && mocp --toggle-pause, mode "default"
