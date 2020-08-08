@@ -40,8 +40,27 @@ const newSwayConfig = [
 fs.writeFileSync(destinationConfigFile, newSwayConfig, { encoding: 'utf8' })
 
 if (process.env.SWAYSOCK) {
-	const tmpConfigFile = destinationConfigFile + `-${Date.now()}`
-	fs.copyFileSync(destinationConfigFile, tmpConfigFile)
-	childProcess.execSync(`swaymsg include ${tmpConfigFile}`)
-	fs.unlinkSync(tmpConfigFile)
+	newSwayConfig.split('\n').reduce((state, line) => {
+		if (line.startsWith('set ')) {
+			const parts = line.split(' ');
+			state.vars[parts[1]] = parts[2];
+		} else if (line.startsWith('client.')) {
+			const parts = line.split(/\s+/g).map(part => state.vars.hasOwnProperty(part) ? state.vars[part] : part);
+			childProcess.execSync(`swaymsg "${parts.join(' ')}"`)
+		} else if (line.startsWith('bar ')) {
+			state.barBlock = true;
+			state.barNr = parseInt(line.replace(/^bar ([0-9]+).*$/, '$1'), 10);
+		} else if (line === '\tcolors {') {
+			state.colorsBlock = true;
+		} else if (state.colorsBlock && line === '\t}') {
+			state.colorsBlock = false;
+		} else if (state.barBlock && line === '}') {
+			state.barBlock = false;
+			state.barNr = undefined;
+		} else if (state.barBlock && state.colorsBlock && line.startsWith('\t\t') && line.includes('$')) {
+			const parts = line.split(/\s+/g).map(part => state.vars.hasOwnProperty(part) ? state.vars[part] : part);
+			childProcess.execSync(`swaymsg "bar ${state.barNr} colors ${parts.join(' ').trim()}"`)
+		}
+		return state
+	}, { vars: {}, barNr: undefined, barBlock: false, colorsBlock: false })
 }

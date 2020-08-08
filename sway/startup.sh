@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-gammastep -m wayland -r >& /dev/null &
+# `-v` is provided because of this https://gitlab.com/chinstrap/gammastep/-/issues/2
+gammastep -m wayland -r -v >& /dev/null &
 
 mako >& /dev/null &
 
