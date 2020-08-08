@@ -71,7 +71,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'kylef/apiblueprint.vim'
 Plug 'rlue/vim-getting-things-down'
 Plug 'ziglang/zig.vim'
@@ -129,6 +129,7 @@ let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
 
 let g:zig_fmt_autosave = 0
 
+let g:ale_hover_cursor = 0
 let g:ale_linter_aliases = {
 \   'svelte': ['svelte', 'javascript']
 \}
