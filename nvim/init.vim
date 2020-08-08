@@ -113,6 +113,7 @@ let g:gitgutter_sign_removed_first_line='◥'
 let g:gitgutter_sign_modified_removed='◢'
 
 let g:fzf_command_prefix='Fzf'
+let g:fzf_preview_window=''
 lua require("navigation")
 let g:fzf_layout = { 'window': 'lua NavigationFloatingWin()' }
 
