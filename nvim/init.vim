@@ -78,10 +78,16 @@ Plug 'ziglang/zig.vim'
 
 " Use either those two for javascript/typescript:
 Plug 'jelera/vim-javascript-syntax'
-" Plug 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim'
 " or those two:
 " Plug 'othree/yajs.vim'
 " Plug 'HerringtonDarkholme/yats.vim'
+
+" TSX
+Plug 'peitalin/vim-jsx-typescript'
+
+" LSP
+Plug 'neovim/nvim-lsp'
 call plug#end()
 
 " The Silver Searcher
@@ -139,9 +145,11 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'standard', 'eslint'],
 \   'svelte': ['prettier', 'eslint'],
-\   'typescript': ['eslint']
+\   'typescript': ['prettier', 'eslint']
 \}
 let g:ale_javascript_eslint_suppress_missing_config=1
+
+let g:typescript_indent_disable=1
 
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
@@ -308,3 +316,22 @@ if !empty(expand('~/.files/0-theme/configs/nvim.vim'))
 else
 	call SwitchTheme('dark')
 endif
+
+" FIXME jprokop: finalize later!
+lua << LUA
+require'nvim_lsp'.tsserver.setup{}
+LUA
+
+autocmd Filetype typescript,typescript.tsx setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+set completeopt-=preview
