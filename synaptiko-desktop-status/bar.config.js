@@ -4,7 +4,7 @@ const blockConfigs = {
 	'time-track': {
 		extend: 'command',
 		prefix: 'T ',
-		command: 'sudo -u jprokop node /home/jprokop/Documents/todo/time-track.js',
+		command: 'sudo -u jprokop node /home/jprokop/Documents/time-track-utils/time-track.js',
 		refreshId: 'time-track',
 		interval: {
 			amount: 1,

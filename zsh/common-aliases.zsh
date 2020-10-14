@@ -10,9 +10,8 @@ alias df='df -h'
 
 alias recvgpgkey='gpg --recv-keys --keyserver hkp://pool.sks-keyservers.net'
 
-alias plan='~/Documents/todo/plan.sh'
-alias track='~/Documents/todo/track.sh'
-alias show-time='~/Documents/todo/show-time.js'
+alias track='~/Documents/time-track-utils/track.sh'
+alias show-time='~/Documents/time-track-utils/show-time.js'
 
 alias v='vim'
 alias y='yarn'

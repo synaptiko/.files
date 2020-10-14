@@ -14,10 +14,10 @@ elif [ "$1" == "browsers" ]; then
 	fi
 elif [ "$1" == "tasks" ]; then
 	rm -f ~/.cache/wofi-tasks
-	LINES=`~/Documents/todo/track-rofi.sh | wc -l`
-	ITEM=`~/Documents/todo/track-rofi.sh | wofi --cache-file=$HOME/.cache/wofi-tasks --dmenu --width=200 --lines=$LINES`
+	LINES=`~/Documents/time-track-utils/track-rofi.sh | wc -l`
+	ITEM=`~/Documents/time-track-utils/track-rofi.sh | wofi --cache-file=$HOME/.cache/wofi-tasks --dmenu --width=200 --lines=$LINES`
 	if [ $? == 0 ]; then
-		~/Documents/todo/track-rofi.sh "$ITEM"
+		~/Documents/time-track-utils/track-rofi.sh "$ITEM"
 	fi
 elif [ "$1" == "close" ]; then
 	pkill wofi

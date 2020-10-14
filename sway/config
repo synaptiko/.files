@@ -226,7 +226,7 @@ bindswitch --locked lid:on output * dpms off
 bindswitch --locked lid:off output * dpms on
 
 set $mode_adjust "adjust: volume +(j) -(k) (h)igh (l)ow (m)ute, brightness +(f) -(d)"
-bindsym $mod+a mode $mode_adjust
+bindsym $mod+n mode $mode_adjust
 mode $mode_adjust {
 	bindsym j exec ~/.files/sway/volume.sh 2
 	bindsym k exec ~/.files/sway/volume.sh -2
@@ -330,22 +330,27 @@ for_window [title="^Authy$" class="^Chromium$"] floating enable
 # KeepassXC can run both as Wayland or X app, depending on QT_QPA_PLATFORM env var
 for_window [app_id="^keepassxc$"] floating enable
 for_window [class="^keepassxc$"] floating enable
-for_window [class="^zoom$"] floating enable
-for_window [class="^lxqt-openssh-askpass$"] floating enable
+for_window [app_id="^lxqt-openssh-askpass$"] floating enable
 for_window [app_id="^Alacritty$" title="^daily-reports$"] mark "sp`", move scratchpad
 for_window [app_id="^Alacritty$" title="^\[floating\]$"] floating enable
 # Android Studio
 for_window [title="^win0$" class="^java-lang-Thread$"] floating enable
+# Zoom
+for_window [class="^zoom$"] floating enable
+for_window [class="^zoom$" title="^Zoom - Free Account$"] mark "sp7", move scratchpad
 
 # needed for temporary/hacked wayland screen sharing
 for_window [class=ffplay] floating enable, sticky enable
 # TODO modes can be now generated dynamically, see: https://github.com/swaywm/sway/pull/4271
-set $mode_adjust "zoom screen sharing: (s)tart; s(t)op; st(a)tus"
-bindsym $mod+z mode $mode_adjust
-mode $mode_adjust {
+# TODO this can be now removed, including the scripts etc.
+set $mode_zoom "zoom screen sharing: (s)tart; s(t)op; st(a)tus; (k)ill zoom; (f)ocus meeting window"
+bindsym $mod+z mode $mode_zoom
+mode $mode_zoom {
 	bindsym s exec ~/.files/wayland-screen-share/share-screen.sh start, mode "default"
 	bindsym t exec ~/.files/wayland-screen-share/share-screen.sh stop, mode "default"
 	bindsym a exec ~/.files/wayland-screen-share/share-screen.sh is-recording, mode "default"
+	bindsym k exec pkill zoom, mode "default"
+	bindsym f [class="^zoom$" title="^Zoom Meeting$"] focus, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
