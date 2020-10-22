@@ -151,6 +151,8 @@ let g:ale_javascript_eslint_suppress_missing_config=1
 
 let g:typescript_indent_disable=1
 
+let g:markdown_folding=0
+
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
@@ -245,6 +247,9 @@ augroup configgroup
 
 	" Open files in quickfix window in new tab when Ctrl+T is pressed
 	autocmd FileType qf nnoremap <buffer> <C-T> <C-W><Enter><C-W>T
+
+	" Better wrapping in markdown files
+	autocmd FileType markdown setlocal wrap linebreak showbreak=...
 augroup END
 
 " Following ensures that fzf will be always set correctly, even when run from nvim-wrapper
@@ -258,6 +263,14 @@ let $FZF_DEFAULT_OPTS='--reverse --inline-info --color=16'
 
 " Update appearance of TabLine (according to gruvbox theme)
 highlight TabLineSel guifg=#1d2021 guibg=#a89984
+
+" For better wrapping of prose text
+function! WrapByWords()
+	setlocal wrap
+	setlocal linebreak
+	setlocal showbreak=...
+endfunction
+nmap <leader>wr :call WrapByWords()<CR>
 
 " Convenient 'Mr.Proper for tabs and buffers' function
 function! ClearTabsAndBuffers()

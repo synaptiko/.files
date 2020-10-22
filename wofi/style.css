@@ -35,6 +35,9 @@
 
 #entry:selected {
 	background-color: rgba(--wofi-rgb-color0, 0.94);
+}
+
+#text:selected {
 	color: --wofi-color1;
 }
 
