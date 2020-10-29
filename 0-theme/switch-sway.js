@@ -59,7 +59,7 @@ if (process.env.SWAYSOCK) {
 			state.barNr = undefined;
 		} else if (state.barBlock && state.colorsBlock && line.startsWith('\t\t') && line.includes('$')) {
 			const parts = line.split(/\s+/g).map(part => state.vars.hasOwnProperty(part) ? state.vars[part] : part);
-			childProcess.execSync(`swaymsg "bar ${state.barNr} colors ${parts.join(' ').trim()}"`)
+			childProcess.execSync(`swaymsg "bar '${state.barNr}' colors ${parts.join(' ').trim()}"`)
 		}
 		return state
 	}, { vars: {}, barNr: undefined, barBlock: false, colorsBlock: false })
