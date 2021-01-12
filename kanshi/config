@@ -4,6 +4,11 @@
 }
 
 {
+	output DP-2 enable position 0,0
+	output eDP-1 enable position 320,2440
+}
+
+{
 	output HDMI-A-2 enable position 0,0
 	output eDP-1 enable position 320,2440
 }

@@ -2,6 +2,7 @@
 mod=Mod1
 if [[ "$1" == "top" ]]; then
 	swaymsg focus output DP-1
+	swaymsg focus output DP-2
 	output=²
 else
 	swaymsg focus output eDP-1
