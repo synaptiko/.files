@@ -2,6 +2,16 @@ if ! type fzf &> /dev/null; then
 	return;
 fi
 
+# Ensure precmds are run after cd
+fzf-redraw-prompt() {
+  local precmd
+  for precmd in $precmd_functions; do
+    $precmd
+  done
+  zle reset-prompt
+}
+zle -N fzf-redraw-prompt
+
 # ALT-C - cd into the selected directory from recently visited dirs
 fzf-recent-dirs-widget() {
 	setopt localoptions pipefail 2> /dev/null
