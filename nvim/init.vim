@@ -332,7 +332,7 @@ endif
 
 " FIXME jprokop: finalize later!
 lua << LUA
-require'nvim_lsp'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{}
 LUA
 
 autocmd Filetype typescript,typescript.tsx setlocal omnifunc=v:lua.vim.lsp.omnifunc
