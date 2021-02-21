@@ -16,6 +16,21 @@ case "$1" in
 		;;
 esac
 
-notify-desktop -u low -t 3000 "Screenshot has been taken" $(basename "$FILE")
-
 xclip -selection clipboard -t image/png < $FILE
+
+ANNOTATE=`dunstify -b -u low -t 15000 "Screenshot has been taken (click to annotate)" $(basename "$FILE")`
+
+if [ $ANNOTATE == 2 ]; then
+	swappy -f $FILE
+fi
+
+# TODO: I could use notification actions + makoctl + wofi to show actions to do after the screenshot is taken, ie.:
+# - Dismiss
+# - Annotate
+# - Save to file
+# - Open in Gimp
+# - Upload and copy URL
+#
+# Some snippets:
+# dunstify -A yes,"Save to file" -A no,"Annotate" "Test"
+# makoctl menu wofi --dmenu

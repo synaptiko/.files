@@ -36,3 +36,6 @@ xf86-video-intel
 wl-clipboard
 aur/wl-clipboard-x11
 synaptiko/browser-profile-runner-git
+swappy
+otf-font-awesome
+dunst
