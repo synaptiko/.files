@@ -4,6 +4,7 @@ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ]; then
 		# FIXME it's too early for the below; neither Chromium nor Electron app will work with it
 		# export GDK_BACKEND=wayland
 		export MOZ_ENABLE_WAYLAND=1
+		export MOZ_DBUS_REMOTE=1
 		# FIXME Zoom doesn't work with this yet
 		# export QT_QPA_PLATFORM=wayland-egl
 		export CLUTTER_BACKEND=wayland

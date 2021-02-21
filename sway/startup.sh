@@ -13,3 +13,7 @@ kanshi >& /dev/null &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 >& /dev/null &
 
 $DIR/../wayland-screen-share/gnome-shell-screenshot-dbus-emulator >& /dev/null &
+
+# required for gnome-keyring and seahorse to somehow work
+systemctl --user import-environment DISPLAY
+dbus-update-activation-environment DISPLAY
