@@ -1,3 +1,4 @@
+alias lg='lazygit'
 alias gs='git status'
 alias gl='git log'
 alias ga='git add'

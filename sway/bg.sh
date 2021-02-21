@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 KEEP_BG_PATH=/tmp/.sway-current-bg-$USER
 if [ "$1" = "keep" ] && [ -f $KEEP_BG_PATH ]; then
 	file=$(<$KEEP_BG_PATH)
