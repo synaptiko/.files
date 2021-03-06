@@ -346,7 +346,10 @@ for_window [app_id="^zoom$" title="^Zoom - Free Account$"] mark "sp7", move scra
 for_window [class="^zoom$"] floating enable
 for_window [class="^zoom$" title="^Zoom - Free Account$"] mark "sp7", move scratchpad
 # Screensharing
-for_window [app_id="^firefox$" title="Firefox - Sharing Indicator"] floating enable, mark "ffss", move scratchpad
+# for_window [app_id="^firefox.*$" title="^Firefox.* - Sharing Indicator$"] floating enable, mark "ffss", move scratchpad
+# for_window [app_id="^$" title="^.* is sharing your screen.$"] floating enable, mark "chss", move scratchpad
+for_window [app_id="^firefoxdeveloperedition$" title="^Firefox Developer Edition — Sharing Indicator$"] floating enable, border none
+for_window [app_id="^$" title="^.* is sharing your screen.$"] floating enable, border none
 
 # needed for temporary/hacked wayland screen sharing
 for_window [class=ffplay] floating enable, sticky enable

@@ -41,3 +41,7 @@ otf-font-awesome
 dunst
 gnome-keyring
 seahorse
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+pipewire
+libpipewire02

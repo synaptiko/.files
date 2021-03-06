@@ -17,3 +17,7 @@ $DIR/../wayland-screen-share/gnome-shell-screenshot-dbus-emulator >& /dev/null &
 # required for gnome-keyring and seahorse to somehow work; see: https://unix.stackexchange.com/a/295652
 systemctl --user import-environment DISPLAY
 dbus-update-activation-environment DISPLAY
+
+/usr/lib/xdg-desktop-portal-wlr -r >& /dev/null &
+sleep 2
+/usr/lib/xdg-desktop-portal -r -v >& /dev/null &

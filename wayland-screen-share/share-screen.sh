@@ -29,7 +29,7 @@ else
 		ffplay /dev/video2 &
 		sleep 0.5
 		# a hack so FPS is not dropping
-		swaymsg [class=ffplay] move position 1915 1050
+		swaymsg "[class=ffplay]" move position 2555 1410
 		swaymsg focus tiling
 	fi
 	notify-send -t 2000 "Wayland recording has been started"
