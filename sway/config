@@ -242,7 +242,7 @@ mode $mode_adjust {
 }
 
 # TODO modes can be now generated dynamically, see: https://github.com/swaywm/sway/pull/4271
-set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (g)ammastep, (s)wayidle, (l)aptop keyboard"
+set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (g)ammastep, (s)wayidle, (k)ill zoom"
 bindsym $mod+m mode $mode_misc
 mode $mode_misc {
 	bindsym e exec ~/.files/sway/screenshot.sh selection, mode "default"
@@ -254,8 +254,7 @@ mode $mode_misc {
 	bindsym w exec ~/.files/sway/bg.sh
 	bindsym g exec pkill -USR1 -u $UID ^gammastep$, mode "default"
 	bindsym s exec ~/.files/sway/idle.sh toggle, mode "default"
-	bindsym l mode "default"
-	bindsym --release l exec ~/.files/sway/inputs.sh laptop-keyboard toggle
+	bindsym k exec pkill zoom, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
@@ -350,23 +349,6 @@ for_window [class="^zoom$" title="^Zoom - Free Account$"] mark "sp7", move scrat
 # for_window [app_id="^$" title="^.* is sharing your screen.$"] floating enable, mark "chss", move scratchpad
 for_window [app_id="^firefoxdeveloperedition$" title="^Firefox Developer Edition — Sharing Indicator$"] floating enable, border none
 for_window [app_id="^$" title="^.* is sharing your screen.$"] floating enable, border none
-
-# needed for temporary/hacked wayland screen sharing
-for_window [class=ffplay] floating enable, sticky enable
-# TODO modes can be now generated dynamically, see: https://github.com/swaywm/sway/pull/4271
-# TODO this can be now removed, including the scripts etc.
-set $mode_zoom "zoom screen sharing: (s)tart; s(t)op; st(a)tus; (k)ill zoom; (f)ocus meeting window"
-bindsym $mod+z mode $mode_zoom
-mode $mode_zoom {
-	bindsym s exec ~/.files/wayland-screen-share/share-screen.sh start, mode "default"
-	bindsym t exec ~/.files/wayland-screen-share/share-screen.sh stop, mode "default"
-	bindsym a exec ~/.files/wayland-screen-share/share-screen.sh is-recording, mode "default"
-	bindsym k exec pkill zoom, mode "default"
-	bindsym f [class="^zoom$" title="^Zoom Meeting$"] focus, mode "default"
-
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
 
 # TODO jprokop: add to host-specific files
 # include ~/.config/sway/config.d/*
