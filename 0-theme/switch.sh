@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# TODO jprokop: investigate (ie. theme switching for GTK apps) http://bhepple.com/doku/doku.php?id=sway:dark-mode (+ https://gitlab.com/wef/dotfiles/-/blob/master/bin/dark-mode)
+
 ACTIVE_THEME_FILE=$DIR/configs/active-theme
 
 if [[ "$1" == "toggle" ]]; then

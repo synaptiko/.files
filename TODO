@@ -27,4 +27,3 @@
 - consider forking: http://archibold.io/
 - adapt switching color theme to alacritty (should be easy)
 - report feature request/issue with yay -Sy && yay -Pn (mention partial upgrades, need for sudo and post my previous version of checkversion.sh script for context)
-- add Noto/Noto Emoji to my .files?

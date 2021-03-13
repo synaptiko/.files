@@ -2,10 +2,9 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # required for gnome-keyring and seahorse to somehow work; see: https://unix.stackexchange.com/a/295652
-# TODO jprokop: check later if I really need both import-environment commands
-systemctl --user import-environment
-systemctl --user import-environment DISPLAY
-dbus-update-activation-environment DISPLAY
+systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+hash dbus-update-activation-environment && \
+	dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 gammastep -m wayland -r >& /dev/null &
 
@@ -19,6 +18,9 @@ kanshi >& /dev/null &
 # screensharing with Zoom running on X11 (check zoom folder)
 # TODO jprokop: consider usage of https://aur.archlinux.org/packages/gnome-shell-screenshot-dbus-emulator (instead of having the binary in the repo directly)
 $DIR/../zoom/gnome-shell-screenshot-dbus-emulator >& /dev/null &
+
+# TODO jprokop: instead of notification I could integrate it with the swaybar
+yubikey-touch-detector --libnotify
 
 # screensharing with Chrome/Chromium/Firefox (and Electron later on); the below are supposed to be start by DBus automatically but it doesn't work for me for some reason
 # TODO jprokop: re-evaluate if this is still needed after a while

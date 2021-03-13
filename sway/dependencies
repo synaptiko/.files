@@ -5,6 +5,7 @@ aur/fonts-meta-extended-lt
 aur/mimeo
 aur/neovim-remote
 aur/notify-desktop-git
+noto-fonts-emoji
 sway
 swayidle
 swaylock
@@ -45,3 +46,4 @@ xdg-desktop-portal
 xdg-desktop-portal-wlr
 pipewire
 libpipewire02
+yubikey-touch-detector
