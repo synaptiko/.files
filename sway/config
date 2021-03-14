@@ -12,6 +12,7 @@ exec ~/.files/sway/startup.sh
 
 font pango:Iosevka Term SS03 Medium 12
 
+focus_on_window_activation smart
 floating_modifier $mod normal
 default_border pixel 3
 default_floating_border normal
@@ -316,6 +317,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 # for_window [title="Synaptiko Keyboard Cheatsheet"] floating enable, resize set 900px 470px, move position center
 
 titlebar_padding 8 4
+titlebar_border_thickness 3
 
 # following file contains both colors and bar configuration
 include ~/.files/0-theme/configs/sway.config
