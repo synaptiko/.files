@@ -34,3 +34,12 @@ gdcm() {
     echo 'Commits that exist in '$2' but not in '$1':'
     git log --graph --pretty=format:'%Cred%h%Creset %s' --abbrev-commit $1..$2
 }
+
+gbackup() {
+	if git remote -v | grep backup > /dev/null; then
+		git push --mirror backup
+	else
+		echo 'Backup remote is not added, you need to add it first:'
+		echo 'git remote add backup git@git.lan:synaptiko/'$(basename `git rev-parse --show-toplevel`)'.git'
+	fi
+}
