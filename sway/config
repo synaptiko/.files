@@ -242,8 +242,13 @@ mode $mode_adjust {
 	bindsym Escape mode "default"
 }
 
+set $mode_vnc "in vnc (Alt+Escape to exit)"
+mode $mode_vnc {
+	bindsym $mod+Escape mode default
+}
+
 # TODO modes can be now generated dynamically, see: https://github.com/swaywm/sway/pull/4271
-set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (g)ammastep, (s)wayidle, (k)ill zoom"
+set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (g)ammastep, (s)wayidle, (k)ill zoom, (v)nc"
 bindsym $mod+m mode $mode_misc
 mode $mode_misc {
 	bindsym e exec ~/.files/sway/screenshot.sh selection, mode "default"
@@ -256,6 +261,7 @@ mode $mode_misc {
 	bindsym g exec pkill -USR1 -u $UID ^gammastep$, mode "default"
 	bindsym s exec ~/.files/sway/idle.sh toggle, mode "default"
 	bindsym k exec pkill zoom, mode "default"
+	bindsym v mode $mode_vnc
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"

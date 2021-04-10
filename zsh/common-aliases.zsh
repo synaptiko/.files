@@ -14,6 +14,7 @@ alias track='~/Documents/time-track-utils/track.sh'
 alias show-time='~/Documents/time-track-utils/show-time.js'
 
 alias v='vim'
+alias vn='vim -u NONE'
 alias y='yarn'
 alias ys='yarn start'
 alias yb='yarn build'
