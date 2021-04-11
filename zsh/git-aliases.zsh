@@ -11,7 +11,9 @@ alias gcmm='git commit -m'
 alias gcma='git commit --amend'
 alias gpl='git pull --rebase'
 alias gps='git push'
+alias gpsb='git push && gbackup'
 alias gpsf='git push --force-with-lease'
+alias gpsfb='git push --force-with-lease && gbackup'
 alias gpst='git push --tags'
 alias gsth='git stash'
 alias gstp='git stash pop'
@@ -26,6 +28,16 @@ alias gDbr='git branch -D'
 gnbr() {
 	git checkout -b $1
 	git push --set-upstream origin $1
+	echo
+	echo "\e[33mTip: use \e[0m\e[1;33mgchb $1\e[0m\e[33m next time!\e[0m"
+}
+
+# smarter git checkout, combination of gcho & gnbr
+gchb() {
+	if ! git checkout $1; then
+		git checkout -b $1
+		git push --set-upstream origin $1
+	fi
 }
 
 gdcm() {
@@ -38,8 +50,10 @@ gdcm() {
 gbackup() {
 	if git remote -v | grep backup > /dev/null; then
 		git push --mirror backup
+	elif [[ "$1" == "add" ]]; then
+		git remote add backup git@git.lan:synaptiko/$(basename `git rev-parse --show-toplevel`).git
 	else
-		echo 'Backup remote is not added, you need to add it first:'
-		echo 'git remote add backup git@git.lan:synaptiko/'$(basename `git rev-parse --show-toplevel`)'.git'
+		echo 'Backup remote is not added, you need to add it first with:'
+		echo 'gbackup add'
 	fi
 }
