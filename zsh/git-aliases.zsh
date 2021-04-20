@@ -57,3 +57,18 @@ gbackup() {
 		echo 'gbackup add'
 	fi
 }
+
+gsync() {
+	if git branch --show-current | grep -E "^master$" > /dev/null ; then
+		# TODO jprokop: add also check that upstream remote exists and that the current master is origin
+		# TODO jprokop: detect deleted branches from the following two commands
+		set -x
+		git fetch --prune
+		git fetch --prune upstream
+		git rebase upstream/master
+		git push
+		set +x
+	else
+		echo "Not on master branch; gsync currently doesn't support this."
+	fi
+}
