@@ -76,7 +76,9 @@ gsync() {
 				branchesToDelete=$(mktemp)
 				# TODO jprokop: improve later, somehow detect that branches are related to the remote and also that they do not contain unpushed changes
 				sed -e "/^ - \[deleted\]/!d" $fetchResult | sed -e "s/^.*\/\([^/]*\)$/\1/" | sort | uniq > $branchesToDelete
-				cat $branchesToDelete | xargs -p git branch -D
+				if [[ -s $branchesToDelete ]]; then
+					cat $branchesToDelete | xargs -p git branch -D
+				fi
 
 				rm $branchesToDelete $fetchResult
 			else
