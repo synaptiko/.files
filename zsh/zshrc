@@ -51,6 +51,10 @@ if [ -n "$DISPLAY" ]; then
 	xset b off
 fi
 
+# Custom completions
+# https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org#table-of-contents
+fpath=( $HOME/.files/zsh/custom-completions $fpath )
+
 # Defaults for completion
 zstyle :compinstall filename '$HOME/.zshrc'
 zstyle ':completion:*' rehash true

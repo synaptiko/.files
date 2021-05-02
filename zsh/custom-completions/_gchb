@@ -1,0 +1,15 @@
+#compdef gchb
+
+_gchb() {
+  local state
+
+  _arguments \
+    '1: :->branch'
+
+  case $state in
+    (branch) _alternative "branches:branches:($(git branch --format '%(refname:short)'))" ;;
+
+  esac
+}
+
+_gchb "$@"
