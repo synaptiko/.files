@@ -59,35 +59,51 @@ gbackup() {
 }
 
 gsync() {
+	fetchResult=$(mktemp)
+
+	if [[ "$1" == "" ]]; then
+		echo "git fetch --prune"
+		git fetch --prune 2>&1 | tee $fetchResult
+
+		if git remote -v | grep -E "^upstream\s+" > /dev/null; then
+			echo "git fetch --prune upstream"
+			git fetch --prune upstream 2>&1 | tee -a $fetchResult
+		fi
+	elif [[ "$1" == "all" ]]; then
+		echo "git fetch --all --prune"
+		git fetch --all --prune 2>&1 | tee $fetchResult
+	else
+		echo "git fetch --prune $1"
+		git fetch --prune $1 2>&1 | tee $fetchResult
+	fi
+
 	if git branch --show-current | grep -E "^master$" > /dev/null; then
 		if git remote -v | grep -E "^upstream\s+" > /dev/null; then
 			if git rev-parse --abbrev-ref HEAD@{upstream} | grep -E "^origin/master$" > /dev/null; then
-				fetchResult=$(mktemp)
-				echo "git fetch --prune"
-				git fetch --prune 2>&1 | tee $fetchResult
-				echo "git fetch --prune upstream"
-				git fetch --prune upstream 2>&1 | tee -a $fetchResult
 				echo "git rebase upstream/master"
 				git rebase upstream/master
 				echo "git push"
 				git push
-
-				echo
-				branchesToDelete=$(mktemp)
-				# TODO jprokop: improve later, somehow detect that branches are related to the remote and also that they do not contain unpushed changes
-				sed -e "/^ - \[deleted\]/!d" $fetchResult | sed -e "s/^.*\/\([^/]*\)$/\1/" | sort | uniq > $branchesToDelete
-				if [[ -s $branchesToDelete ]]; then
-					cat $branchesToDelete | xargs -p git branch -D
-				fi
-
-				rm $branchesToDelete $fetchResult
 			else
-				echo "This branch doesn't track origin remote; gsync currently doesn't support this."
+				echo "git pull --rebase"
+				git pull --rebase
 			fi
 		else
-			echo "This repository doesn't have upstream remote defined; gsync currently doesn't support this."
+			echo "git pull --rebase"
+			git pull --rebase
 		fi
 	else
-		echo "Not on master branch; gsync currently doesn't support this."
+		echo "git pull --rebase"
+		git pull --rebase
 	fi
+
+	echo
+	branchesToDelete=$(mktemp)
+	# TODO jprokop: improve later, somehow detect that branches are related to the remote and also that they do not contain unpushed changes
+	sed -e "/^ - \[deleted\]/!d" $fetchResult | sed -e "s/^.*\/\([^/]*\)$/\1/" | sort | uniq > $branchesToDelete
+	if [[ -s $branchesToDelete ]]; then
+		cat $branchesToDelete | xargs -p git branch -D
+	fi
+
+	rm $branchesToDelete $fetchResult
 }
