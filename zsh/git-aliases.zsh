@@ -81,20 +81,20 @@ gsync() {
 		if git remote -v | grep -E "^upstream\s+" > /dev/null; then
 			if git rev-parse --abbrev-ref HEAD@{upstream} | grep -E "^origin/master$" > /dev/null; then
 				echo "git rebase upstream/master"
-				git rebase upstream/master
+				git rebase upstream/master 2>&1 | cat
 				echo "git push"
-				git push
+				git push 2>&1 | cat
 			else
 				echo "git pull --rebase"
-				git pull --rebase
+				git pull --rebase 2>&1 | cat
 			fi
 		else
 			echo "git pull --rebase"
-			git pull --rebase
+			git pull --rebase 2>&1 | cat
 		fi
 	else
 		echo "git pull --rebase"
-		git pull --rebase
+		git pull --rebase 2>&1 | cat
 	fi
 
 	echo

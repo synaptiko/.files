@@ -1,0 +1,5 @@
+git:
+    autoFetch: true
+
+refresher:
+  fetchInterval: 600
