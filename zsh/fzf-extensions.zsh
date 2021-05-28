@@ -15,7 +15,7 @@ zle -N fzf-redraw-prompt
 # ALT-C - cd into the selected directory from recently visited dirs
 fzf-recent-dirs-widget() {
 	setopt localoptions pipefail 2> /dev/null
-	local dir="$(eval "command recent-dirs list ~/.recent-dirs" | fzf '--bind=ctrl-i:execute-silent(recent-dirs ignore ~/.recent-dirs {}),ctrl-d:execute-silent(recent-dirs delete ~/.recent-dirs {})' | recent-dirs normalize)"
+	local dir="$(eval "command recent-dirs list ~/.recent-dirs" | fzf '--bind=ctrl-i:execute-silent(recent-dirs ignore ~/.recent-dirs {})+reload(recent-dirs list ~/.recent-dirs),ctrl-d:execute-silent(recent-dirs delete ~/.recent-dirs {})+reload(recent-dirs list ~/.recent-dirs)' | recent-dirs normalize)"
 
 	if [[ -z "$dir" ]]; then
 		zle redisplay
@@ -46,18 +46,19 @@ fzf-browse-widget() {
 
 	while :; do
 		local listing=$(ls -p --group-directories-first)
-		local selected="$(echo .\\n..\\n$listing | fzf)"
+		local selected="$(echo .\\n..\\n$listing | fzf --no-clear)"
 
 		if [[ -z "$selected" ]]; then
 			cd "$origDir"
 			zle redisplay
 			return 0
 		elif [[ "$selected" == "." ]]; then
+			cd .
 			zle fzf-redraw-prompt
 			typeset -f zle-line-init >/dev/null && zle zle-line-init
 			return 0
 		elif [[ -d "$selected" ]]; then
-			cd "$selected"
+			IN_SELECTION=true cd "$selected"
 			sleep 0
 		else
 			RBUFFER=${selected}${RBUFFER}
@@ -99,6 +100,10 @@ alias f='fzf -m --bind "enter:execute(vim -p {+}),ctrl-c:execute-silent(xclip-co
 autoload -Uz add-zsh-hook
 
 visit_folder() {
+	if [ "$IN_SELECTION" = "true" ]; then # see above: fzf-browse-widget
+		return
+	fi
+
 	if [ "$PWD" != "$HOME" ]; then
 		recent-dirs visit ~/.recent-dirs "$PWD"
 	fi
