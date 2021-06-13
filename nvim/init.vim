@@ -76,18 +76,11 @@ Plug 'kylef/apiblueprint.vim'
 Plug 'rlue/vim-getting-things-down'
 Plug 'ziglang/zig.vim'
 
-" Use either those two for javascript/typescript:
-Plug 'jelera/vim-javascript-syntax'
-Plug 'leafgarland/typescript-vim'
-" or those two:
-" Plug 'othree/yajs.vim'
-" Plug 'HerringtonDarkholme/yats.vim'
-
-" TSX
-Plug 'peitalin/vim-jsx-typescript'
-
 " LSP
 Plug 'neovim/nvim-lsp'
+
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 " The Silver Searcher
@@ -348,3 +341,25 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
 set completeopt-=preview
+
+" Treesitter
+lua << LUA
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true
+  },
+}
+LUA
