@@ -74,7 +74,7 @@ Plug 'rlue/vim-getting-things-down'
 Plug 'ziglang/zig.vim'
 
 " LSP
-Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -125,9 +125,9 @@ let g:vim_json_syntax_conceal=0
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
 
-let g:zig_fmt_autosave = 0
+let g:zig_fmt_autosave=0
 
-let g:ale_hover_cursor = 0
+let g:ale_hover_cursor=0
 let g:ale_linter_aliases = {
 \   'svelte': ['svelte', 'javascript']
 \}
@@ -137,7 +137,8 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'standard', 'eslint'],
 \   'svelte': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'eslint']
+\   'typescript': ['prettier', 'eslint'],
+\   'typescriptreact': ['prettier', 'eslint']
 \}
 let g:ale_javascript_eslint_suppress_missing_config=1
 
@@ -152,10 +153,14 @@ nmap <silent> <leader>j :FzfFiles<CR>
 nmap <silent> <leader>k :FzfBuffers<CR>
 nmap <silent> <leader>l :FzfBLines<CR>
 
-nmap <silent> <leader>[ <Plug>GitGutterPrevHunk
-nmap <silent> <leader>] <Plug>GitGutterNextHunk
+nmap <silent> <leader>[ <Plug>(GitGutterNextHunk)
+nmap <silent> <leader>] <Plug>(GitGutterPrevHunk)
+nmap <silent> <leader>( <Plug>(GitGutterPreviewHunk)
 
 nmap <leader>d <Plug>(ale_fix)
+
+nmap <silent> <leader>{ :ALENextWrap<CR>
+nmap <silent> <leader>} :ALEPreviousWrap<CR>
 
 " Previous solution: nnoremap <C-l> :let @/ = ""<CR><C-l>
 " More solutions here: http://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
@@ -167,14 +172,6 @@ vmap <Tab> >gv
 vmap <S-Tab> <gv
 imap <Tab> <C-t>
 imap <S-Tab> <C-d>
-
-" Better mapping related to the terminal and window movements (derived from i3)
-" TODO remove?
-tnoremap <Esc> <Esc><C-\><C-n>
-tnoremap <leader>wj <C-\><C-n><C-w>h
-tnoremap <leader>wk <C-\><C-n><C-w>j
-tnoremap <leader>wl <C-\><C-n><C-w>k
-tnoremap <leader>w; <C-\><C-n><C-w>l
 
 " Easier jumping amongst first 9 tabs
 nmap <silent> <leader>1 1gt
@@ -210,6 +207,7 @@ ab cerr console.error()<Left>
 ab cdir console.dir()<Left>
 ab dbg debugger
 ab wtd ¯\_(ツ)_/¯
+ab shrg ¯\_(ツ)_/¯
 
 " Default Fzf's status line is not useful for me
 function! s:fzf_statusline()
