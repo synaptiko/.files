@@ -247,7 +247,7 @@ augroup END
 
 " Following ensures that fzf will be always set correctly, even when run from nvim-wrapper
 " (see https://github.com/fmoralesc/neovim-gnome-terminal-wrapper/pull/9#issuecomment-160473798)
-let $FZF_DEFAULT_COMMAND='ag -g ""'
+let $FZF_DEFAULT_COMMAND='ag -g "" || true'
 let $FZF_DEFAULT_OPTS='--reverse --inline-info --color=16 --color="bg+:-1"'
 
 " Useful for highlight introspection and overrides:
