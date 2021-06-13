@@ -3,3 +3,12 @@ git:
 
 refresher:
   fetchInterval: 600
+
+gui:
+  theme:
+    # TODO jprokop: add support for light theme!!!
+    lightTheme: false
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - reverse
