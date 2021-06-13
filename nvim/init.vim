@@ -60,7 +60,7 @@ Plug 'synaptiko/fzf'
 Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my custom colors for tabline
 Plug 'synaptiko/mintabline'
 Plug '907th/vim-auto-save'
-Plug 'synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
+Plug 'https://git.sr.ht/~synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
