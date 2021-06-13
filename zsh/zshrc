@@ -13,9 +13,6 @@ export OWNVIM_LISTEN_ADDRESS=/run/user/$UID/synaptiko-ownvim
 # Prevent duplicates in PATH variable
 typeset -U path
 
-# NVIM_TUI_ENABLE_TRUE_COLOR was problematic but gruvbox colorscheme has already proper support for it
-# (more info: https://github.com/morhetz/gruvbox/commit/e5c6c3a359af4b2da8f50ea9323315308f00d191
-#  && https://github.com/neovim/neovim/issues/4436)
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # Use vi-like keys
