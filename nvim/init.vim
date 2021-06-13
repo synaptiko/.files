@@ -47,7 +47,7 @@ Plug 'chrisbra/Recover.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'junegunn/fzf.vim'
-Plug 'mhinz/vim-grepper'
+Plug 'mhinz/vim-grepper', { 'on': ['GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'moll/vim-node'
 " Plug 'mxw/vim-jsx'
@@ -86,6 +86,8 @@ if executable('ag')
 	set grepprg=ag\ --vimgrep\ --nogroup\ --nocolor\ $*
 	set grepformat=%f:%l:%c:%m
 endif
+
+command! -nargs=1 Grq GrepperAg -Q <args>
 
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
