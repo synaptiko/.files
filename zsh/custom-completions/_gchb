@@ -7,7 +7,7 @@ _gchb() {
     '1: :->branch'
 
   case $state in
-    (branch) _alternative "branches:branches:($(git branch --all --format '%(refname:lstrip=-1)' | sed '/HEAD/d' | sort | uniq))" ;;
+    (branch) _alternative "branches:branches:($(git branch --all --format '%(refname:lstrip=-1)' | sed '/HEAD/d' | sed 's/>/\\>/' | sort | uniq))" ;;
 
   esac
 }
