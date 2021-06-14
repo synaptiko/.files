@@ -49,14 +49,10 @@ Plug 'joukevandermaas/vim-ember-hbs'
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper', { 'on': ['GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'moll/vim-node'
-" Plug 'mxw/vim-jsx'
-Plug 'mboughaba/i3config.vim'
-" Plug 'sirtaj/vim-openscad'
 Plug 'synaptiko/fzf'
 Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my custom colors for tabline
 Plug 'synaptiko/mintabline'
-Plug '907th/vim-auto-save'
+Plug 'rti/vim-auto-save' " Find a better alternative or write my own plugin
 Plug 'https://git.sr.ht/~synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
