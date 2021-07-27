@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Zoom X11
-Comment=Zoom Video Conference
-Exec=env QT_QPA_PLATFORM= XDG_CURRENT_DESKTOP=GNOME /usr/bin/zoom %U
+Name=Xoom
+Comment=Zoom enforced to run under X11 with screen sharing over v4l2
+Exec=env QT_QPA_PLATFORM= XDG_CURRENT_DESKTOP=GNOME /opt/xoom/wrapper.sh %U
 Icon=Zoom
 Terminal=false
 Type=Application
@@ -10,4 +10,4 @@ Categories=Network;Application;
 StartupWMClass=zoom
 MimeType=x-scheme-handler/zoommtg;x-scheme-handler/zoomus;x-scheme-handler/tel;x-scheme-handler/callto;x-scheme-handler/zoomphonecall;application/x-zoom
 X-KDE-Protocols=zoommtg;zoomus;tel;callto;zoomphonecall;
-Name[en_US]=Zoom X11
+Name[en_US]=Xoom

@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-ZOOM_DESKTOP_FILE=~/.local/share/applications/ZoomX11.desktop
-cp $DIR/ZoomX11.desktop $ZOOM_DESKTOP_FILE
+ZOOM_DESKTOP_FILE=~/.local/share/applications/Xoom.desktop
+cp $DIR/Xoom.desktop $ZOOM_DESKTOP_FILE
+
+ZOOM_WRAPPER_DIR=/opt/xoom
+sudo mkdir -p $ZOOM_WRAPPER_DIR
+sudo cp $DIR/wrapper.sh $ZOOM_WRAPPER_DIR
 
 ZOOM_CONFIG=~/.config/zoomus.conf
 if [ -f $ZOOM_CONFIG ]; then
@@ -19,9 +23,9 @@ MIMEINFO_CACHE=~/.local/share/applications/mimeinfo.cache
 if [ ! -f $MIMEINFO_CACHE ]; then
 	echo "[MIME Cache]" > $MIMEINFO_CACHE
 fi
-echo "application/x-zoom=ZoomX11.desktop;" >> $MIMEINFO_CACHE
-echo "x-scheme-handler/callto=ZoomX11.desktop;" >> $MIMEINFO_CACHE
-echo "x-scheme-handler/tel=ZoomX11.desktop;" >> $MIMEINFO_CACHE
-echo "x-scheme-handler/zoommtg=ZoomX11.desktop;" >> $MIMEINFO_CACHE
-echo "x-scheme-handler/zoomphonecall=ZoomX11.desktop;" >> $MIMEINFO_CACHE
-echo "x-scheme-handler/zoomus=ZoomX11.desktop;" >> $MIMEINFO_CACHE
+echo "application/x-zoom=Xoom.desktop;" >> $MIMEINFO_CACHE
+echo "x-scheme-handler/callto=Xoom.desktop;" >> $MIMEINFO_CACHE
+echo "x-scheme-handler/tel=Xoom.desktop;" >> $MIMEINFO_CACHE
+echo "x-scheme-handler/zoommtg=Xoom.desktop;" >> $MIMEINFO_CACHE
+echo "x-scheme-handler/zoomphonecall=Xoom.desktop;" >> $MIMEINFO_CACHE
+echo "x-scheme-handler/zoomus=Xoom.desktop;" >> $MIMEINFO_CACHE

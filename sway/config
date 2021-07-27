@@ -339,6 +339,7 @@ for_window [title="^Authy$" class="^Chromium$"] floating enable
 for_window [app_id="^keepassxc$"] floating enable
 for_window [class="^keepassxc$"] floating enable
 for_window [app_id="^lxqt-openssh-askpass$"] floating enable
+for_window [class="^lxqt-openssh-askpass$"] floating enable
 for_window [app_id="^Alacritty$" title="^daily-reports$"] mark "sp`", move scratchpad
 for_window [app_id="^Alacritty$" title="^\[floating\]$"] floating enable
 # Android Studio
@@ -352,6 +353,8 @@ for_window [app_id="^zoom$" title="^Zoom - Free Account$"] mark "sp7", move scra
 # Zoom (on X11)
 for_window [class="^zoom$"] floating enable
 for_window [class="^zoom$" title="^Zoom - Free Account$"] mark "sp7", move scratchpad
+for_window [class="^zoom$" title="^XoomScreenSharing$"] move output eDP-1, fullscreen disable, floating enable
+
 # Screensharing
 # for_window [app_id="^firefox.*$" title="^Firefox.* - Sharing Indicator$"] floating enable, mark "ffss", move scratchpad
 # for_window [app_id="^$" title="^.* is sharing your screen.$"] floating enable, mark "chss", move scratchpad
