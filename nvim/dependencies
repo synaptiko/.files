@@ -1,5 +1,5 @@
 python-pip
-aur/neovim-git
+neovim
 aur/neovim-symlinks
 aur/neovim-remote
 the_silver_searcher
