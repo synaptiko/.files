@@ -36,7 +36,7 @@ xf86-input-libinput
 xf86-video-intel
 wl-clipboard
 aur/wl-clipboard-x11
-synaptiko/browser-profile-runner-git
+synaptiko/browser-profile-runner
 swappy
 otf-font-awesome
 dunst
