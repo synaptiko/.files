@@ -48,3 +48,6 @@ $DIR/../0-theme/switch-sway.js dark
 
 systemctl --user daemon-reload
 systemctl --user enable --now yubikey-touch-detector.socket
+
+ELECTRON_FLAGS_CONFIG=~/.config/electron-flags.conf
+ln -s -f $DIR/electron-flags.conf $ELECTRON_FLAGS_CONFIG
