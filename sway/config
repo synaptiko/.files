@@ -1,4 +1,3 @@
-# vim:filetype=i3config
 # Read `man 5 sway` for a complete reference.
 set $mod Mod1
 set $left h
@@ -6,7 +5,7 @@ set $down j
 set $up k
 set $right l
 
-set $term alacritty
+set $term ~/.files/sway/run-alacritty.sh
 
 exec ~/.files/sway/startup.sh
 

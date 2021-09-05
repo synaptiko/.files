@@ -107,6 +107,7 @@ visit_folder() {
 	if [ "$PWD" != "$HOME" ]; then
 		recent-dirs visit ~/.recent-dirs "$PWD"
 	fi
+	echo "$PWD" > ~/.the-most-recent-dir
 }
 
 add-zsh-hook chpwd visit_folder

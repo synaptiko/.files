@@ -15,9 +15,7 @@ kanshi >& /dev/null &
 # TODO jprokop: polkit-gnome sucks but polkit-mate segfaults under sway/wayland :-( (revisit later; revisited 11/2020 and was still happening)
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 >& /dev/null &
 
-# screensharing with Zoom running on X11 (check zoom folder)
-# TODO jprokop: consider usage of https://aur.archlinux.org/packages/gnome-shell-screenshot-dbus-emulator (instead of having the binary in the repo directly)
-$DIR/../zoom/gnome-shell-screenshot-dbus-emulator >& /dev/null &
+synaptiko-alacritty-zsh-cwd-watcher >& ~/.synaptiko-alacritty-zsh-cwd-watcher.log &
 
 # TODO jprokop: instead of notification I could integrate it with the swaybar
 yubikey-touch-detector --libnotify

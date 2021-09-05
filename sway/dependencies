@@ -47,3 +47,5 @@ xdg-desktop-portal-wlr
 pipewire
 libpipewire02
 yubikey-touch-detector
+dash
+synaptiko/synaptiko-alacritty-zsh-cwd-watcher
