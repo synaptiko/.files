@@ -19,6 +19,8 @@ seat * hide_cursor 10000
 
 bindsym $mod+Return exec $term
 bindsym $mod+Shift+Return exec $term --title "[floating]"
+bindsym $mod+Backspace exec $term -e zsh -c nvim
+bindsym $mod+Delete exec $term --title "[floating]" -e zsh -c nvim
 bindsym $mod+Shift+q kill
 
 exec_always ~/.files/wofi/menus.sh generate-cache
