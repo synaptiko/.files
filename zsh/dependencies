@@ -4,8 +4,9 @@ the_silver_searcher
 fzf
 npm
 xclip
+xsel
 reflector
 zsh-completions
 aur/yay-bin
-aur/nodejs-tldr
+tldr
 synaptiko/recent-dirs

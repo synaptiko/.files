@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+synaptiko-desktop-hub '"register"'
+
 # required for gnome-keyring and seahorse to somehow work; see: https://unix.stackexchange.com/a/295652
 systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 hash dbus-update-activation-environment && \

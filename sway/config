@@ -249,7 +249,7 @@ mode $mode_vnc {
 }
 
 # TODO modes can be now generated dynamically, see: https://github.com/swaywm/sway/pull/4271
-set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (g)ammastep, (s)wayidle, (k)ill zoom, (v)nc"
+set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (g)ammastep, (s)wayidle, (k)ill zoom, (v)nc, sway t(r)ee snapshot"
 bindsym $mod+m mode $mode_misc
 mode $mode_misc {
 	bindsym e exec ~/.files/sway/screenshot.sh selection, mode "default"
@@ -263,6 +263,7 @@ mode $mode_misc {
 	bindsym s exec ~/.files/sway/idle.sh toggle, mode "default"
 	bindsym k exec pkill zoom, mode "default"
 	bindsym v mode $mode_vnc
+	bindsym r exec ~/.files/sway/sway-tree.sh, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"

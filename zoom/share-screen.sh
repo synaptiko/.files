@@ -14,7 +14,7 @@ elif [ $1 == "ask" ]; then
 				echo "Adding v42loopback module to kernel"
 				sudo modprobe v4l2loopback card_label=XoomScreenSharing
 			fi
-			wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --pixel-format=yuv420p --output DP-2 &
+			wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video0 --pixel-format=yuv420p --output DP-2 &
 			notify-send -t 2000 "Screensharing enabled"
 		fi
 	fi
@@ -23,7 +23,7 @@ else
 		echo "Adding v42loopback module to kernel"
 		sudo modprobe v4l2loopback card_label=XoomScreenSharing
 	fi
-	wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --pixel-format=yuv420p --output DP-2 &
+	wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video0 --pixel-format=yuv420p --output DP-2 &
 	notify-send -t 2000 "Screensharing enabled"
 fi
 } > ~/.wayland-share-screen.log 2>&1

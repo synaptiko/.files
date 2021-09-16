@@ -42,22 +42,11 @@ switch (os.hostname()) {
 	default:
 		const wifiName = (os.hostname() === 'jprokop-tp13' ? 'wlp3s0' : 'wlp0s20f3')
 		Object.assign(blockConfigs, {
-			'volume0': {
-				extend: 'volume',
-				sinkIndex: 0,
-				volumeIndexFormat: 'activePort'
-			},
 			// FIXME jprokop: temporary solution
 			'i3status-relay': {
 				config: `general {
 					output_format = "none"
 					interval = 15
-				}
-
-				order += "wireless ${wifiName}"
-				wireless ${wifiName} {
-					format_up = "W %essid (%quality)"
-					format_down = "No Wifi"
 				}
 
 				order += "battery all"
@@ -73,21 +62,14 @@ switch (os.hostname()) {
 					integer_battery_capacity = true
 				}`
 			},
-			'wlan': {
-				extend: 'i3status-relay',
-				relayBlockIndex: 0,
-        color: '#928374'
-			},
 			'battery': {
 				extend: 'i3status-relay',
-				relayBlockIndex: 1
+				relayBlockIndex: 0
 			}
 		})
 		blocks = [
 			'system-update',
-			'wlan',
 			'battery',
-			'volume0',
 			'time-track',
 			'date-time'
 		]

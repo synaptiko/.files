@@ -54,7 +54,8 @@ Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my
 Plug 'synaptiko/mintabline'
 Plug 'rti/vim-auto-save' " Find a better alternative or write my own plugin
 Plug 'https://git.sr.ht/~synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
-Plug 'tpope/vim-abolish'
+""""""
+Plug 'tpope/vim-abolish' " This supports cr* commands, so I could get rid of my CamelCase etc. commands, it would be great to figure how to map them so it can be used with visual selection
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -68,9 +69,15 @@ Plug 'dense-analysis/ale'
 Plug 'kylef/apiblueprint.vim'
 Plug 'rlue/vim-getting-things-down'
 Plug 'ziglang/zig.vim'
+Plug 'phaazon/hop.nvim'
+
+Plug 'mcchrish/zenbones.nvim'
+Plug 'rktjmp/lush.nvim'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'kosayoda/nvim-lightbulb'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -93,6 +100,11 @@ let g:gruvbox_invert_selection=0
 let g:gruvbox_invert_tabline=0
 let g:gitgutter_override_sign_column_highlight=1
 colorscheme gruvbox
+
+let g:zenbones_solid_vert_split=v:true
+let g:zenbones_dim_noncurrent_window=v:true
+let g:zenbones_lightness='bright'
+" colorscheme zenbones-lush
 
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts=1
@@ -137,8 +149,16 @@ let g:ale_fixers = {
 \   'typescriptreact': ['prettier', 'eslint']
 \}
 let g:ale_javascript_eslint_suppress_missing_config=1
+let g:ale_disable_lsp=1
+let g:ale_set_highlights=0
+let g:ale_sign_error=''
+let g:ale_sign_warning=''
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
 
 let g:typescript_indent_disable=1
+
+autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 
 let g:markdown_folding=0
 
@@ -318,20 +338,48 @@ endif
 
 " FIXME jprokop: finalize later!
 lua << LUA
-require'lspconfig'.tsserver.setup{}
+require'lspconfig'.tsserver.setup {
+	init_options = {
+		preferences = {
+			importModuleSpecifierPreference = "non-relative"
+		}
+	}
+}
+local saga = require 'lspsaga'
+saga.init_lsp_saga {
+	code_action_keys = { quit = '<Esc>', exec = '<CR>' },
+	finder_action_keys = {
+		open = '<CR>', vsplit = 'v', split = 's', quit = '<Esc>'
+	},
+}
 LUA
+" require'lspconfig'.denols.setup {
+" 	init_options = {
+" 		enable = true,
+" 		lint = true,
+" 		unstable = true
+" 	};
+" }
 
-autocmd Filetype typescript,typescript.tsx setlocal omnifunc=v:lua.vim.lsp.omnifunc
+autocmd Filetype typescript,typescriptreact,typescript.tsx setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+" consider to attach those only in buffers which have LSP working
+nnoremap <silent> <leader>;r :Lspsaga rename<CR>
+nnoremap <silent> <leader>;d :Lspsaga lsp_finder<CR>
+nnoremap <silent> <leader>;c :Lspsaga code_action<CR>
+vnoremap <silent> <leader>;c :<C-U>Lspsaga range_code_action<CR>
+nnoremap <silent> K :Lspsaga hover_doc<CR>
+
+" TODO jprokop: review later
+" nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+" nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+" nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+" nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
 set completeopt-=preview
 

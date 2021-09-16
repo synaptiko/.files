@@ -1,2 +1,7 @@
 Host git.lan
-    Port 2222
+	Port 2222
+
+Host *
+	ControlMaster auto
+	ControlPath ~/.ssh/control-%h-%p-%r
+	ControlPersist 2s
