@@ -20,10 +20,6 @@
 		- refactor yay's installation then
 		- I could also run `synaptiko-desktop` under it (if nobody:nobody won't be suitable)
 
-- 0-theme:
-  - contact zsh (somehow) and switch pure prompt colors (branch name etc)
-  - contact sway and change colors there (+ in bar)
-
 - add support for "git --global config.set" (initialization of git)
 - add association for URL/links to open Chromium/Firefox? (over mimeo?)
 - add multiuser support/setup

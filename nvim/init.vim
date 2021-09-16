@@ -50,7 +50,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper', { 'on': ['GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'synaptiko/fzf'
-Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my custom colors for tabline
 Plug 'synaptiko/mintabline'
 Plug 'rti/vim-auto-save' " Find a better alternative or write my own plugin
 Plug 'https://git.sr.ht/~synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
@@ -62,8 +61,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 " Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rhubarb'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'hoob3rt/lualine.nvim'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'dense-analysis/ale'
 Plug 'kylef/apiblueprint.vim'
@@ -92,23 +90,11 @@ endif
 
 command! -nargs=1 Grq GrepperAg -Q <args>
 
-let g:gruvbox_italic=1
-let g:gruvbox_bold=1
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='hard'
-let g:gruvbox_invert_selection=0
-let g:gruvbox_invert_tabline=0
 let g:gitgutter_override_sign_column_highlight=1
-colorscheme gruvbox
 
 let g:zenbones_solid_vert_split=v:true
 let g:zenbones_dim_noncurrent_window=v:true
-let g:zenbones_lightness='bright'
-" colorscheme zenbones-lush
-
-let g:airline_theme='gruvbox'
-let g:airline_powerline_fonts=1
-let g:airline#extensions#whitespace#enabled=0
+colorscheme zenbones-lush
 
 set signcolumn=yes
 let g:gitgutter_realtime=1
@@ -267,9 +253,6 @@ let $FZF_DEFAULT_OPTS='--reverse --inline-info --color=16 --color="bg+:-1"'
 " http://yanpritzker.com/2012/04/17/how-to-change-vim-syntax-colors-that-are-annoying-you/
 " nmap <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
-" Update appearance of TabLine (according to gruvbox theme)
-highlight TabLineSel guifg=#1d2021 guibg=#a89984
-
 " For better wrapping of prose text
 function! WrapByWords()
 	setlocal wrap
@@ -319,22 +302,6 @@ function! Uuid()
 		normal! "up
 endfunction
 nmap <silent> <leader>uuid :call Uuid()<CR>
-
-function! SwitchTheme(variant)
-	if a:variant == 'dark'
-		set background=dark
-	else
-		set background=light
-	endif
-
-	" To be more cooler => transparent background
-	hi! Normal ctermbg=none guibg=none
-endfunction
-if !empty(expand('~/.files/0-theme/configs/nvim.vim'))
-	source ~/.files/0-theme/configs/nvim.vim
-else
-	call SwitchTheme('dark')
-endif
 
 " FIXME jprokop: finalize later!
 lua << LUA
@@ -402,5 +369,55 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true
   },
+}
+LUA
+
+" Lualine
+lua << LUA
+require'lualine'.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'zenbones',
+    component_separators = '',
+    section_separators = '',
+    disabled_filetypes = {}
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {},
+    lualine_c = {
+			{
+					'filename',
+					file_status = true,
+					path = 1
+			}
+		},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {
+			{
+				'diagnostics',
+				sources = {'nvim_lsp', 'ale'},
+				sections = {'hint', 'info', 'warn', 'error'},
+				symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}
+			}
+		}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {
+			{
+					'filename',
+					file_status = true,
+					path = 1
+			}
+		},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+	extensions = {'quickfix'}
 }
 LUA

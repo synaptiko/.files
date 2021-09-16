@@ -1,5 +1,5 @@
 prompt=
-color=.files/0-theme/configs/wofi-colors
+color=.config/wofi/colors
 allow_images=true
 insensitive=true
 no_actions=true

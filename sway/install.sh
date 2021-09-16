@@ -44,8 +44,6 @@ USER_DIRS_CONFIG=~/.config/user-dirs.dirs
 ln -s -f $DIR/user-dirs.dirs $USER_DIRS_CONFIG
 xdg-user-dirs-update
 
-$DIR/../0-theme/switch-sway.js dark
-
 systemctl --user daemon-reload
 systemctl --user enable --now yubikey-touch-detector.socket
 

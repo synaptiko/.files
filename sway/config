@@ -249,12 +249,11 @@ mode $mode_vnc {
 }
 
 # TODO modes can be now generated dynamically, see: https://github.com/swaywm/sway/pull/4271
-set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; toggle (t)heme; play/(p)ause; toggle: (g)ammastep, (s)wayidle, (k)ill zoom, (v)nc, sway t(r)ee snapshot"
+set $mode_misc "prtsc: s(e)lection/s(c)reen; change (w)allpaper; play/(p)ause; toggle: (g)ammastep, (s)wayidle, (k)ill zoom, (v)nc, sway t(r)ee snapshot"
 bindsym $mod+m mode $mode_misc
 mode $mode_misc {
 	bindsym e exec ~/.files/sway/screenshot.sh selection, mode "default"
 	bindsym c exec ~/.files/sway/screenshot.sh screen, mode "default"
-	bindsym t exec ~/.files/0-theme/switch.sh toggle, mode "default"
 	# TODO jprokop: integrate later to synaptiko-desktop (to support also youtube etc.)
 	bindsym p exec pgrep mocp && mocp --toggle-pause, mode "default"
 	# `mode "default"` omitted on purpose on the next line (so I can switch wallpaper multiple times)
@@ -296,8 +295,6 @@ mode teleport {
 	bindsym Escape mode "default", seat * hide_cursor 10000
 }
 
-# TODO jprokop: this stopped working because of https://github.com/swaywm/sway/pull/5570
-bindsym $mod+t exec ~/.files/0-theme/switch.sh toggle
 # TODO jprokop: integrate later to synaptiko-desktop (to support also youtube etc.)
 bindsym $mod+Shift+p exec pgrep mocp && mocp --toggle-pause, mode "default"
 
@@ -328,7 +325,7 @@ titlebar_padding 8 4
 titlebar_border_thickness 3
 
 # following file contains both colors and bar configuration
-include ~/.files/0-theme/configs/sway.config
+include ~/.files/sway/bar-and-colors.config
 
 exec_always ~/.files/sway/bg.sh keep
 
@@ -344,6 +341,7 @@ for_window [app_id="^lxqt-openssh-askpass$"] floating enable
 for_window [class="^lxqt-openssh-askpass$"] floating enable
 for_window [app_id="^Alacritty$" title="^daily-reports$"] mark "sp`", move scratchpad
 for_window [app_id="^Alacritty$" title="^\[floating\]$"] floating enable
+for_window [app_id="^Alacritty$"] opacity 0.94
 # Android Studio
 # Note: for Android Studio (and other IntelliJ IDEA IDEs) to work you also need:
 # 1. https://github.com/swaywm/sway/issues/3007#issuecomment-643291572

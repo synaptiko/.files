@@ -8,7 +8,7 @@ systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 hash dbus-update-activation-environment && \
 	dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
-gammastep -m wayland -r >& /dev/null &
+gammastep >& /dev/null &
 
 mako >& /dev/null &
 

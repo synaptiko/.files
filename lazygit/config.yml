@@ -1,12 +1,17 @@
 git:
-    autoFetch: true
+  autoFetch: true
 
 refresher:
   fetchInterval: 600
 
 gui:
   theme:
-    lightTheme: false
+    lightTheme: true
+    activeBorderColor:
+      - black
+      - bold
+    inactiveBorderColor:
+      - black
     selectedLineBgColor:
       - default
     selectedRangeBgColor:
