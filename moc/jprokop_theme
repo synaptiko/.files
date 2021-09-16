@@ -1,6 +1,3 @@
-# ~/.moc/themes/my_theme
-# Add `Theme = jprokop_theme` to your ~/.moc/config
-
 background             = default    default normal
 frame                  = default    default
 window_title           = default    default

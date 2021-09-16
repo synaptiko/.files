@@ -1,3 +1,10 @@
+# Simplification
+
+- I don't think I need gnupg anymore, try to remove all the configs and stuff for it and check what will break: ie. password protected keys, VSCode's keychain etc.
+- clean-up  the list below :-D
+
+---
+
 - check and update adwaita themes, there is some weird conflict and it's compiling qt4 which I don't need
 - check why install-dependencies didn't work properly (it looks like it installs only aur deps)
 

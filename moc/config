@@ -206,7 +206,6 @@ Shuffle = yes
 # Example:    Theme = laras_theme
 #
 #Theme =
-#Theme = transparent-background
 Theme = jprokop_theme
 
 # The theme used when running on an xterm.

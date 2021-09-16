@@ -6,7 +6,6 @@ refresher:
 
 gui:
   theme:
-    # TODO jprokop: add support for light theme!!!
     lightTheme: false
     selectedLineBgColor:
       - default
