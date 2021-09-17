@@ -6,12 +6,12 @@ refresher:
 
 gui:
   theme:
-    lightTheme: true
+    lightTheme: false
     activeBorderColor:
-      - black
+      - white
       - bold
     inactiveBorderColor:
-      - black
+      - white
     selectedLineBgColor:
       - default
     selectedRangeBgColor:
