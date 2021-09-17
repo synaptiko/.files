@@ -67,7 +67,7 @@ Plug 'dense-analysis/ale'
 Plug 'kylef/apiblueprint.vim'
 Plug 'rlue/vim-getting-things-down'
 Plug 'ziglang/zig.vim'
-Plug 'phaazon/hop.nvim'
+Plug 'brphilly/hop.nvim', { 'branch': 'feature/virtual-cursor' }
 
 Plug 'mcchrish/zenbones.nvim'
 Plug 'rktjmp/lush.nvim'
@@ -163,6 +163,13 @@ nmap <leader>d <Plug>(ale_fix)
 
 nmap <silent> <leader>{ :ALENextWrap<CR>
 nmap <silent> <leader>} :ALEPreviousWrap<CR>
+
+nmap <silent> <leader>hl :HopLineStart<CR>
+nmap <silent> <leader>hw :HopWord<CR>
+nmap <silent> <leader>hc :HopChar1<CR>
+nmap <silent> <leader>hC :HopChar2<CR>
+
+highlight HopCursor guibg=#2C363C
 
 " Previous solution: nnoremap <C-l> :let @/ = ""<CR><C-l>
 " More solutions here: http://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
