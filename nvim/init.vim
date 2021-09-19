@@ -30,6 +30,7 @@ set mouse=a
 set nobackup
 set nowritebackup
 set foldlevel=99                    " Open all folds by default, useful when checking commits in GV plugin
+set hidden
 
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
@@ -50,8 +51,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper', { 'on': ['GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'synaptiko/fzf'
-Plug 'synaptiko/mintabline'
-Plug 'rti/vim-auto-save' " Find a better alternative or write my own plugin
+" Plug 'synaptiko/mintabline'
+Plug 'romgrk/barbar.nvim'
+Plug 'Pocco81/AutoSave.nvim'
 Plug 'https://git.sr.ht/~synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
 """"""
 Plug 'tpope/vim-abolish' " This supports cr* commands, so I could get rid of my CamelCase etc. commands, it would be great to figure how to map them so it can be used with visual selection
@@ -75,7 +77,7 @@ Plug 'rktjmp/lush.nvim'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim'
-Plug 'kosayoda/nvim-lightbulb'
+Plug 'folke/trouble.nvim'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -93,7 +95,7 @@ command! -nargs=1 Grq GrepperAg -Q <args>
 let g:gitgutter_override_sign_column_highlight=1
 
 let g:zenbones_solid_vert_split=v:true
-let g:zenbones_dim_noncurrent_window=v:true
+let g:zenbones_dim_noncurrent_window=v:false
 colorscheme zenbones-lush
 
 set signcolumn=yes
@@ -108,9 +110,6 @@ let g:fzf_command_prefix='Fzf'
 let g:fzf_preview_window=''
 lua require("navigation")
 let g:fzf_layout = { 'window': 'lua NavigationFloatingWin()' }
-
-let g:auto_save=1
-let g:auto_save_silent=1
 
 let g:GPGExecutable='gpg2'
 
@@ -144,8 +143,6 @@ highlight clear ALEWarningSign
 
 let g:typescript_indent_disable=1
 
-autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-
 let g:markdown_folding=0
 
 nmap gs <plug>(GrepperOperator)
@@ -153,7 +150,7 @@ xmap gs <plug>(GrepperOperator)
 
 nmap <silent> <leader>j :FzfFiles<CR>
 nmap <silent> <leader>k :FzfBuffers<CR>
-nmap <silent> <leader>l :FzfBLines<CR>
+nmap <silent> <leader>L :FzfBLines<CR>
 
 nmap <silent> <leader>[ <Plug>(GitGutterNextHunk)
 nmap <silent> <leader>] <Plug>(GitGutterPrevHunk)
@@ -164,12 +161,43 @@ nmap <leader>d <Plug>(ale_fix)
 nmap <silent> <leader>{ :ALENextWrap<CR>
 nmap <silent> <leader>} :ALEPreviousWrap<CR>
 
-nmap <silent> <leader>hl :HopLineStart<CR>
-nmap <silent> <leader>hw :HopWord<CR>
-nmap <silent> <leader>hc :HopChar1<CR>
-nmap <silent> <leader>hC :HopChar2<CR>
+nmap <silent> <leader>l :HopLineStart<CR>
+nmap <silent> <leader>w :HopWord<CR>
+nmap <silent> <leader>c :HopChar1<CR>
 
 highlight HopCursor guibg=#2C363C
+
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.icons = v:false
+let bufferline.auto_hide = v:true
+let bufferline.tabpages = v:false
+let bufferline.animation = v:false
+let bufferline.closable = v:true
+let bufferline.icon_separator_active = ' '
+let bufferline.icon_separator_inactive = ' '
+let bufferline.icon_close_tab = '×'
+let bufferline.icon_close_tab_modified = '●'
+let bufferline.icon_pinned = '!'
+let bufferline.maximum_padding = 0
+let bufferline.maximum_length = 45
+
+nnoremap <silent> gT :BufferPrevious<CR>
+nnoremap <silent> gt :BufferNext<CR>
+nnoremap <silent> mT :BufferMovePrevious<CR>
+nnoremap <silent> mt :BufferMoveNext<CR>
+nnoremap <silent> <leader>1 :BufferGoto 1<CR>
+nnoremap <silent> <leader>2 :BufferGoto 2<CR>
+nnoremap <silent> <leader>3 :BufferGoto 3<CR>
+nnoremap <silent> <leader>4 :BufferGoto 4<CR>
+nnoremap <silent> <leader>5 :BufferGoto 5<CR>
+nnoremap <silent> <leader>6 :BufferGoto 6<CR>
+nnoremap <silent> <leader>7 :BufferGoto 7<CR>
+nnoremap <silent> <leader>8 :BufferGoto 8<CR>
+nnoremap <silent> <leader>9 :BufferGoto 9<CR>
+nnoremap <silent> <leader>q :BufferClose<CR>
+nnoremap <silent> <leader>Q :BufferCloseAllButPinned<CR>
+nnoremap <silent> <leader>p :BufferPick<CR>
+nnoremap <silent> <leader>P :BufferPin<CR>
 
 " Previous solution: nnoremap <C-l> :let @/ = ""<CR><C-l>
 " More solutions here: http://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
@@ -183,19 +211,19 @@ imap <Tab> <C-t>
 imap <S-Tab> <C-d>
 
 " Easier jumping amongst first 9 tabs
-nmap <silent> <leader>1 1gt
-nmap <silent> <leader>2 2gt
-nmap <silent> <leader>3 3gt
-nmap <silent> <leader>4 4gt
-nmap <silent> <leader>5 5gt
-nmap <silent> <leader>6 6gt
-nmap <silent> <leader>7 7gt
-nmap <silent> <leader>8 8gt
-nmap <silent> <leader>9 9gt
+" nmap <silent> <leader>1 1gt
+" nmap <silent> <leader>2 2gt
+" nmap <silent> <leader>3 3gt
+" nmap <silent> <leader>4 4gt
+" nmap <silent> <leader>5 5gt
+" nmap <silent> <leader>6 6gt
+" nmap <silent> <leader>7 7gt
+" nmap <silent> <leader>8 8gt
+" nmap <silent> <leader>9 9gt
 
 " Tabs can be easily moved (similar to Ctrl+Shift+PageDown/Up)
-nmap <silent> mt :tabm +<CR>
-nmap <silent> mT :tabm -<CR>
+" nmap <silent> mt :tabm +<CR>
+" nmap <silent> mT :tabm -<CR>
 
 " Better search next/prev (always watch one place in long files)
 nnoremap <silent> n nzz
@@ -266,16 +294,16 @@ function! WrapByWords()
 	setlocal linebreak
 	setlocal showbreak=...
 endfunction
-nmap <leader>wr :call WrapByWords()<CR>
+nmap <leader>WR :call WrapByWords()<CR>
 
 " Convenient 'Mr.Proper for tabs and buffers' function
-function! ClearTabsAndBuffers()
-	tabedit
-	tabonly
-	sleep 10m " wait 10ms to avoid gitgutter errors
-	Wipeout
-endfunction
-nmap <leader>Q :call ClearTabsAndBuffers()<CR>
+" function! ClearTabsAndBuffers()
+" 	tabedit
+" 	tabonly
+" 	sleep 10m " wait 10ms to avoid gitgutter errors
+" 	Wipeout
+" endfunction
+" nmap <leader>Q :call ClearTabsAndBuffers()<CR>
 
 " TODO jprokop: replace by some simple C program :-) no need to have yarn, node etc. to convert letters and spaces!
 function! ConvertThroughLodash(fnName, type)
@@ -321,10 +349,15 @@ require'lspconfig'.tsserver.setup {
 }
 local saga = require 'lspsaga'
 saga.init_lsp_saga {
+	code_action_icon = '💡',
+	code_action_prompt = {
+		sign = false,
+	},
 	code_action_keys = { quit = '<Esc>', exec = '<CR>' },
 	finder_action_keys = {
 		open = '<CR>', vsplit = 'v', split = 's', quit = '<Esc>'
 	},
+	border_style = "round"
 }
 LUA
 " require'lspconfig'.denols.setup {
@@ -427,4 +460,45 @@ require'lualine'.setup {
   tabline = {},
 	extensions = {'quickfix'}
 }
+LUA
+
+lua << LUA
+require("trouble").setup {
+	icons = false,
+	fold_open = "-",
+	fold_closed = "+",
+	indent_lines = false,
+	signs = {
+			error = "E",
+			warning = "W",
+			hint = "H",
+			information = "I",
+			other = "?"
+	},
+	use_lsp_diagnostic_signs = false
+}
+LUA
+
+lua << LUA
+local autosave = require("autosave")
+autosave.setup {
+	enabled = true,
+	execution_message = "",
+	events = {"FocusLost"},
+	conditions = {
+		exists = true,
+		filetype_is_not = {},
+		modifiable = true
+	},
+	write_all_buffers = true,
+	on_off_commands = true,
+	clean_command_line_interval = 0,
+	debounce_delay = 250
+}
+autosave.hook_after_off = function ()
+	print("Autosave off")
+end
+autosave.hook_after_on = function ()
+	print("Autosave on")
+end
 LUA
