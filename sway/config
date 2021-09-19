@@ -145,22 +145,7 @@ bindsym $mod+Ctrl+0 [con_mark="sp0"] scratchpad show
 bindsym $mod+grave [con_mark="sp`"] scratchpad show
 bindsym $mod+tab [con_mark="sp`"] scratchpad show
 
-# TODO jprokop: create improved version later: a script which will also turn off notificiations and inhibit idle (also fix/improve toggle functionality)
-# TODO jprokop: (add timer for monitoring how much time I spent in current focus mode? + key to reset/pause (pomodoro-like))
-# "focus/distraction-free" mode
-bindsym $mod+Ctrl+f \
-	workspace F, \
-	bar hidden_state toggle 0, \
-	bar mode toggle 0
-
-bindsym $mod+Shift+Ctrl+f \
-	bar hidden_state hide 0, \
-	bar mode hide 0, \
-	border none, \
-	move container to workspace F, workspace F
-
-# "distraction-free" mode: only for bar
-bindsym $mod+Shift+f bar hidden_state toggle 0, bar mode toggle 0
+bindsym $mod+Shift+f exec pkill -USR1 waybar
 
 bindsym $mod+r mode "resize"
 mode "resize" {

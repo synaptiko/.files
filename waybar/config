@@ -1,0 +1,37 @@
+{
+	"layer": "top",
+	"height": 30,
+	"modules-left": ["sway/workspaces", "wlr/taskbar"],
+	"modules-center": ["sway/mode"],
+	"modules-right": ["tray", "battery", "clock"],
+	"sway/workspaces": {
+		"numeric-first": true
+	},
+	"battery": {
+		"format": "B {capacity}%",
+		"format-discharging": "B-- {capacity}%",
+		"format-charging": "B++ {capacity}%",
+    "states": {
+			"critical": 15
+    },
+		"format-time": "{H}h {M}m",
+	},
+	"clock": {
+		"interval": 1,
+		"format": "{:%a %d %b, %H:%M}",
+		"format-alt": "{:%F %T}",
+		"today-format": "<span background=\"#F0EDEC\" color=\"#2C363C\">{}</span>",
+		"tooltip": true,
+		"tooltip-format": "<big>{:%Y %B}</big>\n\n<tt>{calendar}</tt>",
+		"locale": "en_GB.UTF-8"
+	},
+	"wlr/taskbar": {
+		"format": "{icon}",
+		"tooltip-format": "{title} [{app_id}]",
+		"on-click": "activate",
+	},
+	"tray": {
+		"icon-size": 14,
+		"spacing": 10
+	}
+}

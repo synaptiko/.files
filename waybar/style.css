@@ -1,0 +1,122 @@
+* {
+	border: none;
+	border-radius: 0;
+	font-family: "Iosevka Term SS03 Medium", "Hack Regular Nerd Font Complete Mono";
+	font-size: 14px;
+	font-weight: bold;
+	min-height: 0;
+	transition-duration: 0;
+}
+
+window#waybar {
+	background: alpha(#2C363C, 0.94);
+	color: #F0EDEC;
+}
+
+#workspaces button, #taskbar button {
+	padding: 0 10px;
+	background: transparent;
+	color: #F0EDEC;
+	box-shadow: inherit;
+	opacity: 0.5;
+}
+
+#workspaces button {
+	opacity: 0.75;
+}
+
+#workspaces button:hover, #taskbar button:hover, #taskbar button.active {
+	background: alpha(#F0EDEC, 0.25);
+  text-shadow: inherit;
+	box-shadow: inherit;
+	border: none;
+	opacity: 1;
+}
+
+#taskbar button:hover box image {
+	-gtk-icon-shadow: none;
+}
+
+#workspaces button.visible {
+	background: #76838A;
+	color: #2C363C;
+}
+
+#workspaces button.focused {
+	background: alpha(#F0EDEC, 0.75);
+	color: #2C363C;
+	opacity: 1;
+}
+
+#workspaces button.urgent {
+	background: #A8334C;
+	color: #F0EDEC;
+}
+
+#mode {
+	font-size: 14px;
+	font-weight: normal;
+	opacity: 0.75;
+}
+
+#tray, #mode, #taskbar, #battery {
+	background: alpha(#F0EDEC, 0.1);
+	margin-top: 3px;
+	margin-bottom: 3px;
+	border-radius: 6px;
+	padding: 0 10px;
+}
+
+#mode {
+	background: alpha(#F0EDEC, 0.25);
+}
+
+#taskbar {
+	padding: 0;
+}
+
+#taskbar button, #tray image {
+	border-radius: 6px;
+	opacity: 0.6;
+}
+
+#taskbar button:hover {
+	opacity: 1;
+}
+
+#taskbar button.active {
+	opacity: 1;
+}
+
+#workspaces {
+	margin-right: 4px;
+}
+
+#mode, #taskbar, #tray, #battery {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+#battery {
+	padding: 0 10px;
+	color: alpha(#F0EDEC, 0.75);
+}
+#battery.critical {
+	background: #9C2842;
+}
+
+#clock {
+	padding: 0 10px;
+	color: alpha(#F0EDEC, 0.75);
+}
+
+tooltip {
+  background: alpha(#2C363C, 0.94);
+  border: 3px solid alpha(#2C363C, 1);
+  text-shadow: inherit;
+}
+
+tooltip label {
+	padding: 0px;
+  color: #F0EDEC;
+}
