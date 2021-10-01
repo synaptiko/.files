@@ -35,13 +35,13 @@ fi
 if [ "$aurDeps" != "" ]; then
 	echo -e "\e[1myay -S \e[0m$aurDeps"
 	if [ "$dryRun" != true ]; then
-		EDITOR=`which nvim >& /dev/null && echo nvim || echo nano` sudo -u yay yay -S $aurDeps
+		EDITOR=`hash nvim >& /dev/null && echo nvim || echo nano` sudo -u yay yay -S $aurDeps
 	fi
 fi
 
 if [ "$synaptikoDeps" != "" ]; then
 	echo -e "\e[1myay -S \e[0m$synaptikoDeps"
 	if [ "$dryRun" != true ]; then
-		EDITOR=`which nvim >& /dev/null && echo nvim || echo nano` sudo -u yay yay -S $synaptikoDeps
+		EDITOR=`hash nvim >& /dev/null && echo nvim || echo nano` sudo -u yay yay -S $synaptikoDeps
 	fi
 fi
