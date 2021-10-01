@@ -7,3 +7,5 @@ fzf
 editorconfig-core-c
 yarn
 synaptiko/ownvim
+typescript
+aur/typescript-language-server

@@ -51,8 +51,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper', { 'on': ['GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'synaptiko/fzf'
-" Plug 'synaptiko/mintabline'
-Plug 'romgrk/barbar.nvim'
+Plug 'synaptiko/mintabline'
 Plug 'Pocco81/AutoSave.nvim'
 Plug 'https://git.sr.ht/~synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
 """"""
@@ -167,38 +166,6 @@ nmap <silent> <leader>c :HopChar1<CR>
 
 highlight HopCursor guibg=#2C363C
 
-let bufferline = get(g:, 'bufferline', {})
-let bufferline.icons = v:false
-let bufferline.auto_hide = v:true
-let bufferline.tabpages = v:false
-let bufferline.animation = v:false
-let bufferline.closable = v:true
-let bufferline.icon_separator_active = ' '
-let bufferline.icon_separator_inactive = ' '
-let bufferline.icon_close_tab = '×'
-let bufferline.icon_close_tab_modified = '●'
-let bufferline.icon_pinned = '!'
-let bufferline.maximum_padding = 0
-let bufferline.maximum_length = 45
-
-nnoremap <silent> gT :BufferPrevious<CR>
-nnoremap <silent> gt :BufferNext<CR>
-nnoremap <silent> mT :BufferMovePrevious<CR>
-nnoremap <silent> mt :BufferMoveNext<CR>
-nnoremap <silent> <leader>1 :BufferGoto 1<CR>
-nnoremap <silent> <leader>2 :BufferGoto 2<CR>
-nnoremap <silent> <leader>3 :BufferGoto 3<CR>
-nnoremap <silent> <leader>4 :BufferGoto 4<CR>
-nnoremap <silent> <leader>5 :BufferGoto 5<CR>
-nnoremap <silent> <leader>6 :BufferGoto 6<CR>
-nnoremap <silent> <leader>7 :BufferGoto 7<CR>
-nnoremap <silent> <leader>8 :BufferGoto 8<CR>
-nnoremap <silent> <leader>9 :BufferGoto 9<CR>
-nnoremap <silent> <leader>q :BufferClose<CR>
-nnoremap <silent> <leader>Q :BufferCloseAllButPinned<CR>
-nnoremap <silent> <leader>p :BufferPick<CR>
-nnoremap <silent> <leader>P :BufferPin<CR>
-
 " Previous solution: nnoremap <C-l> :let @/ = ""<CR><C-l>
 " More solutions here: http://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
 nmap <silent> <C-l> :nohlsearch<CR>
@@ -211,19 +178,19 @@ imap <Tab> <C-t>
 imap <S-Tab> <C-d>
 
 " Easier jumping amongst first 9 tabs
-" nmap <silent> <leader>1 1gt
-" nmap <silent> <leader>2 2gt
-" nmap <silent> <leader>3 3gt
-" nmap <silent> <leader>4 4gt
-" nmap <silent> <leader>5 5gt
-" nmap <silent> <leader>6 6gt
-" nmap <silent> <leader>7 7gt
-" nmap <silent> <leader>8 8gt
-" nmap <silent> <leader>9 9gt
+nmap <silent> <leader>1 1gt
+nmap <silent> <leader>2 2gt
+nmap <silent> <leader>3 3gt
+nmap <silent> <leader>4 4gt
+nmap <silent> <leader>5 5gt
+nmap <silent> <leader>6 6gt
+nmap <silent> <leader>7 7gt
+nmap <silent> <leader>8 8gt
+nmap <silent> <leader>9 9gt
 
 " Tabs can be easily moved (similar to Ctrl+Shift+PageDown/Up)
-" nmap <silent> mt :tabm +<CR>
-" nmap <silent> mT :tabm -<CR>
+nmap <silent> mt :tabm +<CR>
+nmap <silent> mT :tabm -<CR>
 
 " Better search next/prev (always watch one place in long files)
 nnoremap <silent> n nzz
@@ -297,13 +264,13 @@ endfunction
 nmap <leader>WR :call WrapByWords()<CR>
 
 " Convenient 'Mr.Proper for tabs and buffers' function
-" function! ClearTabsAndBuffers()
-" 	tabedit
-" 	tabonly
-" 	sleep 10m " wait 10ms to avoid gitgutter errors
-" 	Wipeout
-" endfunction
-" nmap <leader>Q :call ClearTabsAndBuffers()<CR>
+function! ClearTabsAndBuffers()
+	tabedit
+	tabonly
+	sleep 10m " wait 10ms to avoid gitgutter errors
+	Wipeout
+endfunction
+nmap <leader>Q :call ClearTabsAndBuffers()<CR>
 
 " TODO jprokop: replace by some simple C program :-) no need to have yarn, node etc. to convert letters and spaces!
 function! ConvertThroughLodash(fnName, type)
