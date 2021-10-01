@@ -5,7 +5,7 @@ UID=`id -u`
 if [ -f "/tmp/.current-cwd-$UID" ]; then
 	CWD=`cat /tmp/.current-cwd-$UID`
 	if [ -d "$CWD" ]; then
-		if [[ "$CWD" != "$HOME" ]]; then
+		if [ "$CWD" != "$HOME" ]; then
 			recent-dirs visit ~/.recent-dirs "$CWD"
 		fi
 	else

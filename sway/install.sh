@@ -17,6 +17,8 @@ SWAY_CONFIG_DIR=~/.config/sway
 mkdir -p $SWAY_CONFIG_DIR
 SWAY_CONFIG=$SWAY_CONFIG_DIR/config
 ln -s -f $DIR/config $SWAY_CONFIG
+SWAY_ENV=$SWAY_CONFIG_DIR/env
+ln -s -f $DIR/env $SWAY_ENV
 
 SWAYLOCK_CONFIG_DIR=~/.config/swaylock
 mkdir -p $SWAYLOCK_CONFIG_DIR
@@ -37,5 +39,7 @@ xdg-user-dirs-update
 systemctl --user daemon-reload
 systemctl --user enable --now yubikey-touch-detector.socket
 
-ELECTRON_FLAGS_CONFIG=~/.config/electron-flags.conf
-ln -s -f $DIR/electron-flags.conf $ELECTRON_FLAGS_CONFIG
+XDPW_CONFIG_DIR=~/.config/xdg-desktop-portal-wlr
+mkdir -p $XDPW_CONFIG_DIR
+XDPW_CONFIG=$XDPW_CONFIG_DIR/config
+ln -s -f $DIR/xdg-desktop-portal-wlr $XDPW_CONFIG

@@ -32,15 +32,14 @@ xf86-input-libinput
 xf86-video-intel
 wl-clipboard
 aur/wl-clipboard-x11
-synaptiko/browser-profile-runner
 swappy
 dunst
-gnome-keyring
-seahorse
 xdg-desktop-portal
 xdg-desktop-portal-wlr
 pipewire
 libpipewire02
 yubikey-touch-detector
 dash
+synaptiko/browser-profile-runner
 synaptiko/synaptiko-alacritty-zsh-cwd-watcher
+synaptiko/synaptiko-sway-systemd
