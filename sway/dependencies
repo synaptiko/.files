@@ -13,7 +13,7 @@ aur/wdisplays
 chromium
 clutter
 faad2
-glew-wayland
+aur/glew-wayland
 glfw-wayland
 grim
 gtk3
@@ -41,5 +41,5 @@ libpipewire02
 yubikey-touch-detector
 dash
 synaptiko/browser-profile-runner
-synaptiko/synaptiko-alacritty-zsh-cwd-watcher
-synaptiko/synaptiko-sway-systemd
+synaptiko/alacritty-zsh-cwd-watcher
+synaptiko/sway-systemd
