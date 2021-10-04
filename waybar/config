@@ -3,7 +3,7 @@
 	"height": 30,
 	"modules-left": ["sway/workspaces", "wlr/taskbar"],
 	"modules-center": ["sway/mode"],
-	"modules-right": ["tray", "battery", "clock"],
+	"modules-right": ["tray", "custom/system-updates", "custom/time-track", "battery", "clock"],
 	"sway/workspaces": {
 		"numeric-first": true
 	},
@@ -28,7 +28,15 @@
 	"wlr/taskbar": {
 		"format": "{icon}",
 		"tooltip-format": "{title} [{app_id}]",
-		"on-click": "activate",
+		"on-click": "activate"
+	},
+	"custom/time-track": {
+		"exec": "~/.files/synaptiko-desktop-status/time-track.sh",
+		"return-type": "json"
+	},
+	"custom/system-updates": {
+		"exec": "~/.files/synaptiko-desktop-status/system-updates.sh",
+		"return-type": "json"
 	},
 	"tray": {
 		"icon-size": 14,

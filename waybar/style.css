@@ -59,12 +59,15 @@ window#waybar {
 	opacity: 0.75;
 }
 
-#tray, #mode, #taskbar, #battery {
+#tray, #mode, #taskbar, #battery, #clock, .chip {
+	padding: 0 10px;
+}
+
+#tray, #mode, #taskbar, #battery, .chip {
 	background: alpha(#F0EDEC, 0.1);
 	margin-top: 3px;
 	margin-bottom: 3px;
 	border-radius: 6px;
-	padding: 0 10px;
 }
 
 #mode {
@@ -92,22 +95,17 @@ window#waybar {
 	margin-right: 4px;
 }
 
-#mode, #taskbar, #tray, #battery {
+#mode, #taskbar, #tray, #battery, .chip {
 	margin-left: 2px;
 	margin-right: 2px;
 }
 
-#battery {
-	padding: 0 10px;
+#battery, #clock, .chip {
 	color: alpha(#F0EDEC, 0.75);
-}
-#battery.critical {
-	background: #9C2842;
 }
 
-#clock {
-	padding: 0 10px;
-	color: alpha(#F0EDEC, 0.75);
+#battery.critical {
+	background: #9C2842;
 }
 
 tooltip {
