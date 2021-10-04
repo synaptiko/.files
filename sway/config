@@ -349,9 +349,7 @@ for_window [class="^zoom$" title="^XoomScreenSharing$"] move output eDP-1, fulls
 for_window [class="^Skype$"] floating enable
 
 # Screensharing
-# for_window [app_id="^firefox.*$" title="^Firefox.* - Sharing Indicator$"] floating enable, mark "ffss", move scratchpad
-# for_window [app_id="^$" title="^.* is sharing your screen.$"] floating enable, mark "chss", move scratchpad
-for_window [app_id="^firefoxdeveloperedition$" title="^Firefox Developer Edition — Sharing Indicator$"] floating enable, border none
+for_window [app_id="^firefox.*$" title="^Firefox.* — Sharing Indicator$"] floating enable, border none
 for_window [app_id="^$" title="^.* is sharing your screen.$"] floating enable, border none
 
 input "2:14:ETPS/2_Elantech_Touchpad" {
