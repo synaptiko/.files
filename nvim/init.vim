@@ -164,7 +164,7 @@ nmap <silent> <leader>l :HopLineStart<CR>
 nmap <silent> <leader>w :HopWord<CR>
 nmap <silent> <leader>c :HopChar1<CR>
 
-highlight HopCursor guibg=#2C363C
+highlight link HopCursor Cursor
 
 " Previous solution: nnoremap <C-l> :let @/ = ""<CR><C-l>
 " More solutions here: http://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
