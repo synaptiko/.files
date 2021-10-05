@@ -97,6 +97,19 @@ let g:zenbones_solid_vert_split=v:true
 let g:zenbones_dim_noncurrent_window=v:false
 colorscheme zenbones-lush
 
+lua << EOF
+local lush = require "lush"
+local base = require "zenbones"
+
+local specs = lush.parse(function()
+	return {
+		TabLine { bg = base.TabLine.bg, fg = base.TabLine.fg, gui = nil },
+	}
+end)
+
+lush.apply(lush.compile(specs))
+EOF
+
 set signcolumn=yes
 let g:gitgutter_realtime=1
 let g:gitgutter_sign_added='┃'
