@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
-workspace=`swaymsg -t get_tree | ~/.files/sway/get-active-workspace.ts $1`
+workspace=`swaymsg -t get_tree | jq '.nodes[] | select(.type == "output") | select(.name == "'$1'") | .current_workspace'`
 swaymsg move container to workspace $workspace
