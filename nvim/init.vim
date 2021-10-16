@@ -302,8 +302,8 @@ command! -range -nargs=0 CaseStart :call ConvertThroughLodash('startCase', visua
 " Helper function to generate and paste random uuid
 " It can be used in insert mode by pressing Ctrl+O<leader>uuid
 function! Uuid()
-    let @u = system('uuid | tr -d "\n"')
-		normal! "up
+	let @u = system('uuid | tr -d "\n"')
+	normal! "up
 endfunction
 nmap <silent> <leader>uuid :call Uuid()<CR>
 
@@ -314,18 +314,32 @@ require'lspconfig'.tsserver.setup {
 		preferences = {
 			importModuleSpecifierPreference = "non-relative"
 		}
+	},
+	flags = {
+		debounce_text_changes = 500
 	}
 }
 local saga = require 'lspsaga'
 saga.init_lsp_saga {
-	code_action_icon = '💡',
+	code_action_icon = '',
 	code_action_prompt = {
 		sign = false,
+		virtual_text = false,
 	},
 	code_action_keys = { quit = '<Esc>', exec = '<CR>' },
+	rename_action_keys = { quit = '<Esc><Esc>', exec = '<CR>' },
 	finder_action_keys = {
 		open = '<CR>', vsplit = 'v', split = 's', quit = '<Esc>'
 	},
+	error_sign = 'E',
+	warn_sign = 'W',
+	hint_sign = 'H',
+	infor_sign = 'I',
+	dianostic_header_icon = '',
+	finder_definition_icon = '',
+	finder_reference_icon = '',
+	definition_preview_icon = '',
+	rename_prompt_prefix = '❯',
 	border_style = "round"
 }
 LUA
@@ -340,11 +354,14 @@ LUA
 autocmd Filetype typescript,typescriptreact,typescript.tsx setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " consider to attach those only in buffers which have LSP working
-nnoremap <silent> <leader>;r :Lspsaga rename<CR>
-nnoremap <silent> <leader>;d :Lspsaga lsp_finder<CR>
+nnoremap <silent> <leader>;r "ryiw:Lspsaga rename<CR><C-r>r
+nnoremap <silent> <leader>;f :Lspsaga lsp_finder<CR>
 nnoremap <silent> <leader>;c :Lspsaga code_action<CR>
 vnoremap <silent> <leader>;c :<C-U>Lspsaga range_code_action<CR>
 nnoremap <silent> K :Lspsaga hover_doc<CR>
+nnoremap <silent> <leader>;d :Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> <leader>;D :Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent> <leader>;i :Lspsaga show_line_diagnostics<CR>
 
 " TODO jprokop: review later
 " nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
@@ -362,48 +379,48 @@ set completeopt-=preview
 " Treesitter
 lua << LUA
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-  indent = {
-    enable = true
-  },
+	ensure_installed = "maintained",
+	highlight = {
+		enable = true,
+	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "gnn",
+			node_incremental = "grn",
+			scope_incremental = "grc",
+			node_decremental = "grm",
+		},
+	},
+	indent = {
+		enable = true
+	},
 }
 LUA
 
 " Lualine
 lua << LUA
 require'lualine'.setup {
-  options = {
-    icons_enabled = true,
-    theme = 'zenbones',
-    component_separators = '',
-    section_separators = '',
-    disabled_filetypes = {}
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {},
-    lualine_c = {
+	options = {
+		icons_enabled = true,
+		theme = 'zenbones',
+		component_separators = '',
+		section_separators = '',
+		disabled_filetypes = {}
+	},
+	sections = {
+		lualine_a = {'mode'},
+		lualine_b = {},
+		lualine_c = {
 			{
 					'filename',
 					file_status = true,
 					path = 1
 			}
 		},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {
 			{
 				'diagnostics',
 				sources = {'nvim_lsp', 'ale'},
@@ -411,22 +428,22 @@ require'lualine'.setup {
 				symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}
 			}
 		}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {
+	},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {
 			{
 					'filename',
 					file_status = true,
 					path = 1
 			}
 		},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {}
+	},
+	tabline = {},
 	extensions = {'quickfix'}
 }
 LUA
