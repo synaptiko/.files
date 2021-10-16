@@ -75,7 +75,7 @@ Plug 'rktjmp/lush.nvim'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim'
+Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim51' }
 Plug 'folke/trouble.nvim'
 
 " Treesitter
@@ -95,20 +95,7 @@ let g:gitgutter_override_sign_column_highlight=1
 
 let g:zenbones_solid_vert_split=v:true
 let g:zenbones_dim_noncurrent_window=v:false
-colorscheme zenbones-lush
-
-lua << EOF
-local lush = require "lush"
-local base = require "zenbones"
-
-local specs = lush.parse(function()
-	return {
-		TabLine { bg = base.TabLine.bg, fg = base.TabLine.fg, gui = nil },
-	}
-end)
-
-lush.apply(lush.compile(specs))
-EOF
+colorscheme zenbones
 
 set signcolumn=yes
 let g:gitgutter_realtime=1
@@ -172,6 +159,8 @@ nmap <leader>d <Plug>(ale_fix)
 
 nmap <silent> <leader>{ :ALENextWrap<CR>
 nmap <silent> <leader>} :ALEPreviousWrap<CR>
+
+lua require'hop'.setup { keys = 'fdsgajklhqwertyuiopmnbvcxz' }
 
 nmap <silent> <leader>l :HopLineStart<CR>
 nmap <silent> <leader>w :HopWord<CR>
