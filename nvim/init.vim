@@ -68,7 +68,7 @@ Plug 'dense-analysis/ale'
 Plug 'kylef/apiblueprint.vim'
 Plug 'rlue/vim-getting-things-down'
 Plug 'ziglang/zig.vim'
-Plug 'brphilly/hop.nvim', { 'branch': 'feature/virtual-cursor' }
+Plug 'synaptiko/hop.nvim', { 'branch': 'feature-mix' }
 
 Plug 'mcchrish/zenbones.nvim'
 Plug 'rktjmp/lush.nvim'
@@ -165,6 +165,10 @@ lua require'hop'.setup { keys = 'fdsgajklhqwertyuiopmnbvcxz' }
 nmap <silent> <leader>l :HopLineStart<CR>
 nmap <silent> <leader>w :HopWord<CR>
 nmap <silent> <leader>c :HopChar1<CR>
+nmap <silent> f :HopFForward<CR>
+nmap <silent> F :HopFBackward<CR>
+nmap <silent> t :HopTForward<CR>
+nmap <silent> T :HopTBackward<CR>
 
 highlight link HopCursor Cursor
 
