@@ -209,6 +209,9 @@ vnoremap . :norm.<CR>
 inoremap <C-u> <nop>
 nnoremap ZZ <nop>
 
+vnoremap <down> :m '>+1<CR>gv=gv
+vnoremap <up> :m '<-2<CR>gv=gv
+
 " Useful abbreviations
 ab fixme // FIXME jprokop:
 ab todo // TODO jprokop:
