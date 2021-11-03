@@ -95,6 +95,7 @@ let g:gitgutter_override_sign_column_highlight=1
 
 let g:zenbones_solid_vert_split=v:true
 let g:zenbones_dim_noncurrent_window=v:false
+set background=light
 colorscheme zenbones
 
 set signcolumn=yes
@@ -160,7 +161,6 @@ nmap <leader>d <Plug>(ale_fix)
 nmap <silent> <leader>{ :ALENextWrap<CR>
 nmap <silent> <leader>} :ALEPreviousWrap<CR>
 
-lua require'hop'.setup { keys = 'fdsgajklhqwertyuiopmnbvcxz' }
 
 nmap <silent> <leader>l :HopLineStart<CR>
 nmap <silent> <leader>w :HopWord<CR>
