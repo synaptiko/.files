@@ -1,7 +1,4 @@
 Host git.lan
-	# workaround for https://github.com/go-gitea/gitea/issues/17175#issuecomment-932264612
-	HostKeyAlgorithms +ssh-rsa
-	PubkeyAcceptedAlgorithms +ssh-rsa
 	Port 2222
 
 Host *
