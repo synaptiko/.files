@@ -74,10 +74,10 @@ workspace /¹ output eDP-1
 
 bindsym $mod+Ctrl+t exec ~/.files/sway/switch-output.sh top
 bindsym $mod+Ctrl+b exec ~/.files/sway/switch-output.sh bottom
-bindsym $mod+Ctrl+Shift+t move container to output DP-2
-bindsym $mod+Ctrl+Shift+b move container to output eDP-1
-# bindsym $mod+Ctrl+Shift+t exec ~/.files/sway/move-to-output--temporary-fix.sh DP-2
-# bindsym $mod+Ctrl+Shift+b exec ~/.files/sway/move-to-output--temporary-fix.sh eDP-1
+# bindsym $mod+Ctrl+Shift+t move container to output DP-2
+# bindsym $mod+Ctrl+Shift+b move container to output eDP-1
+bindsym $mod+Ctrl+Shift+t exec ~/.files/sway/move-to-output--temporary-fix.sh DP-2 top
+bindsym $mod+Ctrl+Shift+b exec ~/.files/sway/move-to-output--temporary-fix.sh eDP-1 bottom
 ### <-- multimonitor end
 
 bindsym $mod+Shift+$left move left
