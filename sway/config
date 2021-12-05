@@ -339,7 +339,7 @@ for_window [app_id="^Alacritty$"] opacity 0.94
 # Note: for Android Studio (and other IntelliJ IDEA IDEs) to work you also need:
 # 1. https://github.com/swaywm/sway/issues/3007#issuecomment-643291572
 # 2. _JAVA_AWT_WM_NONREPARENTING=1 env variable
-for_window [title="^win0$" instance="^sun-awt-X11-XWindowPeer$" class="^jetbrains-studio$"] floating enable
+for_window [instance="^jetbrains-studio$" class="^jetbrains-studio$"] floating enable
 # Zoom (on Wayland)
 for_window [app_id="^zoom$"] floating enable
 for_window [app_id="^zoom$" title="^Zoom - Free Account$"] mark "sp7", move scratchpad

@@ -4,11 +4,13 @@ export EDITOR=nvim
 export VISUAL=nvim
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export ANDROID_HOME=$HOME/Android/SDK
-export JAVA_HOME=/usr/lib/jvm/java-16-jdk
+export ANDROID_SDK_ROOT=$HOME/Android/SDK
+export JAVA_HOME=/usr/lib/jvm/`archlinux-java get`
 export VOLTA_HOME=$HOME/.volta
 export SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
 export OWNVIM_LISTEN_ADDRESS=/run/user/$UID/synaptiko-ownvim
 export PATH=$HOME/.deno/bin:$VOLTA_HOME/bin:$PATH:$JAVA_HOME/bin:$HOME/.yarn/bin:$HOME/.local/opt/gcc-arm-none-eabi-6/bin:$HOME/.local/bin
+export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 
 # Prevent duplicates in PATH variable
 typeset -U path
