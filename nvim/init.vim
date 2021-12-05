@@ -56,7 +56,6 @@ Plug 'Pocco81/AutoSave.nvim'
 Plug 'https://git.sr.ht/~synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
 """"""
 Plug 'tpope/vim-abolish' " This supports cr* commands, so I could get rid of my CamelCase etc. commands, it would be great to figure how to map them so it can be used with visual selection
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
@@ -80,6 +79,10 @@ Plug 'folke/trouble.nvim'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Comments
+Plug 'numToStr/Comment.nvim'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 call plug#end()
 
 " The Silver Searcher
@@ -386,9 +389,11 @@ set completeopt-=preview
 " Treesitter
 lua << LUA
 require'nvim-treesitter.configs'.setup {
+	context_commentstring = { enable = true },
 	ensure_installed = "maintained",
 	highlight = {
 		enable = true,
+		additional_vim_regex_highlighting = false
 	},
 	incremental_selection = {
 		enable = true,
@@ -403,6 +408,39 @@ require'nvim-treesitter.configs'.setup {
 		enable = true
 	},
 }
+LUA
+
+" Comments
+lua << LUA
+require'Comment'.setup {
+	-- Based on: https://github.com/numToStr/Comment.nvim#pre-hook
+	---@param ctx Ctx
+	pre_hook = function(ctx)
+		-- Only calculate commentstring for tsx filetypes
+		if vim.bo.filetype == 'typescriptreact' then
+			local U = require('Comment.utils')
+
+			-- Detemine whether to use linewise or blockwise commentstring
+			local type = ctx.ctype == U.ctype.line and '__default' or '__multiline'
+
+			-- Determine the location where to calculate commentstring from
+			local location = nil
+			if ctx.ctype == U.ctype.block then
+				location = require('ts_context_commentstring.utils').get_cursor_location()
+			elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+				location = require('ts_context_commentstring.utils').get_visual_start_location()
+			end
+
+			return require('ts_context_commentstring.internal').calculate_commentstring({
+				key = type,
+				location = location,
+			})
+		end
+	end,
+}
+
+local ft = require('Comment.ft')
+ft.set('zig', '// %s')
 LUA
 
 " Lualine
