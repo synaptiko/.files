@@ -468,7 +468,7 @@ require'lualine'.setup {
 		lualine_z = {
 			{
 				'diagnostics',
-				sources = {'nvim_lsp', 'ale'},
+				sources = {'nvim_diagnostic', 'ale'},
 				sections = {'hint', 'info', 'warn', 'error'},
 				symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}
 			}
