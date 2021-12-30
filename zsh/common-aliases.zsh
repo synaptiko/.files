@@ -5,6 +5,7 @@ alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=au
 alias ltag='ls -t | ag'
 
 alias grep='grep --color=tty -d skip'
+alias locate='plocate'
 
 alias df='df -h'
 
