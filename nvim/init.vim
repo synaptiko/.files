@@ -74,7 +74,7 @@ Plug 'rktjmp/lush.nvim'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim51' }
+Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim6.0' }
 Plug 'folke/trouble.nvim'
 
 " Treesitter
@@ -345,7 +345,7 @@ saga.init_lsp_saga {
 	warn_sign = 'W',
 	hint_sign = 'H',
 	infor_sign = 'I',
-	dianostic_header_icon = '',
+	diagnostic_header_icon = '',
 	finder_definition_icon = '',
 	finder_reference_icon = '',
 	definition_preview_icon = '',
