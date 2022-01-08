@@ -364,7 +364,7 @@ LUA
 autocmd Filetype typescript,typescriptreact,typescript.tsx setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " consider to attach those only in buffers which have LSP working
-nnoremap <silent> <leader>;r "ryiw:Lspsaga rename<CR><C-r>r
+nnoremap <silent> <leader>;r :Lspsaga rename<CR>
 nnoremap <silent> <leader>;f :Lspsaga lsp_finder<CR>
 nnoremap <silent> <leader>;c :Lspsaga code_action<CR>
 vnoremap <silent> <leader>;c :<C-U>Lspsaga range_code_action<CR>
