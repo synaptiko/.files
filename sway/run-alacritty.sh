@@ -14,4 +14,4 @@ if [ -f "/tmp/.current-cwd-$UID" ]; then
 fi
 
 ARGS="$@"
-swaymsg "exec alacritty --working-directory=$CWD $ARGS"
+swaymsg "exec alacritty --working-directory='$CWD' $ARGS"
