@@ -30,6 +30,7 @@ set mouse=a
 set nobackup
 set nowritebackup
 set foldlevel=99                    " Open all folds by default, useful when checking commits in GV plugin
+set hidden
 
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
@@ -50,37 +51,38 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper', { 'on': ['GrepperAg', '<plug>(GrepperOperator)'] }
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'synaptiko/fzf'
-Plug 'synaptiko/gruvbox' " To support transparent background correctly & also my custom colors for tabline
 Plug 'synaptiko/mintabline'
-Plug 'rti/vim-auto-save' " Find a better alternative or write my own plugin
+Plug 'Pocco81/AutoSave.nvim'
 Plug 'https://git.sr.ht/~synaptiko/ownvim', { 'rtp': 'nvim-plugin' }
 """"""
 Plug 'tpope/vim-abolish' " This supports cr* commands, so I could get rid of my CamelCase etc. commands, it would be great to figure how to map them so it can be used with visual selection
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 " Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rhubarb'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'hoob3rt/lualine.nvim'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'dense-analysis/ale'
 Plug 'kylef/apiblueprint.vim'
 Plug 'rlue/vim-getting-things-down'
 Plug 'ziglang/zig.vim'
-Plug 'phaazon/hop.nvim'
+Plug 'synaptiko/hop.nvim', { 'branch': 'feature-mix' }
 
 Plug 'mcchrish/zenbones.nvim'
 Plug 'rktjmp/lush.nvim'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim'
-Plug 'kosayoda/nvim-lightbulb'
+Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim6.0' }
+Plug 'folke/trouble.nvim'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Comments
+Plug 'numToStr/Comment.nvim'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 call plug#end()
 
 " The Silver Searcher
@@ -92,23 +94,12 @@ endif
 
 command! -nargs=1 Grq GrepperAg -Q <args>
 
-let g:gruvbox_italic=1
-let g:gruvbox_bold=1
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='hard'
-let g:gruvbox_invert_selection=0
-let g:gruvbox_invert_tabline=0
 let g:gitgutter_override_sign_column_highlight=1
-colorscheme gruvbox
 
 let g:zenbones_solid_vert_split=v:true
-let g:zenbones_dim_noncurrent_window=v:true
-let g:zenbones_lightness='bright'
-" colorscheme zenbones-lush
-
-let g:airline_theme='gruvbox'
-let g:airline_powerline_fonts=1
-let g:airline#extensions#whitespace#enabled=0
+let g:zenbones_dim_noncurrent_window=v:false
+set background=light
+colorscheme zenbones
 
 set signcolumn=yes
 let g:gitgutter_realtime=1
@@ -122,9 +113,6 @@ let g:fzf_command_prefix='Fzf'
 let g:fzf_preview_window=''
 lua require("navigation")
 let g:fzf_layout = { 'window': 'lua NavigationFloatingWin()' }
-
-let g:auto_save=1
-let g:auto_save_silent=1
 
 let g:GPGExecutable='gpg2'
 
@@ -158,8 +146,6 @@ highlight clear ALEWarningSign
 
 let g:typescript_indent_disable=1
 
-autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-
 let g:markdown_folding=0
 
 nmap gs <plug>(GrepperOperator)
@@ -167,7 +153,7 @@ xmap gs <plug>(GrepperOperator)
 
 nmap <silent> <leader>j :FzfFiles<CR>
 nmap <silent> <leader>k :FzfBuffers<CR>
-nmap <silent> <leader>l :FzfBLines<CR>
+nmap <silent> <leader>L :FzfBLines<CR>
 
 nmap <silent> <leader>[ <Plug>(GitGutterNextHunk)
 nmap <silent> <leader>] <Plug>(GitGutterPrevHunk)
@@ -177,6 +163,17 @@ nmap <leader>d <Plug>(ale_fix)
 
 nmap <silent> <leader>{ :ALENextWrap<CR>
 nmap <silent> <leader>} :ALEPreviousWrap<CR>
+
+
+nmap <silent> <leader>l :HopLineStart<CR>
+nmap <silent> <leader>w :HopWord<CR>
+nmap <silent> <leader>c :HopChar1<CR>
+nmap <silent> f :HopFForward<CR>
+nmap <silent> F :HopFBackward<CR>
+nmap <silent> t :HopTForward<CR>
+nmap <silent> T :HopTBackward<CR>
+
+highlight link HopCursor Cursor
 
 " Previous solution: nnoremap <C-l> :let @/ = ""<CR><C-l>
 " More solutions here: http://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
@@ -214,6 +211,9 @@ vnoremap . :norm.<CR>
 " Avoid accidental unexpected behavior of Ctrl+U in insert mode & ZZ
 inoremap <C-u> <nop>
 nnoremap ZZ <nop>
+
+vnoremap <down> :m '>+1<CR>gv=gv
+vnoremap <up> :m '<-2<CR>gv=gv
 
 " Useful abbreviations
 ab fixme // FIXME jprokop:
@@ -267,16 +267,13 @@ let $FZF_DEFAULT_OPTS='--reverse --inline-info --color=16 --color="bg+:-1"'
 " http://yanpritzker.com/2012/04/17/how-to-change-vim-syntax-colors-that-are-annoying-you/
 " nmap <leader>hi :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 
-" Update appearance of TabLine (according to gruvbox theme)
-highlight TabLineSel guifg=#1d2021 guibg=#a89984
-
 " For better wrapping of prose text
 function! WrapByWords()
 	setlocal wrap
 	setlocal linebreak
 	setlocal showbreak=...
 endfunction
-nmap <leader>wr :call WrapByWords()<CR>
+nmap <leader>WR :call WrapByWords()<CR>
 
 " Convenient 'Mr.Proper for tabs and buffers' function
 function! ClearTabsAndBuffers()
@@ -315,26 +312,10 @@ command! -range -nargs=0 CaseStart :call ConvertThroughLodash('startCase', visua
 " Helper function to generate and paste random uuid
 " It can be used in insert mode by pressing Ctrl+O<leader>uuid
 function! Uuid()
-    let @u = system('uuid | tr -d "\n"')
-		normal! "up
+	let @u = system('uuid | tr -d "\n"')
+	normal! "up
 endfunction
 nmap <silent> <leader>uuid :call Uuid()<CR>
-
-function! SwitchTheme(variant)
-	if a:variant == 'dark'
-		set background=dark
-	else
-		set background=light
-	endif
-
-	" To be more cooler => transparent background
-	hi! Normal ctermbg=none guibg=none
-endfunction
-if !empty(expand('~/.files/0-theme/configs/nvim.vim'))
-	source ~/.files/0-theme/configs/nvim.vim
-else
-	call SwitchTheme('dark')
-endif
 
 " FIXME jprokop: finalize later!
 lua << LUA
@@ -343,14 +324,33 @@ require'lspconfig'.tsserver.setup {
 		preferences = {
 			importModuleSpecifierPreference = "non-relative"
 		}
+	},
+	flags = {
+		debounce_text_changes = 500
 	}
 }
 local saga = require 'lspsaga'
 saga.init_lsp_saga {
+	code_action_icon = '',
+	code_action_prompt = {
+		sign = false,
+		virtual_text = false,
+	},
 	code_action_keys = { quit = '<Esc>', exec = '<CR>' },
+	rename_action_keys = { quit = '<Esc><Esc>', exec = '<CR>' },
 	finder_action_keys = {
 		open = '<CR>', vsplit = 'v', split = 's', quit = '<Esc>'
 	},
+	error_sign = 'E',
+	warn_sign = 'W',
+	hint_sign = 'H',
+	infor_sign = 'I',
+	diagnostic_header_icon = '',
+	finder_definition_icon = '',
+	finder_reference_icon = '',
+	definition_preview_icon = '',
+	rename_prompt_prefix = '❯',
+	border_style = "round"
 }
 LUA
 " require'lspconfig'.denols.setup {
@@ -365,10 +365,13 @@ autocmd Filetype typescript,typescriptreact,typescript.tsx setlocal omnifunc=v:l
 
 " consider to attach those only in buffers which have LSP working
 nnoremap <silent> <leader>;r :Lspsaga rename<CR>
-nnoremap <silent> <leader>;d :Lspsaga lsp_finder<CR>
+nnoremap <silent> <leader>;f :Lspsaga lsp_finder<CR>
 nnoremap <silent> <leader>;c :Lspsaga code_action<CR>
 vnoremap <silent> <leader>;c :<C-U>Lspsaga range_code_action<CR>
 nnoremap <silent> K :Lspsaga hover_doc<CR>
+nnoremap <silent> <leader>;d :Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> <leader>;D :Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent> <leader>;i :Lspsaga show_line_diagnostics<CR>
 
 " TODO jprokop: review later
 " nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
@@ -386,21 +389,147 @@ set completeopt-=preview
 " Treesitter
 lua << LUA
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-  indent = {
-    enable = true
-  },
+	context_commentstring = { enable = true },
+	ensure_installed = "maintained",
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = false
+	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "gnn",
+			node_incremental = "grn",
+			scope_incremental = "grc",
+			node_decremental = "grm",
+		},
+	},
+	indent = {
+		enable = true
+	},
 }
+LUA
+
+" Comments
+lua << LUA
+require'Comment'.setup {
+	-- Based on: https://github.com/numToStr/Comment.nvim#pre-hook
+	---@param ctx Ctx
+	pre_hook = function(ctx)
+		-- Only calculate commentstring for tsx filetypes
+		if vim.bo.filetype == 'typescriptreact' then
+			local U = require('Comment.utils')
+
+			-- Detemine whether to use linewise or blockwise commentstring
+			local type = ctx.ctype == U.ctype.line and '__default' or '__multiline'
+
+			-- Determine the location where to calculate commentstring from
+			local location = nil
+			if ctx.ctype == U.ctype.block then
+				location = require('ts_context_commentstring.utils').get_cursor_location()
+			elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+				location = require('ts_context_commentstring.utils').get_visual_start_location()
+			end
+
+			return require('ts_context_commentstring.internal').calculate_commentstring({
+				key = type,
+				location = location,
+			})
+		end
+	end,
+}
+
+local ft = require('Comment.ft')
+ft.set('zig', '// %s')
+LUA
+
+" Lualine
+lua << LUA
+require'lualine'.setup {
+	options = {
+		icons_enabled = true,
+		theme = 'zenbones',
+		component_separators = '',
+		section_separators = '',
+		disabled_filetypes = {}
+	},
+	sections = {
+		lualine_a = {'mode'},
+		lualine_b = {},
+		lualine_c = {
+			{
+					'filename',
+					file_status = true,
+					path = 1
+			}
+		},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {
+			{
+				'diagnostics',
+				sources = {'nvim_diagnostic', 'ale'},
+				sections = {'hint', 'info', 'warn', 'error'},
+				symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}
+			}
+		}
+	},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {
+			{
+					'filename',
+					file_status = true,
+					path = 1
+			}
+		},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {}
+	},
+	tabline = {},
+	extensions = {'quickfix'}
+}
+LUA
+
+lua << LUA
+require("trouble").setup {
+	icons = false,
+	fold_open = "-",
+	fold_closed = "+",
+	indent_lines = false,
+	signs = {
+			error = "E",
+			warning = "W",
+			hint = "H",
+			information = "I",
+			other = "?"
+	},
+	use_lsp_diagnostic_signs = false
+}
+LUA
+
+lua << LUA
+local autosave = require("autosave")
+autosave.setup {
+	enabled = true,
+	execution_message = "",
+	events = {"FocusLost"},
+	conditions = {
+		exists = true,
+		filetype_is_not = {},
+		modifiable = true
+	},
+	write_all_buffers = true,
+	on_off_commands = true,
+	clean_command_line_interval = 0,
+	debounce_delay = 250
+}
+autosave.hook_after_off = function ()
+	print("Autosave off")
+end
+autosave.hook_after_on = function ()
+	print("Autosave on")
+end
 LUA

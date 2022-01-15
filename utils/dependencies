@@ -1,7 +1,7 @@
 pkgfile
 unzip
 wget
-mlocate
+plocate
 rsync
 networkmanager-openvpn
 youtube-dl

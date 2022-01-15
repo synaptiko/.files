@@ -9,4 +9,6 @@ WOFI_STYLE=~/.config/wofi/style.css
 mkdir -p $(dirname $WOFI_STYLE)
 ln -s -f $DIR/style.css $WOFI_STYLE
 
-$DIR/../0-theme/switch-wofi.js `$DIR/../0-theme/get-theme.sh`
+WOFI_COLORS=~/.config/wofi/colors
+mkdir -p $(dirname $WOFI_COLORS)
+ln -s -f $DIR/colors $WOFI_COLORS

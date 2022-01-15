@@ -1,13 +1,17 @@
 git:
-    autoFetch: true
+  autoFetch: true
 
 refresher:
   fetchInterval: 600
 
 gui:
   theme:
-    # TODO jprokop: add support for light theme!!!
     lightTheme: false
+    activeBorderColor:
+      - white
+      - bold
+    inactiveBorderColor:
+      - white
     selectedLineBgColor:
       - default
     selectedRangeBgColor:

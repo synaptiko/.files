@@ -5,7 +5,7 @@ UID=`id -u`
 if [ -f "/tmp/.current-cwd-$UID" ]; then
 	CWD=`cat /tmp/.current-cwd-$UID`
 	if [ -d "$CWD" ]; then
-		if [[ "$CWD" != "$HOME" ]]; then
+		if [ "$CWD" != "$HOME" ]; then
 			recent-dirs visit ~/.recent-dirs "$CWD"
 		fi
 	else
@@ -14,4 +14,4 @@ if [ -f "/tmp/.current-cwd-$UID" ]; then
 fi
 
 ARGS="$@"
-swaymsg "exec alacritty --working-directory=$CWD $ARGS"
+swaymsg "exec alacritty --working-directory='$CWD' $ARGS"

@@ -1,25 +1,14 @@
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ]; then
-	sway() {
-		# setup GUI libraries to work properly under Wayland: https://wiki.archlinux.org/index.php/Wayland#GUI_libraries
-		# FIXME it's too early for the below; neither Chromium nor Electron app will work with it
-		# export GDK_BACKEND=wayland
-		export MOZ_ENABLE_WAYLAND=1
-		export MOZ_DBUS_REMOTE=1
-		export QT_QPA_PLATFORM=wayland
-		export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-		export CLUTTER_BACKEND=wayland
-		export SDL_VIDEODRIVER=wayland
-		export XDG_SESSION_TYPE=wayland
-		export XDG_CURRENT_DESKTOP=sway
-		# export XDG_CURRENT_DESKTOP=GNOME
-		# export GTK_USE_PORTAL=1
-		export _JAVA_AWT_WM_NONREPARENTING=1
-		unfunction sway
-		exec dbus-launch --sh-syntax --exit-with-session \
-			sway -V -d &> ~/.sway.log
+	start_sway_session() {
+		if hash gnome-keyring-daemon >& /dev/null; then
+			eval $(gnome-keyring-daemon --start 2> /dev/null)
+			export SSH_AUTH_SOCK
+		fi
+		/usr/bin/synaptiko-sway-systemd-session start
+		killall -u $USER gnome-keyring-daemon &> /dev/null
 	}
 
 	if [ $XDG_VTNR -le 2 ]; then
-		sway
+		start_sway_session
 	fi
 fi

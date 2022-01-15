@@ -1,3 +1,10 @@
+# Simplification
+
+- I don't think I need gnupg anymore, try to remove all the configs and stuff for it and check what will break: ie. password protected keys, VSCode's keychain etc.
+- clean-up the list below :-D
+
+---
+
 - check and update adwaita themes, there is some weird conflict and it's compiling qt4 which I don't need
 - check why install-dependencies didn't work properly (it looks like it installs only aur deps)
 
@@ -12,10 +19,6 @@
 	- synaptiko will contain yay cache, config and shared `.files` and other multiuser things
 		- refactor yay's installation then
 		- I could also run `synaptiko-desktop` under it (if nobody:nobody won't be suitable)
-
-- 0-theme:
-  - contact zsh (somehow) and switch pure prompt colors (branch name etc)
-  - contact sway and change colors there (+ in bar)
 
 - add support for "git --global config.set" (initialization of git)
 - add association for URL/links to open Chromium/Firefox? (over mimeo?)

@@ -5,6 +5,7 @@ alias lt='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=au
 alias ltag='ls -t | ag'
 
 alias grep='grep --color=tty -d skip'
+alias locate='plocate'
 
 alias df='df -h'
 
@@ -56,6 +57,8 @@ up() {
 	CLEAN_CACHES="n"
 	UPDATE_PACKAGES="y"
 
+	cd /tmp/ > /dev/null
+
 	while [ "$#" -gt 0 ]; do
 		case "$1" in
 			--update-mirrors) UPDATE_MIRRORS="y"; shift 1;;
@@ -93,4 +96,6 @@ up() {
 			echo '{"systemUpdated":true}' | socat unix-connect:/run/synaptiko-desktop-status-bus.socket stdio
 		fi
 	fi
+
+	cd - > /dev/null
 }

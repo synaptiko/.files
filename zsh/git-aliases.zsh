@@ -24,6 +24,7 @@ alias gchrp='git cherry-pick -x'
 alias grbs='git fetch --prune upstream && git rebase upstream/master'
 alias gdbr='git branch -d'
 alias gDbr='git branch -D'
+alias grecent='~/.files/git/git-recent'
 
 gnbr() {
 	git checkout -b $1

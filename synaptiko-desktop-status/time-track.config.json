@@ -1,0 +1,1 @@
+{"statusConfig":true,"blockConfigs":{"command":{},"time-track":{"extend":"command","prefix":"T ","command":"sudo -u jprokop node /home/jprokop/Documents/time-track-utils/time-track.js","refreshId":"time-track","interval":{"amount":1,"unit":"minute"}}},"blocks":["time-track"]}

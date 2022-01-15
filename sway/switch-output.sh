@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-mod=Mod1
+mod=Mod4
 if [[ "$1" == "top" ]]; then
 	swaymsg focus output DP-2
 	output=²

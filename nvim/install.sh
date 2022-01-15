@@ -41,5 +41,6 @@ fi
 # to support ConvertThroughLodash functionality: CamelCase, KebabCase etc.
 yarn global add lodash
 
+# TODO jprokop: this seems broken; I probably don't even need it anymore
 # to support Node.js plugins (yarn cannot be simply used)
-sudo npm install -g neovim
+# sudo npm install -g neovim
